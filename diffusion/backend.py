@@ -30,7 +30,7 @@ stub = Stub(
     gpu=gpu.A10G(),
     container_idle_timeout=240,
     mounts=[Mount.from_local_dir(
-        local_path=CURR_DIR+"/models",
+        local_path=CURR_DIR+"/huggingface_repos",
         remote_path="/models"
     )]
 )

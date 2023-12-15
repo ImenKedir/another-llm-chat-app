@@ -196,8 +196,6 @@ def app():
 
         return StreamingResponse(generate(), media_type="text/event-stream")
 
-    web_app.mount(
-    )
     return web_app
 
 

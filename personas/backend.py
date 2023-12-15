@@ -1,12 +1,7 @@
-# # Hosting Mixtral 8x7B with Text Generation Inference (TGI)
-#
-# In this example, we show how to run an optimized inference server using [Text Generation Inference (TGI)](https://github.com/huggingface/text-generation-inference)
+# Run optimized inference server using [Text Generation Inference (TGI)](https://github.com/huggingface/text-generation-inference)
 # with performance advantages over standard text generation pipelines including:
 # - continuous batching, so multiple generations can take place at the same time on a single container
 # - PagedAttention, an optimization that increases throughput.
-#
-# This example deployment, [accessible here](https://modal-labs--tgi-mixtral.modal.run), can serve Mixtral 8x7B on two 80GB A100s, with
-# up to 500 tokens/s of throughput and per-token latency of 78ms.
 
 # ## Setup
 #
@@ -15,7 +10,7 @@
 import subprocess
 from pathlib import Path
 
-from modal import Image, Mount, Stub, asgi_app, gpu, method
+from modal import Image, Stub, asgi_app, gpu, method
 
 # Next, we set which model to serve, taking care to specify the GPU configuration required
 # to fit the model into VRAM, and the quantization method (`bitsandbytes` or `gptq`) if desired.
@@ -23,7 +18,7 @@ from modal import Image, Mount, Stub, asgi_app, gpu, method
 #
 # Any model supported by TGI can be chosen here.
 GPU_CONFIG = gpu.A100(memory=40, count=4)
-MODEL_ID = "mistralai/Mixtral-8x7B-Instruct-v0.1"
+MODEL_ID = "Austism/chronos-hermes-13b-v2"
 # Add `["--quantize", "gptq"]` for TheBloke GPTQ models.
 LAUNCH_FLAGS = [
     "--model-id",
@@ -37,7 +32,6 @@ LAUNCH_FLAGS = [
 # We want to create a Modal image which has the Huggingface model cache pre-populated.
 # The benefit of this is that the container no longer has to re-download the model from Huggingface -
 # instead, it will take advantage of Modal's internal filesystem for faster cold starts.
-# The 95GB model can be loaded in as little as 70 seconds.
 #
 # ### Download the weights
 # We can use the included utilities to download the model weights (and convert to safetensors, if necessary)
@@ -184,7 +178,7 @@ def app():
             "model": MODEL_ID + " (TGI)",
         }
 
-    @web_app.get("/completion/{question}")
+    @web_app.get("/completion")
     async def completion(question: str):
         from urllib.parse import unquote
 
@@ -192,7 +186,7 @@ def app():
             async for text in Model().generate_stream.remote_gen.aio(
                 unquote(question)
             ):
-                yield f"data: {json.dumps(dict(text=text), ensure_ascii=False)}\n\n"
+                yield json.dumps(dict(text=text), ensure_ascii=False)
 
         return StreamingResponse(generate(), media_type="text/event-stream")
 

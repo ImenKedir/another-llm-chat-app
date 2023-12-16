@@ -6,7 +6,6 @@
 # ## Setup
 #
 # First we import the components we need from `modal`.
-
 import subprocess
 from pathlib import Path
 
@@ -17,7 +16,7 @@ from modal import Image, Stub, asgi_app, gpu, method
 # Note that quantization does degrade token generation performance significantly.
 #
 # Any model supported by TGI can be chosen here.
-GPU_CONFIG = gpu.A100(memory=40, count=4)
+GPU_CONFIG = gpu.A100(memory=40, count=1)
 MODEL_ID = "Austism/chronos-hermes-13b-v2"
 # Add `["--quantize", "gptq"]` for TheBloke GPTQ models.
 LAUNCH_FLAGS = [
@@ -78,8 +77,6 @@ stub = Stub("example-tgi-mixtral", image=image)
 # - specify that each container is allowed to handle up to 10 inputs (i.e. requests) simultaneously
 # - keep idle containers for 10 minutes before spinning down
 # - lift the timeout of each request.
-
-
 @stub.cls(
     gpu=GPU_CONFIG,
     allow_concurrent_inputs=10,
@@ -118,7 +115,7 @@ class Model:
     @method()
     async def generate(self, question: str):
         prompt = self.template.format(user=question)
-        result = await self.client.generate(prompt, max_new_tokens=1024)
+        result = await self.client.generate(prompt, max_new_tokens=50)
 
         return result.generated_text
 
@@ -127,7 +124,7 @@ class Model:
         prompt = self.template.format(user=question)
 
         async for response in self.client.generate_stream(
-            prompt, max_new_tokens=1024
+            prompt, max_new_tokens=50
         ):
             if not response.token.special:
                 yield response.token.text
@@ -135,7 +132,7 @@ class Model:
 
 # ## Run the model
 # We define a [`local_entrypoint`](/docs/guide/apps#entrypoints-for-ephemeral-apps) to invoke
-# our remote function. You can run this script locally with `modal run text_generation_inference.py`.
+# our remote function. You can run this script locally with `modal run backend.py`.
 @stub.local_entrypoint()
 def main():
     print(
@@ -145,31 +142,22 @@ def main():
     )
 
 
-# ## Serve the model
-# Once we deploy this model with `modal deploy text_generation_inference.py`, we can serve it
-# behind an ASGI app front-end. The front-end code (a single file of Alpine.js) is available
-# [here](https://github.com/modal-labs/modal-examples/blob/main/06_gpu_and_ml/llm-frontend/index.html).
-#
-# You can try our deployment [here](https://modal-labs--tgi-mixtral.modal.run).
-
-
-
 @stub.function(
     keep_warm=1,
     allow_concurrent_inputs=20,
     timeout=60 * 10,
 )
-@asgi_app(label="tgi-mixtral")
-def app():
+@asgi_app(label="tgi-chronos-hermes-13b-v2")
+def backend():
     import json
 
     import fastapi
     import fastapi.staticfiles
     from fastapi.responses import StreamingResponse
 
-    web_app = fastapi.FastAPI()
+    app = fastapi.FastAPI()
 
-    @web_app.get("/stats")
+    @app.get("/stats")
     async def stats():
         stats = await Model().generate_stream.get_current_stats.aio()
         return {
@@ -178,19 +166,19 @@ def app():
             "model": MODEL_ID + " (TGI)",
         }
 
-    @web_app.get("/completion")
-    async def completion(question: str):
+    @app.get("/completion")
+    async def completion(prompt: str):
         from urllib.parse import unquote
 
         async def generate():
             async for text in Model().generate_stream.remote_gen.aio(
-                unquote(question)
+                unquote(prompt)
             ):
                 yield json.dumps(dict(text=text), ensure_ascii=False)
 
         return StreamingResponse(generate(), media_type="text/event-stream")
 
-    return web_app
+    return app
 
 
 # ## Invoke the model from other apps

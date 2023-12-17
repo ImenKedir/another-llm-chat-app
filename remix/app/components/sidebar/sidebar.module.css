@@ -1,0 +1,10 @@
+.sidebar_container {
+  max-width: 250px;
+  color: red;
+}
+
+.sidebar_button {
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+}

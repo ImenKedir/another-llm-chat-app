@@ -1,15 +1,97 @@
 .container {
-  margin: none;
   display: flex;
   width: 100vw;
   height: 100vh;
+  align-items: center;
+  justify-content: center;
 }
 
-.nav_container {
+/* styles for default app route */
+.default_container {
   display: flex;
-  width: min(80vw, 300px);
+  padding: 25px;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar_container {
+  display: flex;
+  width: 100%;
+  max-width: 150px;
   height: 100%;
   align-items: center;
   justify-content: center;
   background-color: gray;
+}
+
+.sidebar_container_hidden {
+  display: none;
+}
+
+.toggle_button {
+  position: fixed; /* or absolute */
+  top: 10px; /* Adjust as needed */
+  left: 10px; /* Adjust as needed */
+  padding: 5px;
+}
+
+/* Default text styles */
+h3 {
+  color: red;
+}
+
+/* xs */
+@media (min-width: 475px) {
+  .container {
+    max-width: 640px;
+    color: white;
+  }
+}
+
+/* sm */
+@media (min-width: 640px) {
+  .container {
+    max-width: 768px;
+  }
+  .sidebar_container {
+    max-width: 200px;
+  }
+}
+
+/* md */
+@media (min-width: 768px) {
+  .container {
+    max-width: 1024px;
+  }
+  .sidebar_container {
+    max-width: 250px;
+    color: red;
+  }
+}
+
+/* lg */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1280px;
+  }
+  .sidebar_container {
+    max-width: 300px;
+    color: yellow;
+  }
+}
+
+/* xl */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* 2xl */
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
 }

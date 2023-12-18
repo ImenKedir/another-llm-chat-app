@@ -1,71 +1,98 @@
 .container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background-color: #131619;
-    color: white;
-}
-.name {
-    position: fixed; /* or absolute */
-    top: -5px; /* Adjust as needed */
-    left: 25px; /* Adjust as needed */
-    padding: 10px;
-    font-size: 2rem; /* Adjust the value as needed */
-}
-.login_placeholder {
-    position: fixed; /* or absolute */
-    top: 15px; /* Adjust as needed */
-    right: 5px; /* Adjust as needed */
-    padding: 5px;
-    font-size: 1.5rem; /* Adjust the value as needed */
-}
-.heading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  background-color: #131619;
+  color: white;
 }
 
+.nav_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #131619;
+  color: white;
+  padding: 10px;
+}
+
+.name {
+  padding: 10px;
+  font-size: 2rem;
+}
+
+.login_placeholder {
+  padding: 5px;
+  font-size: 1.5rem;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2rem;
+  margin-top: 20px; /* Adjust to center vertically */
+  flex-grow: 1; /* Allows this div to take up remaining space */
+  justify-content: center; /* Center content vertically within this div */
+}
+
+/* Rest of your CSS... */
+
+
 button {
-    margin: 10px;
-    padding: 10px;
-    font-size: 1.5rem;
-    border-radius: 5px;
-    border: none;
-    background-color: white;
-    color: black;
-    cursor: pointer;
+  margin: 10px;
+  padding: 10px;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  border: none;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  padding: 15px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.login_button {
+  padding: 15px 32px;
+  border-radius: 5px;
+  border: none;
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }
 
 h1 {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 h2 {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 
 h3 {
-    font-size: 0.75rem;
+  font-size: 0.75rem;
 }
 
 /* md  */
 @media (min-width: md) {
-    h1 {
-        font-size: 5rem;
-    }
+  h1 {
+    font-size: 5rem;
+  }
 
-    h2 {
-        font-size: 1.75rem;
-    }
+  h2 {
+    font-size: 1.75rem;
+  }
 
-    h3 {
-        font-size: 1rem;
-    }
+  h3 {
+    font-size: 1rem;
+  }
 }
 
 /* lg  */

@@ -1,4 +1,13 @@
 /* styles for default app route */
+.card {
+  background-color: white; /* Background color of the card */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for a 3D effect */
+  margin: 20px; /* Space around the card */
+  padding: 20px; /* Space inside the card */
+  width: 200px;
+}
+
 .default_container {
   display: flex;
   padding: 25px;
@@ -9,3 +18,15 @@
   background-color: #131619;
   color: blue;
 }
+
+/* md 
+@media (min-width: 768px) {
+}
+
+ lg 
+@media (min-width: 1024px) {
+}
+
+ xl 
+@media (min-width: 1280px) {
+} */

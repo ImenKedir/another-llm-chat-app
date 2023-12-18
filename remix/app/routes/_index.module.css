@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #131619;
+  color: white;
+}
+.name {
+  position: fixed; /* or absolute */
+  top: 15px; /* Adjust as needed */
+  left: 25px; /* Adjust as needed */
+  padding: 10px;
+  font-size: 1.5rem; /* Adjust the value as needed */
+}
+.login_placeholder {
+  position: fixed; /* or absolute */
+  top: 15px; /* Adjust as needed */
+  right: 25px; /* Adjust as needed */
+  padding: 5px;
+  font-size: 1rem; /* Adjust the value as needed */
+}
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}

@@ -30,7 +30,7 @@ export default function Index() {
           <SignIn userId={data.userId} />
         </div>
       </div>
-      <div className={styles.heading}>
+      <div className={styles.center}>
         <h1>Welcome to NaughtyML!</h1>
         <div>
           <Link to="/app">

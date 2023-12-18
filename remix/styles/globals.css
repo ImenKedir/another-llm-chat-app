@@ -1,7 +1,5 @@
 :root {
-  --md: 720px;
-  --lg: 1024px;
-  --xl: 1440px;
+  --background-color: #131619;
 }
 
 html,
@@ -11,4 +9,61 @@ body {
   padding: 0;
   /* This ensures the page takes up the full height */
   height: 100%;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+}
+
+h3 {
+  font-size: 0.75rem;
+}
+
+/* md  */
+@media (min-width: 720px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* lg  */
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 5rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* xl  */
+@media (min-width: 1440px) {
+  h1 {
+    font-size: 5.25rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
 }

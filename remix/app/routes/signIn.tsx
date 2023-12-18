@@ -8,9 +8,11 @@ type SignInProps = {
 const SignIn: React.FC<SignInProps> = ({ userId }) => {
   return userId ? (
     <div>
-      <h1>Signed in as: {userId}</h1>
+      {/* <h3>Signed in as: {userId}</h3> */}
       <Form method="post">
-        <button>Logout</button>
+        <button className={styles.login_button}>
+          <h3>Logout</h3>
+        </button>
       </Form>
     </div>
   ) : (

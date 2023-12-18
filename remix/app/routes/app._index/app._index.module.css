@@ -1,11 +1,14 @@
 /* styles for default app route */
 .card {
+  position: absolute;
+  top: 0;
   background-color: white; /* Background color of the card */
   border-radius: 15px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for a 3D effect */
   margin: 20px; /* Space around the card */
   padding: 20px; /* Space inside the card */
   width: 200px;
+  height: 80px;
 }
 
 .default_container {
@@ -19,14 +22,33 @@
   color: blue;
 }
 
-/* md 
+.name {
+  padding: 10px;
+  font-size: 1rem; /* Adjust the value as needed */
+}
+
+/* md  */
 @media (min-width: 768px) {
 }
 
- lg 
+/* lg  */
 @media (min-width: 1024px) {
+  .card {
+    width: 300px;
+    height: 100px;
+  }
+  h3 {
+    font-size: 2rem;
+  }
 }
 
- xl 
+/* xl  */
 @media (min-width: 1280px) {
-} */
+  .card {
+    width: 600px;
+    height: 150px;
+  }
+  h3 {
+    font-size: 3rem;
+  }
+}

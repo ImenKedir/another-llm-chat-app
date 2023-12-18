@@ -13,7 +13,7 @@ export default function App() {
   return (
     <div className={styles.container}>
       <button onClick={toggleSidebar} className={styles.toggle_button}>
-        Toggle Sidebar
+        T
       </button>
       <div
         className={

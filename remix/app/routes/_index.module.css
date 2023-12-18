@@ -13,14 +13,14 @@
   top: 15px; /* Adjust as needed */
   left: 25px; /* Adjust as needed */
   padding: 10px;
-  font-size: 1.5rem; /* Adjust the value as needed */
+  font-size: 2rem; /* Adjust the value as needed */
 }
 .login_placeholder {
   position: fixed; /* or absolute */
   top: 15px; /* Adjust as needed */
   right: 25px; /* Adjust as needed */
   padding: 5px;
-  font-size: 1rem; /* Adjust the value as needed */
+  font-size: 1.5rem; /* Adjust the value as needed */
 }
 .heading {
   display: flex;
@@ -28,4 +28,19 @@
   align-items: center;
   font-size: 2rem;
   margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+button {
+  margin: 10px;
+  padding: 10px;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  border: none;
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }

@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  z-index: 1;
 }
 
 .sidebar_container {
@@ -17,6 +18,7 @@
   justify-content: center;
   background-color: gray;
   font-size: 1.5rem;
+  z-index: 2;
 }
 .sidebar_button {
   margin-left: 2rem;
@@ -31,7 +33,15 @@
   position: fixed; /* or absolute */
   top: 10px; /* Adjust as needed */
   left: 10px; /* Adjust as needed */
-  padding: 5px;
+  background-color: pink; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  z-index: 3;
 }
 
 /* md */
@@ -41,7 +51,6 @@
   }
   .sidebar_container {
     max-width: 250px;
-    color: red;
   }
 }
 

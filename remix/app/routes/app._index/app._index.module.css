@@ -1,0 +1,11 @@
+/* styles for default app route */
+.default_container {
+  display: flex;
+  padding: 25px;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #131619;
+  color: blue;
+}

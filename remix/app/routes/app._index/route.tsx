@@ -1,4 +1,4 @@
-import styles from "../app/app.module.css";
+import styles from "./app._index.module.css";
 
 export default function AppDefaultOutlet() {
   return (

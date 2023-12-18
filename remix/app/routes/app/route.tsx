@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./app.module.css";
 import { Outlet } from "@remix-run/react";
-import Sidebar from "../../components/sidebar/sidebar";
+import Sidebar from "./sidebar";
 
 export default function App() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);

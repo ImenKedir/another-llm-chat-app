@@ -4,32 +4,8 @@
   height: 100vh;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
-
-/* styles for default app route */
-.default_container {
-  display: flex;
-  padding: 25px;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
-.sidebar_container {
-  display: flex;
-  width: 100%;
-  max-width: 150px;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  background-color: gray;
-}
-
-.sidebar_container_hidden {
-  display: none;
-}
-
 .toggle_button {
   position: fixed; /* or absolute */
   top: 10px; /* Adjust as needed */
@@ -37,27 +13,22 @@
   padding: 5px;
 }
 
-/* Default text styles */
-h3 {
-  color: red;
+.sidebar_container {
+  display: flex;
+  width: 100%;
+  max-width: 150px;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: gray;
 }
-
-/* xs */
-@media (min-width: 475px) {
-  .container {
-    max-width: 640px;
-    color: white;
-  }
+.sidebar_button {
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
 }
-
-/* sm */
-@media (min-width: 640px) {
-  .container {
-    max-width: 768px;
-  }
-  .sidebar_container {
-    max-width: 200px;
-  }
+.sidebar_container_hidden {
+  display: none;
 }
 
 /* md */
@@ -85,13 +56,10 @@ h3 {
 /* xl */
 @media (min-width: 1280px) {
   .container {
-    max-width: 1280px;
+    max-width: 100%;
   }
-}
-
-/* 2xl */
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
+  .sidebar_container {
+    min-width: 300px;
+    color: yellow;
   }
 }

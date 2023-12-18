@@ -3,11 +3,6 @@ import styles from "./app.module.css";
 import { Link } from "@remix-run/react";
 import { SidebarData } from "./sidebarData";
 
-type SidebarProps = {
-  children: React.ReactNode;
-};
-// { children }: SidebarProps
-
 function Sidebar() {
   return (
     <div className={styles.sidebar_container}>

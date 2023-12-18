@@ -1,46 +1,47 @@
-import type { MetaFunction, ActionFunctionArgs} from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { getCount, incrementCount } from "@/models/counter.server"
-import { useLoaderData, useFetcher } from "@remix-run/react";
+import { getSession } from "@/sessions";
+import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node";
+import { useLoaderData, Link, Form } from "@remix-run/react";
+import { destroySession } from "@/sessions";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
-};
+export async function loader({ request }: LoaderFunctionArgs) {
+  const session = await getSession(
+    request.headers.get("Cookie")
+  );
 
-export async function loader() {
-  const count = await getCount()
-  return json({ count })
+ return json({ userId: session.get("userId") }) 
 }
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
-  const fetcher = useFetcher();
-  const isIncrementing = fetcher.state !== "idle";
 
-  if (isIncrementing) {
+  if (data.userId) {
     return (
-      <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-        <h1>Incrementing...</h1>
+      <div>
+        <h1>Signed in as: {data.userId}</h1>
+        <Form method="post">
+        <button>Logout</button>
+      </Form>
       </div>
-    );
+    )
   }
-  
+
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>This site has been visited {data.count} times.</h1>
-      <fetcher.Form method="post">
-        <button type="submit">
-          Increment
-        </button>
-      </fetcher.Form>
+    <div>
+      <h1>You are not signed in</h1>
+      <Link to={"/login"}>click here to login</Link>
     </div>
-  );
+  )
 }
 
-export async function action({ request }: ActionFunctionArgs) {
-  await incrementCount()
-  return json({ ok: true })
-}
+export const action = async ({
+  request,
+}: ActionFunctionArgs) => {
+  const session = await getSession(
+    request.headers.get("Cookie")
+  );
+  return redirect("/", {
+    headers: {
+      "Set-Cookie": await destroySession(session),
+    },
+  });
+};

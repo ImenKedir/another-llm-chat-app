@@ -1,5 +1,5 @@
 import type { SSTConfig } from "sst";
-import { Table, RemixSite } from "sst/constructs";
+import { Table, Api, Auth, RemixSite } from "sst/constructs";
 
 export default {
   config(_input) {
@@ -10,18 +10,30 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
-      const table = new Table(stack, "counter", {
-        fields: {
-          counter: "string",
-        },
-        primaryIndex: { partitionKey: "counter" },
-      });
+      const authApi = new Api(stack, "authApi");
 
       const site = new RemixSite(stack, "site", {
-        bind: [table]
+        environment: {
+          AUTH_API_URL: authApi.url + "/auth",
+        }
       });
+
+      const auth = new Auth(stack, "auth", {
+        authenticator: {
+          handler: "functions/auth.handler",
+          bind: [site],
+        },
+      });
+
+      auth.attach(stack, {
+        api: authApi,
+        prefix: "/auth",
+      });
+
       stack.addOutputs({
-        url: site.url,
+        GoogleAuth: authApi.url + "/auth/google/authorize",
+        GoogleAuthCallback: authApi.url + "/auth/google/callback",
+        SiteURL: site.url || "Site URL not available until after deployment",
       });
     });
   },

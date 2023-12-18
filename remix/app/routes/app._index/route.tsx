@@ -1,5 +1,4 @@
-import styles from "./app._index.module.css";
-
+import styles from "@/routes/app._index/app._index.module.css"
 // This is the default outlet for the app route.
 export default function AppDefaultOutlet() {
   return (

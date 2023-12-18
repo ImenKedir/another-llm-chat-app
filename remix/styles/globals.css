@@ -1,5 +1,8 @@
 :root {
   --background-color: #131619;
+  --md-breakpoint: 720px;
+  --lg-breakpoint: 1024px;
+  --xl-breakpoint: 1440px;
 }
 
 html,
@@ -25,11 +28,10 @@ h3 {
 
 p {
   font-size: 0.75rem;
-
 }
 
 /* md  */
-@media (min-width: 720px) {
+@media (min-width: var(--md-breakpoint)) {
   h1 {
     font-size: 3.5rem;
   }
@@ -44,7 +46,7 @@ p {
 }
 
 /* lg  */
-@media (min-width: 1024px) {
+@media (min-width: var(--lg-breakpoint)) {
   h1 {
     font-size: 4rem;
   }
@@ -59,7 +61,7 @@ p {
 }
 
 /* xl  */
-@media (min-width: 1440px) {
+@media (min-width: var(--xl-breakpoint)) {
   h1 {
     font-size: 5.25rem;
   }

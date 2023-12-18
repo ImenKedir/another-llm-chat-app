@@ -1,14 +1,13 @@
-import { getSession } from "@/sessions";
 import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
   json,
   redirect,
 } from "@remix-run/node";
-import { useLoaderData, Link, Form } from "@remix-run/react";
-import { destroySession } from "@/sessions";
-import styles from "./_index.module.css";
-import SignIn from "./signIn";
+import { useLoaderData, Link } from "@remix-run/react";
+import { getSession, destroySession } from "@/sessions.server";
+import SignIn from "@/routes/signIn"
+import styles from "@/routes/_index.module.css"
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"));

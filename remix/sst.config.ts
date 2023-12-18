@@ -1,5 +1,5 @@
 import type { SSTConfig } from "sst";
-import { Table, RemixSite } from "sst/constructs";
+import { Table, Api, Auth, RemixSite } from "sst/constructs";
 
 export default {
   config(_input) {
@@ -10,31 +10,30 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
-      const messagesTable = new Table(stack, "Messages", {
-        fields: {
-          author: "string", // the author of the message ('user' | 'ai')
-          content: "string", // the content of the message
-          sendDate: "string", // date the message was sent
-          userId: "string", // the user associated with the message
-          messageId: "string", // uuid of the message
-          conversationId: "string", // uuid of the conversation
-        },
-        primaryIndex: { // get all messages in a conversation sorted by send date
-          partitionKey: "conversationId",
-          sortKey: "sendDate",
-        },
-        globalIndexes: {
-          "userId-index": { // get all conversations for a user
-            partitionKey: "userId",
-            sortKey: "conversationId",
-        }
-      }});
+      const authApi = new Api(stack, "authApi");
 
       const site = new RemixSite(stack, "site", {
-        bind: [messagesTable]
+        environment: {
+          AUTH_API_URL: authApi.url + "/auth",
+        }
       });
+
+      const auth = new Auth(stack, "auth", {
+        authenticator: {
+          handler: "functions/auth.handler",
+          bind: [site],
+        },
+      });
+
+      auth.attach(stack, {
+        api: authApi,
+        prefix: "/auth",
+      });
+
       stack.addOutputs({
-        url: site.url,
+        GoogleAuth: authApi.url + "/auth/google/authorize",
+        GoogleAuthCallback: authApi.url + "/auth/google/callback",
+        SiteURL: site.url || "Site URL not available until after deployment",
       });
     });
   },

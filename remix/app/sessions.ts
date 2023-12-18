@@ -9,16 +9,12 @@ type SessionFlashData = {
 };
 
 const { getSession, commitSession, destroySession } =
-  createCookieSessionStorage<SessionData, SessionFlashData>(
-    {
-      cookie: {
-        name: "__session",
-        maxAge: 60,
-        secrets: [
-          "pa55word"
-        ]
-      },
-    }
-  );
+  createCookieSessionStorage<SessionData, SessionFlashData>({
+    cookie: {
+      name: "__session",
+      maxAge: 60,
+      secrets: ["pa55word"],
+    },
+  });
 
 export { getSession, commitSession, destroySession };

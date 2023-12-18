@@ -22,15 +22,16 @@ export const handler = AuthHandler({
 
         const redirectURL =
           RemixSite.site.url === "localhost"
-          ? "http://localhost:3000/login" : RemixSite.site.url + "/login";
+            ? "http://localhost:3000/login"
+            : RemixSite.site.url + "/login";
 
         return Session.parameter({
           redirect: redirectURL,
           type: "user",
           properties: {
             userID: claims.sub,
-          }
-        })
+          },
+        });
       },
     }),
   },

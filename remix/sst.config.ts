@@ -15,7 +15,7 @@ export default {
       const site = new RemixSite(stack, "site", {
         environment: {
           AUTH_API_URL: authApi.url + "/auth",
-        }
+        },
       });
 
       const auth = new Auth(stack, "auth", {

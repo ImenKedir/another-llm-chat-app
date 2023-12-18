@@ -1,86 +1,86 @@
 .container {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  z-index: 1;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .sidebar_container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 150px;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  background-color: gray;
-  font-size: 1.5rem;
-  z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 150px;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+    font-size: 1.5rem;
+    z-index: 2;
 }
 
 ul {
-  text-decoration: none;
-  list-style: none;
-  font-size: 1.5rem;
+    text-decoration: none;
+    list-style: none;
+    font-size: 1.5rem;
 }
 
 .sidebar_button {
-  margin-left: 2rem;
-  font-size: 2rem;
-  background: none;
+    margin-left: 2rem;
+    font-size: 2rem;
+    background: none;
 }
 .sidebar_container_hidden {
-  display: none;
+    display: none;
 }
 
 .toggle_button {
-  position: fixed; /* or absolute */
-  top: 10px; /* Adjust as needed */
-  left: 10px; /* Adjust as needed */
-  background-color: pink; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  z-index: 3;
+    position: fixed; /* or absolute */
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    background-color: pink; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    z-index: 3;
 }
 
 /* md */
 @media (min-width: 768px) {
-  .container {
-    max-width: 1024px;
-  }
-  .sidebar_container {
-    max-width: 250px;
-  }
+    .container {
+        max-width: 1024px;
+    }
+    .sidebar_container {
+        max-width: 250px;
+    }
 }
 
 /* lg */
 @media (min-width: 1024px) {
-  .container {
-    max-width: 1280px;
-  }
-  .sidebar_container {
-    max-width: 300px;
-    color: yellow;
-  }
+    .container {
+        max-width: 1280px;
+    }
+    .sidebar_container {
+        max-width: 300px;
+        color: yellow;
+    }
 }
 
 /* xl */
 @media (min-width: 1280px) {
-  .container {
-    max-width: 100%;
-  }
-  .sidebar_container {
-    min-width: 300px;
-    color: yellow;
-  }
+    .container {
+        max-width: 100%;
+    }
+    .sidebar_container {
+        min-width: 300px;
+        color: yellow;
+    }
 }
 
 /* md 

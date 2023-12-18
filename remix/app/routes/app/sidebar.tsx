@@ -10,8 +10,8 @@ type SidebarProps = {
 
 function Sidebar() {
   return (
-    <div>
-      <ul className={styles.sidebar_container}>
+    <div className={styles.sidebar_container}>
+      <ul>
         {SidebarData.map((item, index) => {
           return (
             <li key={index} className={item.cName}>

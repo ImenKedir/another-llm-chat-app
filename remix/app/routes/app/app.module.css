@@ -20,6 +20,13 @@
   font-size: 1.5rem;
   z-index: 2;
 }
+
+ul {
+  text-decoration: none;
+  list-style: none;
+  font-size: 1.5rem;
+}
+
 .sidebar_button {
   margin-left: 2rem;
   font-size: 2rem;

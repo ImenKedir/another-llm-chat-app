@@ -23,6 +23,7 @@
 
 .name {
   padding: 10px;
+  margin-left: 15px;
   font-size: 2rem;
 }
 
@@ -36,13 +37,11 @@
   flex-direction: column;
   align-items: center;
   font-size: 2rem;
-  margin-top: 20px; /* Adjust to center vertically */
-  flex-grow: 1; /* Allows this div to take up remaining space */
-  justify-content: center; /* Center content vertically within this div */
+  margin-top: 25%;
+  justify-content: flex-start;
 }
 
 /* Rest of your CSS... */
-
 
 button {
   margin: 10px;

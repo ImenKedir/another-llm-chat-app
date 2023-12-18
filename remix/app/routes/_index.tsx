@@ -44,7 +44,6 @@ export default function Index() {
   );
 }
 
-
 // export default function Index() {
 //   const data = useLoaderData<typeof loader>();
 

@@ -31,7 +31,7 @@ p {
 }
 
 /* md  */
-@media (min-width: var(--md-breakpoint)) {
+@media (min-width: 720px) {
   h1 {
     font-size: 3.5rem;
   }
@@ -41,12 +41,12 @@ p {
   }
 
   h3 {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 }
 
 /* lg  */
-@media (min-width: var(--lg-breakpoint)) {
+@media (min-width: 1024px) {
   h1 {
     font-size: 4rem;
   }
@@ -56,12 +56,12 @@ p {
   }
 
   h3 {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 }
 
 /* xl  */
-@media (min-width: var(--xl-breakpoint)) {
+@media (min-width:1440px) {
   h1 {
     font-size: 5.25rem;
   }
@@ -71,6 +71,6 @@ p {
   }
 
   h3 {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 }

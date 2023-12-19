@@ -39,4 +39,3 @@ pnpm run dev
 
 - [@imenkedir](https://www.github.com/imenkedir)
 - [@josssiiiah](https://github.com/Josssiiiah)
-- [@kadijaismail112](https://github.com/kadijaismail112)

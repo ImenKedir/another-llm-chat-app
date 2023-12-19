@@ -44,8 +44,6 @@
   max-width: 325px;
 }
 
-
-
 .signin_button {
   border-radius: 10px;
   padding: 0px 14px;
@@ -54,8 +52,6 @@
   color: black;
   cursor: pointer;
 }
-
-
 
 .start_chatting_button {
   padding: 2px 18px;
@@ -92,7 +88,7 @@
 /* xl  */
 @media (min-width: 1440px) {
   .center {
-    margin-top: 5%;
+    margin-top: 10%;
     max-width: 1000px;
   }
   .start_chatting_button {

@@ -12,7 +12,7 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 h2 {
@@ -20,7 +20,12 @@ h2 {
 }
 
 h3 {
+  font-size: 1rem;
+}
+
+p {
   font-size: 0.75rem;
+
 }
 
 /* md  */
@@ -41,7 +46,7 @@ h3 {
 /* lg  */
 @media (min-width: 1024px) {
   h1 {
-    font-size: 5rem;
+    font-size: 4rem;
   }
 
   h2 {

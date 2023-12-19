@@ -8,7 +8,6 @@ import {
 import { useLoaderData, Link, Form } from "@remix-run/react";
 import { destroySession } from "@/sessions";
 import styles from "./_index.module.css";
-import "../../styles/globals.css";
 import SignIn from "./signIn";
 
 export async function loader({ request }: LoaderFunctionArgs) {

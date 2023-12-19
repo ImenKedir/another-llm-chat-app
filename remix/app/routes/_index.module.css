@@ -11,19 +11,18 @@
 }
 
 .nav_container {
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
   background-color: var(--background-color);
   color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 10px;
+  width: 100%;
 }
 
 .name {
-  padding: 10px;
-  margin-left: 15px;
+  margin-left: 30px;
   font-size: 2rem;
 }
 
@@ -66,14 +65,14 @@ button {
 
 /* md  */
 @media (min-width: 720px) {
-  .heading {
+  .center {
     margin-top: 20%;
   }
 }
 
 /* lg  */
 @media (min-width: 1024px) {
-  .heading {
+  .center {
     margin-top: 10%;
   }
 }

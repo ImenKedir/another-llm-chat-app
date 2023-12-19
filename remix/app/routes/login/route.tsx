@@ -1,8 +1,9 @@
 import { Link, useLoaderData } from "@remix-run/react";
 import { LoaderFunctionArgs, redirect, json } from "@remix-run/node";
 import { getSession, commitSession } from "@/sessions";
-import "../../../styles/globals.css";
 import styles from "./login.module.css";
+import "../../../styles/globals.css";
+import woman from "/woman.png";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"));
@@ -40,17 +41,43 @@ export default function Login() {
         </div>
         <div className={styles.login_placeholder}></div>
       </div>
-      <div className={styles.center}>
-        <h1>Hello, John!</h1>
-        <p>Log in to start creating magic.</p>
-      </div>
-      <button>
-        <Link to={data.authApiURL + "/google/authorize"}>
-          <h3>Sign in with Google</h3>
-        </Link>
-      </button>
-      <div>
-        <h2>Form Placeholder</h2>
+      <div className={styles.main}>
+        <div className={styles.left_content}>
+          <div className={styles.left_text}>
+            <h1>Hello, John!</h1>
+            <h3>Log in to start creating magic.</h3>
+          </div>
+          <div className={styles.center_button}>
+            <button className={styles.login_button}>
+              <Link to={data.authApiURL + "/google/authorize"}>
+                <p>Sign in with Google</p>
+              </Link>
+            </button>
+          </div>
+          <div>
+            <form className={styles.form_container}>
+              <input
+                className={styles.input}
+                type="text"
+                id="fname"
+                name="fname"
+                value="email"
+              />
+              <input
+                className={styles.input}
+                type="text"
+                id="lname"
+                name="lname"
+                value="password"
+              />
+            </form>
+          </div>
+        </div>
+        <div className={styles.right_content}>
+          <div className={styles.right_text}>
+            <img src="/woman.png" className={styles.responsive_image} />
+          </div>
+        </div>
       </div>
     </div>
   );

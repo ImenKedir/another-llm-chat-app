@@ -54,7 +54,7 @@
 .responsive_image {
   height: 100vh;
   max-width: 100%;
-  object-fit: cover;
+    margin-right: 0;
 }
 
 .container {
@@ -115,6 +115,10 @@
   display: none; /* Initially hidden */
 }
 
+.link {
+  text-decoration: none;
+}
+
 /* md  */
 @media (min-width: 720px) {
   .form_container {
@@ -125,8 +129,8 @@
     flex-direction: row;
   }
   .left_text {
-    margin-left: 0;
-    margin-top: 40px;
+    margin-left: 20px;
+    margin-top: 30px;
   }
 
   .left_content {
@@ -135,10 +139,10 @@
   .right_content {
     width: 60%;
     height: 100vh;
-  }
-
-  .right_content {
     display: block; /* Show right content area */
+  }
+  .right_content {
+    margin-right: 0;
   }
 
   .name h2 {
@@ -152,8 +156,22 @@
 
 /* lg  */
 @media (min-width: 1024px) {
+  .left_text {
+    margin-left: 60px;
+    margin-top: 40px;
+  }
 }
 
 /* xl  */
 @media (min-width: 1440px) {
+  .left_content {
+    width: 45%;
+  }
+  .right_content {
+    width: 55%;
+  }
+  .left_text {
+    margin-left: 100px;
+    margin-top: 60px;
+  }
 }

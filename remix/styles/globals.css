@@ -35,7 +35,7 @@ p {
 /* md  */
 @media (min-width: 720px) {
   h1 {
-    font-size: 3.25rem;
+    font-size: 3rem;
   }
 
   h2 {
@@ -50,7 +50,7 @@ p {
 /* lg  */
 @media (min-width: 1024px) {
   h1 {
-    font-size: 3rem;
+    font-size: 3.25rem;
   }
 
   h2 {

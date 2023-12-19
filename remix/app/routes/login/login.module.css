@@ -23,7 +23,7 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-left: 10%;  
+  margin-left: 10%;
   padding: 30px;
   width: 100%;
   margin-top: 30px;
@@ -40,8 +40,8 @@
 }
 
 .name {
-    margin-left: 20px;
-    font-size: 2rem;
+  margin-left: 20px;
+  font-size: 2rem;
 }
 
 .nav_container {
@@ -100,7 +100,6 @@
 .login_button a:hover {
   text-decoration: underline;
 }
-
 
 .nav_container {
   align-items: center;

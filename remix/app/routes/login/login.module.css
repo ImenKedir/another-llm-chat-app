@@ -10,7 +10,7 @@
   width: 100%;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 32px;
+  padding: 30px;
   text-align: left;
 }
 
@@ -29,6 +29,11 @@
   margin-top: 0; /* Reduces the top margin of h3 */
   /* other styles for h3 if needed */
 }
+
+.name h2 {
+  margin-top: 6.5px;
+}
+
 
 .responsive_image {
   height: 100vh;
@@ -70,18 +75,6 @@
   margin: 0;
   padding: 2px 12px;
   text-decoration: none;
-}
-.login_button a, /* Targeting the <Link> component inside the button */
-.login_button a:visited, /* For visited state */
-
-.login_button a:active {
-  /* For active state */
-  text-decoration: none; /* Remove underline from the link */
-  color: inherit; /* Optional: Ensures the link color matches the button text color */
-}
-
-.login_button a:hover {
-  text-decoration: underline;
 }
 
 

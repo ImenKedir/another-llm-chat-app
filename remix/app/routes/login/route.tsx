@@ -40,7 +40,6 @@ export default function Login() {
               <div className={styles.name}>
                 <h2>NaughtyML</h2>
               </div>
-            <div className={styles.center_container}>
               <h1>Hello, John!</h1>
               <h3>Log in to start creating magic.</h3>
               <div className={styles.center_button}>
@@ -50,7 +49,6 @@ export default function Login() {
                   </Link>
                 </button>
               </div>
-            </div>
           </div>
 
           <div>

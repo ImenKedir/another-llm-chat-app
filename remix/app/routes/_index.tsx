@@ -6,8 +6,8 @@ import {
 } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
 import { getSession, destroySession } from "@/sessions.server";
-import SignIn from "@/routes/signIn"
-import styles from "@/routes/_index.module.css"
+import SignInButton from "@/routes/signInButton";
+import styles from "@/routes/_index.module.css";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"));
@@ -25,7 +25,7 @@ export default function Index() {
           <h2>NaughtyML</h2>
         </div>
         <div className={styles.login_placeholder}>
-          <SignIn userId={data.userId} />
+          <SignInButton userId={data.userId} />
         </div>
       </div>
       <div className={styles.center}>

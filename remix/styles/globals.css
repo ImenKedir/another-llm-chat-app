@@ -1,8 +1,5 @@
 :root {
   --background-color: #131619;
-  --md-breakpoint: 720px;
-  --lg-breakpoint: 1024px;
-  --xl-breakpoint: 1440px;
 }
 
 html,
@@ -33,7 +30,7 @@ p {
 /* md  */
 @media (min-width: 720px) {
   h1 {
-    font-size: 3.5rem;
+    font-size: 3.25rem;
   }
 
   h2 {

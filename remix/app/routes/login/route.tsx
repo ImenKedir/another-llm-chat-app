@@ -1,8 +1,7 @@
 import { Link, useLoaderData } from "@remix-run/react";
 import { LoaderFunctionArgs, redirect, json } from "@remix-run/node";
 import { getSession, commitSession } from "@/sessions.server";
-import styles from "@/routes/login/login.module.css"
-
+import styles from "@/routes/login/login.module.css";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"));
@@ -34,25 +33,26 @@ export default function Login() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.nav_container}>
-        <div className={styles.name}>
-          <h2>NaughtyML</h2>
-        </div>
-        <div className={styles.login_placeholder}></div>
-      </div>
       <div className={styles.main}>
         <div className={styles.left_content}>
           <div className={styles.left_text}>
-            <h1>Hello, John!</h1>
-            <h3>Log in to start creating magic.</h3>
+           
+              <div className={styles.name}>
+                <h2>NaughtyML</h2>
+              </div>
+            <div className={styles.center_container}>
+              <h1>Hello, John!</h1>
+              <h3>Log in to start creating magic.</h3>
+              <div className={styles.center_button}>
+                <button className={styles.login_button}>
+                  <Link to={data.authApiURL + "/google/authorize"}>
+                    <p>Sign in with Google</p>
+                  </Link>
+                </button>
+              </div>
+            </div>
           </div>
-          <div className={styles.center_button}>
-            <button className={styles.login_button}>
-              <Link to={data.authApiURL + "/google/authorize"}>
-                <p>Sign in with Google</p>
-              </Link>
-            </button>
-          </div>
+
           <div>
             <form className={styles.form_container}>
               <input

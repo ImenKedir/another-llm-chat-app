@@ -28,7 +28,7 @@
 }
 
 /* md  */
-@media (min-width: 768px) {
+@media (min-width: 720px) {
 }
 
 /* lg  */
@@ -40,10 +40,9 @@
 }
 
 /* xl  */
-@media (min-width: 1280px) {
+@media (min-width: 1440px) {
   .card {
     width: 600px;
     height: 150px;
   }
-
 }

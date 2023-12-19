@@ -5,7 +5,7 @@ type SignInProps = {
   userId: string | undefined;
 };
 
-const SignIn: React.FC<SignInProps> = ({ userId }) => {
+const SignInButton: React.FC<SignInProps> = ({ userId }) => {
   return userId ? (
     <div>
       {/* <h3>Signed in as: {userId}</h3> */}
@@ -26,4 +26,4 @@ const SignIn: React.FC<SignInProps> = ({ userId }) => {
   );
 };
 
-export default SignIn;
+export default SignInButton;

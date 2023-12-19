@@ -1,4 +1,4 @@
-import styles from "@/routes/app.chat/chat.module.css"
+import styles from "@/routes/app.chat/chat.module.css";
 
 export default function Chat() {
   return (

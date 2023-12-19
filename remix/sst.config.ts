@@ -4,7 +4,7 @@ import { Table, Api, Auth, RemixSite } from "sst/constructs";
 export default {
   config(_input) {
     return {
-      name: "remix",
+      name: "NaughtyML",
       region: "us-west-1",
     };
   },
@@ -15,7 +15,7 @@ export default {
       const site = new RemixSite(stack, "site", {
         environment: {
           AUTH_API_URL: authApi.url + "/auth",
-        }
+        },
       });
 
       const auth = new Auth(stack, "auth", {

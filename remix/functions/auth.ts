@@ -2,7 +2,7 @@ import { AuthHandler, Session, GoogleAdapter } from "sst/node/auth";
 import { RemixSite } from "sst/node/site";
 
 const GOOGLE_CLIENT_ID =
-  "833860023730-e28nvln8858cko29gqk79242mlm78f14.apps.googleusercontent.com";
+  "902188418129-rmhvn4kk7k4j731pcc27fkn9gnpj3t5f.apps.googleusercontent.com";
 
 declare module "sst/node/auth" {
   export interface SessionTypes {
@@ -22,15 +22,16 @@ export const handler = AuthHandler({
 
         const redirectURL =
           RemixSite.site.url === "localhost"
-          ? "http://localhost:3000/login" : RemixSite.site.url + "/login";
+            ? "http://localhost:3000/login"
+            : RemixSite.site.url + "/login";
 
         return Session.parameter({
           redirect: redirectURL,
           type: "user",
           properties: {
             userID: claims.sub,
-          }
-        })
+          },
+        });
       },
     }),
   },

@@ -7,6 +7,7 @@
     "build": "remix build",
     "dev": "sst bind remix dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "fmt": "prettier --write \"app/**/*.{tsx,css}\"",
     "start": "remix-serve ./build/index.js",
     "typecheck": "tsc",
     "sst:deploy": "sst deploy",
@@ -20,8 +21,10 @@
     "@remix-run/react": "^2.4.0",
     "@remix-run/serve": "^2.4.0",
     "isbot": "^3.6.8",
+    "prettier": "^3.1.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.4.0",

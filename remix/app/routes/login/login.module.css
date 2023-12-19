@@ -5,36 +5,50 @@
 }
 
 .left_content {
-  align-items: center;
   display: flex;
-  width: 100%;
   flex-direction: column;
-  justify-content: flex-start;
-  padding: 30px;
+  justify-content: center; /* Centers children vertically */
+  align-items: flex-start; /* Aligns children to the start (left) horizontally */
+
   text-align: left;
+  height: 100%;
 }
 
 .left_text {
-  align-items: flex-start;
   display: flex;
   flex-direction: column;
+  margin-left: 10%;  
+  padding: 30px;
   width: 100%;
+  margin-top: 30px;
 }
+
 .left_text h1 {
   margin-bottom: 10px; /* Reduces the bottom margin of h1 */
   /* other styles for h1 if needed */
 }
 
 .left_text h3 {
-  margin-top: 0; /* Reduces the top margin of h3 */
+  margin-top: 5px; /* Reduces the top margin of h3 */
   /* other styles for h3 if needed */
 }
 
-.name h2 {
-  margin-top: 6.5px;
+.name {
+    margin-left: 20px;
+    margin-top: 7px;
+    font-size: 2rem;
 }
 
-
+.nav_container {
+  align-items: center;
+  background-color: var(--background-color);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+}
 .responsive_image {
   height: 100vh;
   max-width: 100%;
@@ -75,8 +89,8 @@
   margin: 0;
   padding: 2px 12px;
   text-decoration: none;
+  margin-top: 20px;
 }
-
 
 .nav_container {
   align-items: center;
@@ -102,6 +116,10 @@
     display: flex;
     flex-direction: row;
   }
+  .left_text {
+    margin-left: 0;
+    margin-top: 40px;
+  }
 
   .left_content {
     width: 40%;
@@ -113,6 +131,10 @@
 
   .right_content {
     display: block; /* Show right content area */
+  }
+
+  .name h2 {
+    margin-top: 6.5px;
   }
 }
 

@@ -12,19 +12,24 @@ body {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 2.25rem;
 }
 
 h2 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
   font-size: 1rem;
+
 }
 
 p {
-  font-size: 0.75rem;
+  font-size: 0.5rem;
 }
 
 /* md  */
@@ -34,7 +39,7 @@ p {
   }
 
   h2 {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
   }
 
   h3 {
@@ -45,7 +50,7 @@ p {
 /* lg  */
 @media (min-width: 1024px) {
   h1 {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
   h2 {
@@ -60,7 +65,7 @@ p {
 /* xl  */
 @media (min-width:1440px) {
   h1 {
-    font-size: 5.25rem;
+    font-size: 4.25rem;
   }
 
   h2 {

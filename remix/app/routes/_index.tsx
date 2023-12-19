@@ -22,18 +22,18 @@ export default function Index() {
     <div className={styles.container}>
       <div className={styles.nav_container}>
         <div className={styles.name}>
-          <h2>NaughtyML</h2>
+          <h3>NaughtyML</h3>
         </div>
         <div className={styles.login_placeholder}>
           <SignInButton userId={data.userId} />
         </div>
       </div>
       <div className={styles.center}>
-        <h1>Welcome to NaughtyML!</h1>
+        <h1>Welcome to NaughtyML</h1>
         <div>
           <Link to="/app">
             <button>
-              <span>Get started</span>
+              <h3>Get started</h3>
             </button>
           </Link>
         </div>

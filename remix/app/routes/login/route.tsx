@@ -35,23 +35,26 @@ export default function Login() {
     <div className={styles.container}>
       <div className={styles.main}>
         <div className={styles.left_content}>
+          <div className={styles.nav_container}>
+            <div className={styles.name}>
+              <h3>NaughtyML</h3>
+            </div>
+          </div>
+            
           <div className={styles.left_text}>
-           
-              <div className={styles.name}>
-                <h2>NaughtyML</h2>
-              </div>
-              <h1>Hello, John!</h1>
-              <h3>Log in to start creating magic.</h3>
-              <div className={styles.center_button}>
-                <button className={styles.login_button}>
-                  <Link to={data.authApiURL + "/google/authorize"}>
-                    <p>Sign in with Google</p>
-                  </Link>
-                </button>
-              </div>
+            
+            <h1>Hello, John!</h1>
+            <h3>Log in to start creating magic.</h3>
+            <div className={styles.center_button}>
+              <button className={styles.login_button}>
+                <Link to={data.authApiURL + "/google/authorize"}>
+                  <p>Sign in with Google</p>
+                </Link>
+              </button>
+            </div>
           </div>
 
-          <div>
+          {/* <div>
             <form className={styles.form_container}>
               <input
                 className={styles.input}
@@ -68,7 +71,7 @@ export default function Login() {
                 value="password"
               />
             </form>
-          </div>
+          </div> */}
         </div>
         <div className={styles.right_content}>
           <div className={styles.right_text}>

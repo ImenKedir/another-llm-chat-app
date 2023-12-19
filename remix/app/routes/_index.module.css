@@ -41,6 +41,7 @@
   margin-top: 5%;
   justify-content: flex-start;
   margin-left: 30px;
+  max-width: 325px;
 }
 
 
@@ -56,7 +57,7 @@
 
 
 
-.get_started_button {
+.start_chatting_button {
   padding: 2px 18px;
   border-radius: 5px;
   border: none;
@@ -67,14 +68,35 @@
 
 /* md  */
 @media (min-width: 720px) {
+  .center {
+    margin-top: 10%;
+    margin-left: 15%;
+    max-width: 525px;
+  }
  
 }
 
 /* lg  */
 @media (min-width: 1024px) {
+  .center {
+    margin-left: 15%;
+    max-width: 750px;
+  }
+  .start_chatting_button {
+    margin-top: 10px;
+    padding: 2px 20px;
+  }
   
 }
 
 /* xl  */
 @media (min-width: 1440px) {
+  .center {
+    margin-top: 5%;
+    max-width: 1000px;
+  }
+  .start_chatting_button {
+    padding: 4px 24px;
+  }
+  
 }

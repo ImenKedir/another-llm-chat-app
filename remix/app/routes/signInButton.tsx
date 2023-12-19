@@ -19,7 +19,7 @@ const SignInButton: React.FC<SignInProps> = ({ userId }) => {
     <div>
       <Link to={"/login"}>
         <button className={styles.signin_button}>
-          <h4>Sign In </h4>
+          <h3>Sign In </h3>
         </button>
       </Link>
     </div>

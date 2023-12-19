@@ -30,10 +30,10 @@ export default function Index() {
       </div>
 
       <div className={styles.center}>
-        <h1>Where<br /> Characters <br /> Do Whatever <br /> You Want</h1>
+        <h1>Where Characters Do Whatever You Want</h1>
         <div>
           <Link to="/app">
-            <button className={styles.get_started_button}>
+            <button className={styles.start_chatting_button}>
               <h3>Start Chatting</h3>
             </button>
           </Link>

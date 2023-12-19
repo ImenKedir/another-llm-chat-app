@@ -5,6 +5,7 @@
 }
 
 .left_content {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centers children vertically */
@@ -15,6 +16,7 @@
 }
 
 .left_text {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   margin-left: 10%;  
@@ -93,9 +95,8 @@
   margin-top: 20px;
 }
 
-.link {
-  text-decoration: none;
-  color: black;
+.login_button a:hover {
+  text-decoration: underline;
 }
 
 

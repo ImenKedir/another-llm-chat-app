@@ -4,34 +4,59 @@
   width: 100%;
 }
 
+.main {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
 .left_content {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
-  width: 100%;
   flex-direction: column;
-  justify-content: flex-start;
-  padding: 32px;
+  justify-content: center; /* Centers children vertically */
+  align-items: flex-start; /* Aligns children to the start (left) horizontally */
   text-align: left;
+  height: 100%;
 }
 
 .left_text {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
+  margin-left: 10%;
+  padding: 30px;
   width: 100%;
+  margin-top: 30px;
 }
+
 .left_text h1 {
   margin-bottom: 10px; /* Reduces the bottom margin of h1 */
   /* other styles for h1 if needed */
 }
 
 .left_text h3 {
-  margin-top: 0; /* Reduces the top margin of h3 */
+  margin-top: 5px; /* Reduces the top margin of h3 */
   /* other styles for h3 if needed */
 }
 
+.name {
+  margin-left: 20px;
+  font-size: 2rem;
+}
+
+.nav_container {
+  align-items: center;
+  background-color: var(--background-color);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
 .responsive_image {
-  height: auto;
+  height: 100vh;
   max-width: 100%;
+  margin-right: 0;
 }
 
 .container {
@@ -68,24 +93,12 @@
   margin: 0;
   padding: 2px 12px;
   text-decoration: none;
-}
-.login_button a, /* Targeting the <Link> component inside the button */
-.login_button a:visited, /* For visited state */
-
-.login_button a:active {
-  /* For active state */
-  text-decoration: none; /* Remove underline from the link */
-  color: inherit; /* Optional: Ensures the link color matches the button text color */
+  list-style: none;
+  margin-top: 20px;
 }
 
 .login_button a:hover {
   text-decoration: underline;
-}
-
-.name {
-  font-size: 2rem;
-  margin-left: 20px;
-  padding-top: 9.5px;
 }
 
 .nav_container {
@@ -103,41 +116,63 @@
   display: none; /* Initially hidden */
 }
 
+.link {
+  text-decoration: none;
+}
 
 /* md  */
 @media (min-width: 720px) {
-    .form_container {
-        display: none;
-      }
-      .heading {
-        margin-top: 10%;
-      }
-    
-      .main {
-        display: flex;
-        flex-direction: row;
-      }
-    
-      .left_content {
-        width: 40%;
-      }
-      .right_content {
-        width: 60%;
-      }
-    
-    
-      .right_content {
-        display: block; /* Show right content area */
-      }
+  .form_container {
+    display: none;
+  }
+  .main {
+    display: flex;
+    flex-direction: row;
+  }
+  .left_text {
+    margin-left: 20px;
+    margin-top: 30px;
+  }
+
+  .left_content {
+    width: 50%;
+  }
+  .right_content {
+    width: 50%;
+    height: 100vh;
+    display: block; /* Show right content area */
+  }
+  .right_content {
+    margin-right: 0;
+  }
+
+  .name h2 {
+    margin-top: 6.5px;
+  }
+
+  .login_button {
+    padding: 5px 18px;
+  }
 }
-  
 
 /* lg  */
 @media (min-width: 1024px) {
-
+  .left_text {
+    margin-left: 60px;
+    margin-top: 40px;
+  }
 }
-
 
 /* xl  */
 @media (min-width: 1440px) {
+  .left_content {
+    width: 50%;
+  }
+  .right_content {
+    width: 50%;
+  }
+  .left_text {
+    margin-left: 100px;
+    margin-top: 60px;
+  }
 }

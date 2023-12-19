@@ -28,7 +28,7 @@
 }
 
 /* md  */
-@media (min-width: 768px) {
+@media (min-width: 720px) {
 }
 
 /* lg  */
@@ -37,18 +37,12 @@
     width: 300px;
     height: 100px;
   }
-  h3 {
-    font-size: 2rem;
-  }
 }
 
 /* xl  */
-@media (min-width: 1280px) {
+@media (min-width: 1440px) {
   .card {
     width: 600px;
     height: 150px;
-  }
-  h3 {
-    font-size: 3rem;
   }
 }

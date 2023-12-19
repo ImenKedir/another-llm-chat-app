@@ -6,8 +6,9 @@ import {
 } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
 import { getSession, destroySession } from "@/sessions.server";
-import SignIn from "@/routes/signIn"
-import styles from "@/routes/_index.module.css"
+import SignInButton from "@/routes/signInButton";
+import Scroller from "@/routes/scroller";
+import styles from "@/routes/_index.module.css";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"));
@@ -22,56 +23,25 @@ export default function Index() {
     <div className={styles.container}>
       <div className={styles.nav_container}>
         <div className={styles.name}>
-          <h2>NaughtyML</h2>
+          <h3>NaughtyML</h3>
         </div>
         <div className={styles.login_placeholder}>
-          <SignIn userId={data.userId} />
+          <SignInButton userId={data.userId} />
         </div>
       </div>
+
       <div className={styles.center}>
-        <h1>Welcome to NaughtyML!</h1>
-        <div>
-          <Link to="/app">
-            <button>
-              <span>Get started</span>
-            </button>
-          </Link>
-        </div>
+        <h1>Where Characters Do Whatever You Want</h1>
+        <Link to="/app">
+          <button className={styles.start_chatting_button}>
+            <h3>Start Chatting</h3>
+          </button>
+        </Link>
+        <Scroller />
       </div>
     </div>
   );
 }
-
-// export default function Index() {
-//   const data = useLoaderData<typeof loader>();
-
-//   <div className={styles.container}>
-//     <div className={styles.name}>NaughtyML</div>
-//     <div className={styles.login_placeholder}>
-//       {/* {data.userId ? (
-//         <SignIn userId={data.userId} />
-//       ) : (
-//         <div>
-//           <h1>You are not signed in</h1>
-//           <Link to={"/login"}>click here to login</Link>
-//         </div>
-//       )} */}
-//     </div>
-//     <div className={styles.heading}>
-//       <h1>Welcome to NaughtyML!</h1>
-//       {/* <p>
-//           This will be the landing page. Click the link below to go to the app.
-//         </p> */}
-//       <div className={styles.link}>
-//         <Link to="/app">
-//           <button>
-//             <span>Get started</span>
-//           </button>
-//         </Link>
-//       </div>
-//     </div>
-//   </div>;
-// }
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const session = await getSession(request.headers.get("Cookie"));

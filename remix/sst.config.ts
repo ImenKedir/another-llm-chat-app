@@ -1,5 +1,5 @@
 import type { SSTConfig } from "sst";
-import { Table, Api, Auth, RemixSite } from "sst/constructs";
+import { Api, Auth, RemixSite } from "sst/constructs";
 
 export default {
   config(_input) {

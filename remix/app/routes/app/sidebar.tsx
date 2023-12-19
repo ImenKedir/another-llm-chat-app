@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import { SidebarData } from "@/routes/app/sidebarData"
+import { SidebarData } from "@/routes/app/sidebarData";
 import styles from "@/routes/app/app.module.css";
 
 function Sidebar() {

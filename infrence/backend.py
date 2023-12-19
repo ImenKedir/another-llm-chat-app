@@ -16,7 +16,7 @@ from modal import Image, Stub, asgi_app, gpu, method
 # Note that quantization does degrade token generation performance significantly.
 #
 # Any model supported by TGI can be chosen here.
-GPU_CONFIG = gpu.A100(memory=40, count=1)
+GPU_CONFIG = gpu.A10G(count=2)
 MODEL_ID = "Austism/chronos-hermes-13b-v2"
 # Add `["--quantize", "gptq"]` for TheBloke GPTQ models.
 LAUNCH_FLAGS = [
@@ -57,7 +57,7 @@ image = (
     .pip_install("text-generation")
 )
 
-stub = Stub("example-tgi-mixtral", image=image)
+stub = Stub("tgi-chronos-hermes-13b-v2", image=image)
 
 
 # ## The model class
@@ -94,7 +94,6 @@ class Model:
             ["text-generation-launcher"] + LAUNCH_FLAGS
         )
         self.client = AsyncClient("http://127.0.0.1:8000", timeout=60)
-        self.template = "[INST] {user} [/INST]"
 
         # Poll until webserver at 127.0.0.1:8000 accepts connections before running inputs.
         webserver_ready = False
@@ -113,18 +112,15 @@ class Model:
         self.launcher.terminate()
 
     @method()
-    async def generate(self, question: str):
-        prompt = self.template.format(user=question)
-        result = await self.client.generate(prompt, max_new_tokens=50)
+    async def generate(self, prompt: str, max_new_tokens: int):
+        result = await self.client.generate(prompt, max_new_tokens=max_new_tokens)
 
         return result.generated_text
 
     @method()
-    async def generate_stream(self, question: str):
-        prompt = self.template.format(user=question)
-
+    async def generate_stream(self, prompt: str, max_new_tokens: int):
         async for response in self.client.generate_stream(
-            prompt, max_new_tokens=50
+            prompt, max_new_tokens=max_new_tokens
         ):
             if not response.token.special:
                 yield response.token.text
@@ -167,14 +163,14 @@ def backend():
         }
 
     @app.get("/completion")
-    async def completion(prompt: str):
+    async def completion(prompt: str, max_new_tokens: int = 100):
         from urllib.parse import unquote
 
         async def generate():
             async for text in Model().generate_stream.remote_gen.aio(
-                unquote(prompt)
+                prompt=unquote(prompt), max_new_tokens=max_new_tokens
             ):
-                yield json.dumps(dict(text=text), ensure_ascii=False)
+                yield f"{json.dumps(dict(text=text), ensure_ascii=False)}\n\n"
 
         return StreamingResponse(generate(), media_type="text/event-stream")
 

@@ -10,16 +10,16 @@ const SignInButton: React.FC<SignInProps> = ({ userId }) => {
     <div>
       {/* <h3>Signed in as: {userId}</h3> */}
       <Form method="post">
-        <button className={styles.login_button}>
-          <h3>Logout</h3>
+        <button className={styles.signin_button}>
+          <h4>Logout</h4>
         </button>
       </Form>
     </div>
   ) : (
     <div>
       <Link to={"/login"}>
-        <button className={styles.login_button}>
-          <h3>Sign In </h3>
+        <button className={styles.signin_button}>
+          <h4>Sign In </h4>
         </button>
       </Link>
     </div>

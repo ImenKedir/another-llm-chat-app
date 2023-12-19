@@ -28,12 +28,13 @@ export default function Index() {
           <SignInButton userId={data.userId} />
         </div>
       </div>
+
       <div className={styles.center}>
-        <h1>Welcome to NaughtyML</h1>
+        <h1>Where<br /> Characters <br /> Do Whatever <br /> You Want</h1>
         <div>
           <Link to="/app">
             <button className={styles.get_started_button}>
-              <h3>Get started</h3>
+              <h3>Start Chatting</h3>
             </button>
           </Link>
         </div>

@@ -54,25 +54,6 @@ export default function Login() {
               </button>
             </div>
           </div>
-
-          {/* <div>
-            <form className={styles.form_container}>
-              <input
-                className={styles.input}
-                type="text"
-                id="fname"
-                name="fname"
-                value="email"
-              />
-              <input
-                className={styles.input}
-                type="text"
-                id="lname"
-                name="lname"
-                value="password"
-              />
-            </form>
-          </div> */}
         </div>
         <div className={styles.right_content}>
           <div className={styles.right_text}>

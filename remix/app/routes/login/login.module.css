@@ -1,83 +1,142 @@
-.container {
+.center_button {
+  align-items: flex-start;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.left_content {
+  align-items: flex-start;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 32px;
+  text-align: left;
+}
+
+.left_text {
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
+}
+.left_text h1 {
+  margin-bottom: 10px; /* Reduces the bottom margin of h1 */
+  /* other styles for h1 if needed */
+}
+
+.left_text h3 {
+  margin-top: 0; /* Reduces the top margin of h3 */
+  /* other styles for h3 if needed */
+}
+
+.responsive_image {
+  height: auto;
+  max-width: 100%;
+}
+
+.container {
+  align-items: flex-start;
+  background-color: var(--background-color);
+  color: white;
   height: 100vh;
-  align-items: center;
   justify-content: flex-start;
   overflow: hidden;
-  background-color: var(--background-color);
-  color: white;
+  width: 100vw;
 }
 
-.nav_container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  background-color: var(--background-color);
-  color: white;
-  padding: 10px;
-}
-
-.name {
-  padding: 10px;
-  margin-left: 15px;
-  font-size: 2rem;
-}
-
-.login_placeholder {
-  padding: 5px;
-  font-size: 1.5rem;
-}
-
-.center {
+.form_container {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  margin-top: 25%;
+  gap: 15px;
   justify-content: flex-start;
+  margin-top: 100px;
+  overflow: hidden;
+  width: 100%;
 }
 
-button {
-  margin: 10px;
-  padding: 2px 32px;
-  font-size: 1.5rem;
-  border-radius: 5px;
-  border: none;
-  background-color: white;
-  color: black;
-  cursor: pointer;
-  padding: 15px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+.input {
+  height: 25px;
+  width: 250px;
 }
 
 .login_button {
-  padding: 2px 32px;
-  border-radius: 5px;
-  border: none;
   background-color: white;
+  border: none;
   color: black;
   cursor: pointer;
+  margin: 0;
+  padding: 2px 12px;
+  text-decoration: none;
 }
+.login_button a, /* Targeting the <Link> component inside the button */
+.login_button a:visited, /* For visited state */
+
+.login_button a:active {
+  /* For active state */
+  text-decoration: none; /* Remove underline from the link */
+  color: inherit; /* Optional: Ensures the link color matches the button text color */
+}
+
+.login_button a:hover {
+  text-decoration: underline;
+}
+
+.name {
+  font-size: 2rem;
+  margin-left: 20px;
+  padding-top: 9.5px;
+}
+
+.nav_container {
+  align-items: center;
+  background-color: var(--background-color);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+}
+
+.right_content {
+  display: none; /* Initially hidden */
+}
+
 
 /* md  */
 @media (min-width: 720px) {
-  .heading {
-    margin-top: 20%;
-  }
+    .form_container {
+        display: none;
+      }
+      .heading {
+        margin-top: 10%;
+      }
+    
+      .main {
+        display: flex;
+        flex-direction: row;
+      }
+    
+      .left_content {
+        width: 40%;
+      }
+      .right_content {
+        width: 60%;
+      }
+    
+    
+      .right_content {
+        display: block; /* Show right content area */
+      }
 }
+  
 
 /* lg  */
 @media (min-width: 1024px) {
-  .heading {
-    margin-top: 10%;
-  }
+
 }
+
 
 /* xl  */
 @media (min-width: 1440px) {

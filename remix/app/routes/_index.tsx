@@ -32,7 +32,7 @@ export default function Index() {
         <h1>Welcome to NaughtyML</h1>
         <div>
           <Link to="/app">
-            <button>
+            <button className={styles.get_started_button}>
               <h3>Get started</h3>
             </button>
           </Link>

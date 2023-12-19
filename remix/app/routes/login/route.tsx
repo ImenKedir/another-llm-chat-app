@@ -47,7 +47,7 @@ export default function Login() {
             <h3>Log in to start creating magic.</h3>
             <div className={styles.center_button}>
               <button className={styles.login_button}>
-                <Link to={data.authApiURL + "/google/authorize"}>
+                <Link to={data.authApiURL + "/google/authorize"} className={styles.link}>
                   <p>Sign in with Google</p>
                 </Link>
               </button>

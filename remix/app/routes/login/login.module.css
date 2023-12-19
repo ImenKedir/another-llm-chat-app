@@ -89,8 +89,15 @@
   margin: 0;
   padding: 2px 12px;
   text-decoration: none;
+  list-style: none;
   margin-top: 20px;
 }
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
 
 .nav_container {
   align-items: center;
@@ -135,6 +142,10 @@
 
   .name h2 {
     margin-top: 6.5px;
+  }
+
+  .login_button {
+    padding: 5px 18px;
   }
 }
 

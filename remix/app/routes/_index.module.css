@@ -21,6 +21,8 @@
   width: 100%;
 }
 
+
+
 .name {
   margin-left: 30px;
   font-size: 2rem;
@@ -55,6 +57,14 @@
 }
 
 .login_button {
+  border-radius: 5px;
+  border: none;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.get_started_button {
   padding: 2px 32px;
   border-radius: 5px;
   border: none;

@@ -23,13 +23,14 @@ export async function loader({ request }: LoaderFunctionArgs) {
   }
 
   // user is not logged in, pass the auth api url to the client
-  return json({ authApiURL: process.env.AUTH_API_URL });
+  return json({ authApiURL: process.env.AUTH_API_URL, processEnv: process.env });
 }
 
 export default function Login() {
   const data = useLoaderData<typeof loader>();
 
   if (!data.authApiURL) return null;
+  console.log(data.processEnv)
 
   return (
     <div className={styles.container}>
@@ -43,7 +44,7 @@ export default function Login() {
             
           <div className={styles.left_text}>
             
-            <h1>Hello, John!</h1>
+            <h2>Hello, John!</h2>
             <h3>Log in to start creating magic.</h3>
             <div className={styles.center_button}>
               <button className={styles.login_button}>

@@ -45,7 +45,7 @@
   font-size: 2rem;
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  margin-left: 40px;
 }
 
 .login_placeholder {
@@ -59,11 +59,11 @@
   flex-direction: column;
   align-items: flex;
   max-width: 720px;
-  padding: 0 20px;
+  margin-left: 40px;
 }
 
 .top_container h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 5px;
 }
 
@@ -231,6 +231,7 @@
     flex-direction: row;
     align-items: start; /* Aligns items to the top */
     max-width: 1440px;
+    margin-top: 8%;
   }
   .top_container {
     width: 60%; /* Adjust as needed */
@@ -239,8 +240,7 @@
   }
   .scroller_container {
     width: 40%; /* Adjust as needed */
-    padding: 0;
-    margin-left: 5%;
+    margin-left: 20px;
   }
   .scroller {
     width: 100%;
@@ -251,5 +251,8 @@
 @media (min-width: 1440px) {
   .start_chatting_button {
     padding: 4px 24px;
+  }
+  .scroller_container {
+    margin-left: 50px;
   }
 }

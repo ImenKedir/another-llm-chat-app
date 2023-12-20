@@ -150,8 +150,17 @@ def backend():
     import fastapi
     import fastapi.staticfiles
     from fastapi.responses import StreamingResponse
+    from fastapi.middleware.cors import CORSMiddleware
 
     app = fastapi.FastAPI()
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["http://localhost:3000"],  # Specify the exact origin
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     @app.get("/stats")
     async def stats():
@@ -170,7 +179,7 @@ def backend():
             async for text in Model().generate_stream.remote_gen.aio(
                 prompt=unquote(prompt), max_new_tokens=max_new_tokens
             ):
-                yield f"{json.dumps(dict(text=text), ensure_ascii=False)}\n\n"
+                yield f"data: {json.dumps(dict(text=text), ensure_ascii=False)}\n\n"
 
         return StreamingResponse(generate(), media_type="text/event-stream")
 

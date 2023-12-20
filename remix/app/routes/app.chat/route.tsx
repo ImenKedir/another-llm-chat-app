@@ -2,6 +2,7 @@ import { useState } from "react";
 import { json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import { Header } from "@/routes/app.chat/header";
+import { Messages } from "@/routes/app.chat/messages";
 import styles from "@/routes/app.chat/chat.module.css";
 
 export function loader() {
@@ -50,6 +51,7 @@ export default function Chat() {
   return (
     <div className={styles.chat_container}>
       <Header />
+      <Messages />
       {/* <Form onSubmit={SendMessage}>
         <input type="text" name="prompt" placeholder="Enter your query" />
         <button disabled={isLoading} type="submit">

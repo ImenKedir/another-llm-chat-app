@@ -6,8 +6,8 @@ import {
 } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
 import { getSession, destroySession } from "@/sessions.server";
-import SignInButton from "@/routes/signInButton";
-import Scroller from "@/routes/scroller";
+import SignInButton from "@/routes/_index/signInButton";
+import Scroller from "@/routes/_index/scroller";
 import styles from "@/routes/_index.module.css";
 
 export async function loader({ request }: LoaderFunctionArgs) {

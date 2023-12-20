@@ -30,6 +30,8 @@ const Scroller: React.FC = () => {
   return (
     <div className={styles.scroller_container}>
       <div className={styles.scroller} data-speed="fast">
+      <div className={styles.scroller__inner}>
+
         <ul className={`${styles.tag_list} ${styles.scroller__inner}`}>
           <img src="https://i.pravatar.cc/150?img=1" alt="" />
           <img src="https://i.pravatar.cc/150?img=2" alt="" />
@@ -39,15 +41,20 @@ const Scroller: React.FC = () => {
           <img src="https://i.pravatar.cc/150?img=6" alt="" />
         </ul>
       </div>
+      </div>
 
       <div className={styles.scroller} data-direction="right" data-speed="slow">
-        <div className={styles.scroller__inner}>
-          <img src="https://i.pravatar.cc/150?img=1" alt="" />
-          <img src="https://i.pravatar.cc/150?img=2" alt="" />
-          <img src="https://i.pravatar.cc/150?img=3" alt="" />
-          <img src="https://i.pravatar.cc/150?img=4" alt="" />
-          <img src="https://i.pravatar.cc/150?img=5" alt="" />
-          <img src="https://i.pravatar.cc/150?img=6" alt="" />
+        <div className={styles.scroller_bottom}>
+          <div className={styles.scroller__inner}>
+            <ul className={`${styles.tag_list} ${styles.scroller__inner}`}>
+              <img src="https://i.pravatar.cc/150?img=1" alt="" />
+              <img src="https://i.pravatar.cc/150?img=2" alt="" />
+              <img src="https://i.pravatar.cc/150?img=3" alt="" />
+              <img src="https://i.pravatar.cc/150?img=4" alt="" />
+              <img src="https://i.pravatar.cc/150?img=5" alt="" />
+              <img src="https://i.pravatar.cc/150?img=6" alt="" />
+            </ul>
+          </div>
         </div>
       </div>
     </div>

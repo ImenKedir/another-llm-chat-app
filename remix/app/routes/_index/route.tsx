@@ -33,27 +33,31 @@ export default function Index() {
       <div>
         <hr className={styles.hr} />
       </div>
-      <div className={styles.top_container}>
-        <h1>Where Characters <br /> Do Whatever You Want</h1>
-        <h4>Unleash your creativity and be whoever you want to be, free 
-          from the chains of a judgemental society.</h4>
-        <Link to="/app">
-          <button className={styles.start_chatting_button}>
-            <h3>Start Chatting</h3>
-          </button>
-        </Link>
+      <div className={styles.main_container}>
+        <div className={styles.top_container}>
+          <h1>
+            Where Characters <br /> Do Whatever You Want
+          </h1>
+          <h4>
+            Unleash your creativity and be whoever you want to be, free from the
+            chains of a judgemental society.
+          </h4>
+          <Link to="/app">
+            <button className={styles.start_chatting_button}>
+              <h3>Start Chatting</h3>
+            </button>
+          </Link>
+        </div>
         <Scroller />
       </div>
 
-      <div>
-        <div className={styles.feature_container}>
-          <h2>Features</h2>
-          <FeatureGrid />
-        </div>
-        <div className={styles.footer}>
-          <h3>NaughtyML</h3>
-          <h4>© 2021 NaughtyML</h4>
-        </div>
+      <div className={styles.feature_container}>
+        <h2>Features</h2>
+        <FeatureGrid />
+      </div>
+      <div className={styles.footer}>
+        <h3>NaughtyML</h3>
+        <h4>© 2021 NaughtyML</h4>
       </div>
     </div>
   );

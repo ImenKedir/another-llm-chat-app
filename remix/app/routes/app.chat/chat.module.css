@@ -1,6 +1,15 @@
-.container {
-  display: flex;
+.chat_container {
   width: 100%;
   height: 100%;
-  background-color: blueviolet;
+  display: flex;
+}
+
+.chat_header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1rem;
+  background-color: var(--primary-dark);
 }

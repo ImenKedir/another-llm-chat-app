@@ -5,16 +5,16 @@ import { LeftSidebarVisibleContext } from "@/contexts/LeftSidebarVisibleContext"
 import styles from "@/routes/app/app.module.css";
 
 export default function App() {
-  const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [sidebarVisible, setSidebarVisible] = useState(true);
 
   return (
-    <LeftSidebarVisibleContext.Provider
-      value={{ sidebarVisible, setSidebarVisible }}
-    >
-      <div className={styles.app_container}>
+    <div className={styles.app_container}>
+      <LeftSidebarVisibleContext.Provider
+        value={{ sidebarVisible, setSidebarVisible }}
+      >
         {sidebarVisible && <LeftSidebar />}
         <Outlet />
-      </div>
-    </LeftSidebarVisibleContext.Provider>
+      </LeftSidebarVisibleContext.Provider>
+    </div>
   );
 }

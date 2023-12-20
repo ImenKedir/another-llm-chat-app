@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import styles from "./_index.module.css";
+import { useEffect } from "react";
+import styles from "@/routes/_index/_index.module.css";
 
 const Scroller: React.FC = () => {
   useEffect(() => {

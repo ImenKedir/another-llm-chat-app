@@ -1,5 +1,5 @@
 import { Link, Form } from "@remix-run/react";
-import styles from "./_index.module.css"; // Adjust the path to your styles
+import styles from "@/routes/_index/_index.module.css";
 
 type SignInProps = {
   userId: string | undefined;

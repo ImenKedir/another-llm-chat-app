@@ -1,10 +1,43 @@
+/* CSS Variables */
 :root {
-  --background-color: #131619;
-  --clr-neutral-100: hsl(0, 0%, 100%);
-  --clr-primary-100: hsl(205, 15%, 58%);
-  --clr-primary-400: hsl(215, 25%, 27%);
-  --clr-primary-800: hsl(217, 33%, 17%);
-  --clr-primary-900: hsl(218, 33%, 9%);
+  --primary-dark: #0D0F10;
+  --secondary-dark: #141619;
+}
+
+/* Fonts */
+@font-face {
+  font-family: 'Geist-Thin';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/Geist-Thin.woff2');
+}
+
+@font-face {
+  font-family: 'Geist-Light';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/Geist-Light.woff2');
+}
+
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/Geist-Regular.woff2');
+}
+
+@font-face {
+  font-family: 'Geist-Bold';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/Geist-Bold.woff2');
+}
+
+@font-face {
+  font-family: 'Geist-Ultra';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/Geist-UltraBlack.woff2');
 }
 
 html,
@@ -13,69 +46,7 @@ body {
   margin: 0;
   padding: 0;
   /* This ensures the page takes up the full height */
-  height: 100%;
-  background-color: var(--background-color);
-}
-h1 {
-  font-size: 3.5rem;
-}
-h2 {
-  font-size: 2rem;
-}
-h3 {
-  font-size: 1.25rem;
-}
-h4 {
-  font-size: 0.5rem;
-}
-p {
-  font-size: 0.75rem;
-}
-
-/* md  */
-@media (min-width: 720px) {
-  h1 {
-    font-size: 3.75rem;
-  }
-  h2 {
-    font-size: 2rem;
-  }
-  h3 {
-    font-size: 1.5rem;
-  }
-  h4 {
-    font-size: 0.75rem;
-  }
-}
-
-/* lg  */
-@media (min-width: 1024px) {
-  h1 {
-    font-size: 5rem;
-  }
-  h2 {
-    font-size: 3rem;
-  }
-  h3 {
-    font-size: 1.5rem;
-  }
-  h4 {
-    font-size: 1rem;
-  }
-}
-
-/* xl  */
-@media (min-width:1440px) {
-  h1 {
-    font-size: 5rem;
-  }
-  h2 {
-    font-size: 3rem;
-  }
-  h3 {
-    font-size: 1.5rem;
-  }
-  h4 {
-    font-size: 1.5rem;
-  }
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--secondary-dark);
 }

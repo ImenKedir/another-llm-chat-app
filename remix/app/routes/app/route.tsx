@@ -1,30 +1,20 @@
 import { useState } from "react";
 import { Outlet } from "@remix-run/react";
-import Sidebar from "@/routes/app/sidebar";
+import { LeftSidebar } from "@/routes/app/left-sidebar";
+import { LeftSidebarVisibleContext } from "@/contexts/LeftSidebarVisibleContext";
 import styles from "@/routes/app/app.module.css";
 
 export default function App() {
-  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
-
-  const toggleSidebar = () => {
-    setIsSidebarVisible((prevState) => !prevState);
-  };
+  const [sidebarVisible, setSidebarVisible] = useState(true);
 
   return (
-    <div className={styles.container}>
-      <button onClick={toggleSidebar} className={styles.toggle_button}>
-        T
-      </button>
-      <div
-        className={
-          isSidebarVisible
-            ? styles.sidebar_container
-            : styles.sidebar_container_hidden
-        }
+    <div className={styles.app_container}>
+      <LeftSidebarVisibleContext.Provider
+        value={{ sidebarVisible, setSidebarVisible }}
       >
-        <Sidebar />
-      </div>
-      <Outlet />
+        {sidebarVisible && <LeftSidebar />}
+        <Outlet />
+      </LeftSidebarVisibleContext.Provider>
     </div>
   );
 }

@@ -18,6 +18,7 @@ export function Header() {
           onClick={() => setSidebarVisible(true)}
         />
       )}
+      <h1>Chat</h1>
     </div>
   );
 }

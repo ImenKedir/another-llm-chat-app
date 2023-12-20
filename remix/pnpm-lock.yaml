@@ -11,6 +11,9 @@ dependencies:
   '@aws-sdk/lib-dynamodb':
     specifier: ^3.474.0
     version: 3.474.0(@aws-sdk/client-dynamodb@3.474.0)
+  '@radix-ui/react-icons':
+    specifier: ^1.3.0
+    version: 1.3.0(react@18.2.0)
   '@remix-run/css-bundle':
     specifier: ^2.4.0
     version: 2.4.0
@@ -35,9 +38,6 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
-  react-icons:
-    specifier: ^4.12.0
-    version: 4.12.0(react@18.2.0)
 
 devDependencies:
   '@remix-run/dev':
@@ -2741,6 +2741,14 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@radix-ui/react-icons@1.3.0(react@18.2.0):
+    resolution: {integrity: sha512-jQxj/0LKgp+j9BiTXz3O3sgs26RNet2iLWmsPyRz2SIcR4q/4SbazXfnYwbAr+vLYKSfc7qxzyGQA1HLlYiuNw==}
+    peerDependencies:
+      react: ^16.x || ^17.x || ^18.x
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@remix-run/css-bundle@2.4.0:
     resolution: {integrity: sha512-kFFJ5Iek1lNjoiajiqirLGcxTvPdmbIezvKZbJwSO173pZRHr1MlTnLactrYhFmEHNBE6LMN54QXDynl93S+aQ==}
@@ -8234,14 +8242,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-    dev: false
-
-  /react-icons@4.12.0(react@18.2.0):
-    resolution: {integrity: sha512-IBaDuHiShdZqmfc/TwHu6+d6k2ltNCf3AszxNmjJc1KUfXdEeRJOKyNvLmAHaarhzGmTSVygNdyu8/opXv2gaw==}
-    peerDependencies:
-      react: '*'
-    dependencies:
-      react: 18.2.0
     dev: false
 
   /react-is@16.13.1:

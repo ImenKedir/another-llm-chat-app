@@ -1,10 +1,10 @@
 import { createContext } from "react";
 
-interface SidebarVisibleType {
+interface LeftSidebarVisibleType {
   sidebarVisible: boolean;
   setSidebarVisible: (value: boolean) => void;
 }
 
-export const SidebarVisibleContext = createContext<
-  SidebarVisibleType | undefined
+export const LeftSidebarVisibleContext = createContext<
+  LeftSidebarVisibleType | undefined
 >(undefined);

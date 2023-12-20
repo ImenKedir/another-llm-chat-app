@@ -1,17 +1,18 @@
 import { useContext } from "react";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import { SidebarVisibleContext } from "@/contexts/SidebarVisibleContext";
+import { LeftSidebarVisibleContext } from "@/contexts/LeftSidebarVisibleContext";
 import styles from "@/routes/app.chat/chat.module.css";
 
 export function Header() {
   const { sidebarVisible, setSidebarVisible } = useContext(
-    SidebarVisibleContext,
+    LeftSidebarVisibleContext,
   )!;
 
   return (
     <div className={styles.chat_header}>
       {!sidebarVisible && (
         <HamburgerMenuIcon
+          style={{ padding: "0.5rem" }}
           color="white"
           width={20}
           height={20}

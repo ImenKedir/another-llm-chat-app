@@ -6,11 +6,11 @@ import {
   ArchiveIcon,
   AvatarIcon,
 } from "@radix-ui/react-icons";
-import { SidebarVisibleContext } from "@/contexts/SidebarVisibleContext";
+import { LeftSidebarVisibleContext } from "@/contexts/LeftSidebarVisibleContext";
 import styles from "@/routes/app/app.module.css";
 
 export function LeftSidebar() {
-  const { setSidebarVisible } = useContext(SidebarVisibleContext)!;
+  const { setSidebarVisible } = useContext(LeftSidebarVisibleContext)!;
 
   return (
     <div className={styles.sidebar_container}>

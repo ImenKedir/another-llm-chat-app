@@ -22,7 +22,8 @@ export default function Index() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.nav_container}>
+      <div className= {styles.sticky_nav}>
+        <div className={styles.nav_container}>
         <div className={styles.name}>
           <h3>NaughtyML</h3>
         </div>
@@ -30,9 +31,9 @@ export default function Index() {
           <SignInButton userId={data.userId} />
         </div>
       </div>
-      <div>
         <hr className={styles.hr} />
       </div>
+      
       <div className={styles.main_container}>
         <div className={styles.top_container}>
           <h1>

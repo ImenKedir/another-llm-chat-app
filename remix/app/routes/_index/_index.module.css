@@ -183,7 +183,7 @@
 .signin_button {
   font-size: 1rem;
   font-weight: 600;
-  background-image: linear-gradient(to bottom right, #7a01de, #bd0695);
+  background-image: var(--gradient);
   color: white;
   text-align: center;
   width: 100px;
@@ -220,7 +220,7 @@
   position: relative;
   overflow: hidden;
    /* for background color shift */
-  background-image: linear-gradient(to bottom right, #7a01de, #bd0695);
+  background-image: var(--gradient);
   background-size: 400% 400%;
   /* animation: TransitioningBackground 10s ease infinite; */
    /* to ease the button growth on hover */
@@ -254,7 +254,7 @@
 
    /* grow button and change background gradient on hover */
   &:hover {
-    background-image: (linear-gradient(to left, #2d8fe5, #d155b8));
+    background-image: var(--gradient);
     transform: scale(1.1);
     cursor: pointer;
 

@@ -37,7 +37,7 @@ export default function Index() {
       <div className={styles.main_container}>
         <div className={styles.top_container}>
           <h1>
-            Where Characters <br /> Do Whatever You Want
+            Where Characters <br /> Do <span className={styles.highlight}>Whatever</span>  You Want
           </h1>
           <h4>
             Unleash your creativity and be whoever you want to be, free from the

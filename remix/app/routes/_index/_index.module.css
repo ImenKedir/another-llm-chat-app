@@ -14,10 +14,13 @@
 
 /* Card Container Styles */
 .card_container {
+
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid white;
   transition: 0.3s;
   border-radius: 10px; /* Add rounded edges */
+  padding: 12vh 10vw;
+
 }
 
 .card_container:hover {
@@ -26,9 +29,20 @@
 
 /* Card Styles */
 .card {
-  padding: 10vh 15vw;
-  text-align: center;
-  
+  display: flex;
+  flex-direction: column; 
+  justify-content: start; /* Align content to the start of the flex container */
+  height: 100%; /* Make sure the card takes full height of the container */
+
+}
+
+.card h4 {
+  width: 100%; /* Set width to fill the container */
+  text-align: start; /* Align text to the start */
+  margin-top: 0; /* Remove any top margin to stick it to the top */}
+
+.card p {
+
 }
 
 /* Center Container Layout */
@@ -114,6 +128,7 @@
   flex-direction: column;
   align-items: flex;
   max-width: 720px;
+  margin-top: 20px;
   margin-left: 40px;
   margin-right: 40px;
 }
@@ -121,6 +136,8 @@
 .top_container h1 {
   font-size: 3rem;
   margin-bottom: 5px;
+  font-family: "Geist", sans-serif;
+
 }
 
 .top_container h4 {
@@ -128,6 +145,17 @@
   margin-top: 15px;
   margin-bottom: 35px;
   font-family: "Geist-Light", sans-serif;
+}
+
+.highlight {
+  text-decoration: none;
+  font-family: "sans-serif", sans-serif;
+
+  display: inline;
+  background-image: var(--gradient);
+  background-repeat: no-repeat;
+  background-size: 100% 2px;
+  background-position: 0 100%;
 }
 
 /* Horizontal Rule Styles */
@@ -365,24 +393,18 @@
     margin-top: 8%;
   }
 
-  .feature_container {
-    margin-left: 20px;
-  }
-
   .top_container {
-    width: 60%; /* Adjust as needed */
+    width: 50%; /* Adjust as needed */
     text-align: start;
     align-items: start;
   }
 
   .scroller_container {
-    width: 40%; /* Adjust as needed */
+    width: 50%; /* Adjust as needed */
     margin-left: 20px;
   }
 
-  .scroller {
-    width: 100%;
-  }
+ 
 }
 
 /* xl  */

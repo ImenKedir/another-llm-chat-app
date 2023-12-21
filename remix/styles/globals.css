@@ -1,7 +1,13 @@
 /* CSS Variables */
 :root {
-  --primary-dark: #0D0F10;
-  --secondary-dark: #141619;
+  --primary-dark: #080404;
+  --secondary-dark: #100c0c;
+
+  --primary-accent: #7a01de;
+  --secondary-accent: #bd0695;
+  --gradient: linear-gradient(to bottom right, #7a01de, #bd0695);
+  /* --gradient: linear-gradient(to bottom right, var(--primary-accent), var(--secondary-accent)); */
+  
 }
 
 /* Fonts */

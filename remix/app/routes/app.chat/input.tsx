@@ -39,10 +39,9 @@ export function Input() {
   return (
     <div className={styles.chat_input_container}>
       <Form className={styles.chat_input_form} onSubmit={SendMessage}>
-        <input type="text" name="prompt" placeholder="Enter a prompt">
-        </input>
+        <input type="text" name="prompt" placeholder="Enter a prompt"></input>
         <button disabled={isLoading} type="submit">
-            <EnterIcon color="white" width={20} height={20}/>
+          <EnterIcon color="white" width={20} height={20} />
         </button>
       </Form>
       <div>{streamingResponse}</div>

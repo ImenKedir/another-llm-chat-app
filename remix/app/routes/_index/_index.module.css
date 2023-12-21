@@ -61,6 +61,7 @@
   width: 100%;
   max-width: 1440px;
   color: white;
+  margin: auto;
 }
 
 .sticky_nav {
@@ -302,8 +303,6 @@
     padding: 0px 24px;
   }
 
-  .scroller_container {
-    margin-left: 50px;
-  }
+  
 }
 

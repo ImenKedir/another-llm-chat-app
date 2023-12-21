@@ -152,14 +152,40 @@
 }
 
 /* Sign in Button Styles  */
-
 .signin_button {
   font-size: 1rem;
   font-weight: 600;
+  background-image: linear-gradient(to bottom right, #7a01de, #bd0695);
   color: white;
   text-align: center;
   width: 100px;
   height: 40px;
+  border: none;
+  border-radius: 5px;
+
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+}
+
+.signin_button h4 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Start Chatting Button Styles */
+.start_chatting_button h3 {
+  margin: 0;
+}
+.start_chatting_button {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  justify-content: center;
+  width: 180px;
+  height: 60px;
   border: none;
   border-radius: 5px;
    /* for shine & gradient effects to work */
@@ -213,21 +239,8 @@
   }
 }
 
-.signin_button h4 {
-  font-size: 1rem;
-  margin: 0;
-}
 
-/* Start Chatting Button Styles */
-.start_chatting_button {
-  padding: 2px 18px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: none;
-  background-color: white;
-  color: black;
-  cursor: pointer;
-}
+
 
 /* Scroller Styles */
 .scroller {

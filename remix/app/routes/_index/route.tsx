@@ -9,7 +9,9 @@ import { getSession, destroySession } from "@/sessions.server";
 import SignInButton from "@/routes/_index/signInButton";
 import Scroller from "@/routes/_index/scroller";
 import FeatureGrid from "@/routes/_index/feature_grid";
+import MenuButton from "@/routes/_index/menu_button";
 import styles from "@/routes/_index/_index.module.css";
+
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"));
@@ -28,7 +30,11 @@ export default function Index() {
           <h3>NaughtyML</h3>
         </div>
         <div className={styles.login_placeholder}>
-          <SignInButton userId={data.userId} />
+
+
+          {/* <SignInButton userId={data.userId} /> */}
+
+          <MenuButton />
         </div>
       </div>
         <hr className={styles.hr} />

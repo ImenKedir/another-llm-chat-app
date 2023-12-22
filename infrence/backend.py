@@ -75,12 +75,12 @@ stub = Stub("tgi-chronos-hermes-13b-v2", image=image)
 # Here, we also
 # - specify how many A100s we need per container
 # - specify that each container is allowed to handle up to 10 inputs (i.e. requests) simultaneously
-# - keep idle containers for 10 minutes before spinning down
+# - keep idle containers for 1 minute before spinning down
 # - lift the timeout of each request.
 @stub.cls(
     gpu=GPU_CONFIG,
     allow_concurrent_inputs=10,
-    container_idle_timeout=60 * 10,
+    container_idle_timeout=60,
     timeout=60 * 60,
 )
 class Model:
@@ -172,7 +172,7 @@ def backend():
         }
 
     @app.get("/completion")
-    async def completion(prompt: str, max_new_tokens: int = 100):
+    async def completion(prompt: str, max_new_tokens: int = 30):
         from urllib.parse import unquote
 
         async def generate():

@@ -24,36 +24,56 @@ export default function Index() {
 
   const toggleNav = () => {
     setIsNavExpanded(!isNavExpanded);
-
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.sticky}>
-
-      <div className={isNavExpanded ? `${styles.nav_container_expanded}` : styles.nav_container}>
-        <div className={styles.nav_text}>
-          <div className={styles.name}>
-            <h3>NaughtyML</h3>
+        <div
+          className={
+            isNavExpanded
+              ? `${styles.nav_container_expanded}`
+              : styles.nav_container
+          }
+        >
+          <div className={styles.nav_text}>
+            <div className={styles.name}>
+              <h3>NaughtyML</h3>
+            </div>
+            {/* Displays on < 720px  */}
+            <div className={styles.login_placeholder}>
+              <MenuToggle onToggle={toggleNav} />
+            </div>
+            {/* Displays on > 720px  */}
+            <div className={styles.menu_extended_container}>
+              <Link to="/faq" className={styles.menu_extended_links}>
+                Blog
+              </Link>
+              <Link to="/app" className={styles.menu_extended_links}>
+                Community
+              </Link>
+              <Link to="/about" className={styles.menu_app_button}>
+                Launch App
+              </Link>
+            </div>
           </div>
-          <div className={styles.login_placeholder}>
-
-            <MenuToggle onToggle={toggleNav} />
-          </div>
-        </div>      
-        {isNavExpanded && (
-          <div className={styles.nav_links}>
-            <Link to="/path1" className={styles.nav_link}>Link 1</Link>
-            <Link to="/path2" className={styles.nav_link}>Link 2</Link>
-            <Link to="/path3" className={styles.nav_link}>Link 3</Link>
-            {/* Add more links as needed */}
-          </div>
-        )}
-        <hr className={styles.hr} />
-
+          {/* 'expanded' = menu is dropped down       */}
+          {isNavExpanded && (
+            <div className={styles.menu_container}>
+              <Link to="/path1" className={styles.menu_links}>
+                Link 1
+              </Link>
+              <Link to="/path2" className={styles.menu_links}>
+                Link 2
+              </Link>
+              <Link to="/path3" className={styles.menu_links}>
+                Link 3
+              </Link>
+            </div>
+          )}
+          <hr className={styles.hr} />
+        </div>
       </div>
-      </div>
-
 
       <div className={styles.main_container}>
         <div className={styles.top_container}>
@@ -62,8 +82,8 @@ export default function Index() {
             <span className={styles.highlight}>Whatever</span> You Want
           </h1>
           <h3>
-            Spicy conversation with your favorite characters,
-            completely uncensored. 
+            Spicy conversation with your favorite characters, completely
+            uncensored.
           </h3>
           <Link to="/app">
             <button className={styles.start_chatting_button}>
@@ -74,11 +94,11 @@ export default function Index() {
         <Scroller />
       </div>
 
-      <div className={styles.feature_container}>
+      {/* <div className={styles.feature_container}>
         <h2>Features</h2>
         <FeatureGrid />
-      </div>
-   
+      </div> */}
+      <div className={styles.features}>Hello</div>
     </div>
   );
 }

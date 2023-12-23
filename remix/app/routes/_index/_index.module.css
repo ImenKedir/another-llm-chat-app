@@ -1,6 +1,8 @@
 /* Container Layout */
 .container {
   display: flex;
+  width: 100%;
+  min-height: 100vh;
   position: relative;
   flex-direction: column;
   margin-left: auto;
@@ -35,7 +37,6 @@
 }
 
 .card h4 {
-  width: 100%; /* Set width to fill the container */
   text-align: start; /* Align text to the start */
   margin-top: 0; /* Remove any top margin to stick it to the top */
 }
@@ -47,11 +48,16 @@
   margin-bottom: 5%;
 }
 
+.features {
+  margin-top: 50%;
+}
+
 /* Feature Container Layout */
 .feature_container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 50%
  
 }
 
@@ -62,6 +68,13 @@
 }
 
 /* Navigation Container Styles */
+.sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
 .nav_text {
   display: flex;
   flex-direction: row;
@@ -79,11 +92,12 @@
   position: absolute;
   top: 0;
   width: 100%;
-  transition: 0.6s ease-in-out; /* Apply to all changing properties */
   z-index: 10;    
   background-color: rgba(0, 0, 0, 0);
   opacity: 1;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
 
 }
 .nav_container {
@@ -96,18 +110,10 @@
 
 .nav_container_expanded {
   height: 300px;
-  padding-top: 40px;
+  padding-top: 40px;  
 }
 
-
-.sticky {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-}
-
-/* Nav Link Styles  */
+/* Expanded Nav Styles  */
 
 @keyframes fadeInUp {
   from {
@@ -121,6 +127,7 @@
   }
 }
 
+
 .nav_links {
   display: flex;
   flex-direction: column;
@@ -130,8 +137,8 @@
 }
 
 .nav_container_expanded .nav_links {
-  animation: fadeInUp 1.5s ease forwards; /* Apply the animation */
-  animation-delay: 0.6s; /* Delay the animation */
+  animation: fadeInUp 1s ease forwards; /* Apply the animation */
+  animation-delay: 5ms; /* Delay the animation */
 }
 
 .nav_link {
@@ -456,7 +463,8 @@
 @media (min-width: 1024px) {
   .start_chatting_button {
     margin-top: 10px;
-    padding: 2px 20px;
+    width: 150px;
+    height: 50px;
   }
 
   .main_container {
@@ -480,7 +488,5 @@
 
 /* xl  */
 @media (min-width: 1440px) {
-  .start_chatting_button {
-    padding: 0px 24px;
-  }
+  
 }

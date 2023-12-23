@@ -74,9 +74,12 @@ export default function Index() {
         <Scroller />
       </div>
 
-      <div className={styles.feature_container}>
+      {/* <div className={styles.feature_container}>
         <h2>Features</h2>
         <FeatureGrid />
+      </div> */}
+      <div className={styles.features}>
+        Hello
       </div>
    
     </div>

@@ -78,10 +78,7 @@ export default function Index() {
         <h2>Features</h2>
         <FeatureGrid />
       </div>
-      <div className={styles.footer}>
-        <h3>NaughtyML</h3>
-        <h4>© 2021 NaughtyML</h4>
-      </div>
+   
     </div>
   );
 }

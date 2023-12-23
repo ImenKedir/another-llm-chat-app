@@ -6,12 +6,11 @@ import {
 } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
 import { getSession, destroySession } from "@/sessions.server";
-import SignInButton from "@/routes/_index/signInButton";
 import Scroller from "@/routes/_index/scroller";
 import FeatureGrid from "@/routes/_index/feature_grid";
-import MenuButton from "@/routes/_index/menu_button";
+import MenuToggle from "@/routes/_index/menu_toggle";
 import styles from "@/routes/_index/_index.module.css";
-
+import { useState } from "react";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"));
@@ -21,37 +20,54 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
+  const [isNavExpanded, setIsNavExpanded] = useState(false);
+
+  const toggleNav = () => {
+    setIsNavExpanded(!isNavExpanded);
+
+  };
 
   return (
     <div className={styles.container}>
-      <div className= {styles.sticky_nav}>
-        <div className={styles.nav_container}>
-        <div className={styles.name}>
-          <h3>NaughtyML</h3>
-        </div>
-        <div className={styles.login_placeholder}>
+      <div className={styles.sticky}>
 
+      <div className={isNavExpanded ? `${styles.nav_container_expanded}` : styles.nav_container}>
+        <div className={styles.nav_text}>
+          <div className={styles.name}>
+            <h3>NaughtyML</h3>
+          </div>
+          <div className={styles.login_placeholder}>
 
-          {/* <SignInButton userId={data.userId} /> */}
-
-          <MenuButton />
-        </div>
-      </div>
+            <MenuToggle onToggle={toggleNav} />
+          </div>
+        </div>      
+        {isNavExpanded && (
+          <div className={styles.nav_links}>
+            <Link to="/path1" className={styles.nav_link}>Link 1</Link>
+            <Link to="/path2" className={styles.nav_link}>Link 2</Link>
+            <Link to="/path3" className={styles.nav_link}>Link 3</Link>
+            {/* Add more links as needed */}
+          </div>
+        )}
         <hr className={styles.hr} />
+
       </div>
-      
+      </div>
+
+
       <div className={styles.main_container}>
         <div className={styles.top_container}>
           <h1>
-            Where Characters <br /> Do <span className={styles.highlight}>Whatever</span>  You Want
+            Where Characters <br /> Do{" "}
+            <span className={styles.highlight}>Whatever</span> You Want
           </h1>
-          <h4>
-            Unleash your creativity and be whoever you want to be, free from the
-            chains of a judgemental society.
-          </h4>
+          <h3>
+            Spicy conversation with your favorite characters,
+            completely uncensored. 
+          </h3>
           <Link to="/app">
             <button className={styles.start_chatting_button}>
-              <h3>Start Chatting</h3>
+              <h4>Start Chatting</h4>
             </button>
           </Link>
         </div>
@@ -62,10 +78,7 @@ export default function Index() {
         <h2>Features</h2>
         <FeatureGrid />
       </div>
-      <div className={styles.footer}>
-        <h3>NaughtyML</h3>
-        <h4>© 2021 NaughtyML</h4>
-      </div>
+   
     </div>
   );
 }

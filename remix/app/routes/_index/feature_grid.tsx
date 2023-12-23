@@ -5,10 +5,7 @@ const cardData = [
   { id: 2, title: "Card Title 2", content: "Content for card 2" },
   { id: 3, title: "Card Title 3", content: "Content for card 3" },
   { id: 4, title: "Card Title 4", content: "Content for card 4" },
-  
-
 ];
-
 
 const FeatureGrid = () => {
   return (

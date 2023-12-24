@@ -94,7 +94,7 @@ export default function Index() {
       </div>
 
       <div className={styles.feature_container}>
-        <h2>Features</h2>
+        <h3>FEATURES</h3>
         <FeatureGrid />
       </div>
       <div className={styles.features}>Hello</div>

@@ -466,7 +466,7 @@
   justify-content: center;
   background-color: var(--primary-dark);
   margin-top: 10%;
-  width: 100%;
+  max-width: 1440px;
   color: var(--primary-light);
   padding-bottom: 30%;
 
@@ -510,12 +510,11 @@
 
 .footer_text {
   display: flex;
-  padding: 50px;
   flex-direction: column;
   text-align: center;
   align-content: center;
   justify-content: center;
-
+  margin-bottom: 5%;
   font-family: "Geist", sans-serif;
 }
 
@@ -607,6 +606,8 @@
     grid-template-columns: repeat(3, 1fr);
     width: 100%;
   }
+ 
+  
 }
 
 /* xl  */

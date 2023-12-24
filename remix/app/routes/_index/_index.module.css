@@ -11,8 +11,7 @@
   font-family: "Geist", sans-serif;
   color: white;
   align-items: center;
-  padding-left: 5px;
-  padding-right: 5px;
+ 
 }
 
 /* Card Container Styles */
@@ -378,6 +377,7 @@
 
 /* Scroller Container Styles */
 .scroller_container {
+  box-sizing: border-box;
   display: grid;
   max-width: 1200px;
   padding: 30px;

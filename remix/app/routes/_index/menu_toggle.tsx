@@ -13,8 +13,7 @@ const MenuToggle: React.FC<MenuToggleProps> = ({ onToggle }) => {
   return (
     <>
       <div
-        className={styles.toggle_container}
-        onClick={(e) => myFunction(e.currentTarget as HTMLDivElement)}
+                onClick={(e) => myFunction(e.currentTarget as HTMLDivElement)}
       >
         <div className={styles.bar1}></div>
         <div className={styles.bar2}></div>

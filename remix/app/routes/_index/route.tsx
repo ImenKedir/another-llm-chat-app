@@ -20,18 +20,20 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
-  const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const [isDropdownExpanded, setIsDropdownExpanded] = useState(false);
 
   const toggleNav = () => {
-    setIsNavExpanded(!isNavExpanded);
+    setIsDropdownExpanded(!isDropdownExpanded);
   };
 
   return (
     <div className={styles.container}>
-      
-         <div
+      <div className={styles.sticky}>
+        <div
           className={
-            isNavExpanded ? `${styles.nav_dropdown}` : styles.nav_container
+            isDropdownExpanded
+              ? `${styles.nav_container_expanded}`
+              : styles.nav_container
           }
         >
           <div className={styles.nav_text}>
@@ -39,39 +41,38 @@ export default function Index() {
               <h3>NaughtyML</h3>
             </div>
             {/* Displays on < 720px  */}
-            <div className={styles.login_placeholder}>
+            <div className={styles.toggle_container}>
               <MenuToggle onToggle={toggleNav} />
             </div>
             {/* Displays on > 720px  */}
             <div className={styles.menu_container}>
-              <Link to="/faq" className={styles.menu_extended_links}>
+              <Link to="/faq" className={styles.menu_links}>
                 Blog
               </Link>
-              <Link to="/app" className={styles.menu_extended_links}>
+              <Link to="/app" className={styles.menu_links}>
                 Community
               </Link>
               <Link to="/about" className={styles.menu_app_button}>
                 Launch App
               </Link>
             </div>
-           </div>
-          {/* 'expanded' = menu is dropped down       */}
-          {isNavExpanded && (
+          </div>
+          {isDropdownExpanded && (
             <div className={styles.dropdown_container}>
-              <Link to="/path1" className={styles.menu_links}>
+              <Link to="/path1" className={styles.dropdown_links}>
                 Link 1
               </Link>
-              <Link to="/path2" className={styles.menu_links}>
+              <Link to="/path2" className={styles.dropdown_links}>
                 Link 2
               </Link>
-              <Link to="/path3" className={styles.menu_links}>
+              <Link to="/path3" className={styles.dropdown_links}>
                 Link 3
               </Link>
             </div>
           )}
-       
           <hr className={styles.hr} />
-       </div>
+        </div>
+      </div>
 
       <div className={styles.main_container}>
         <div className={styles.top_container}>

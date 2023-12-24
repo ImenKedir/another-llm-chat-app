@@ -28,12 +28,10 @@ export default function Index() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.sticky}>
-        <div
+      
+         <div
           className={
-            isNavExpanded
-              ? `${styles.nav_container_expanded}`
-              : styles.nav_container
+            isNavExpanded ? `${styles.nav_dropdown}` : styles.nav_container
           }
         >
           <div className={styles.nav_text}>
@@ -45,7 +43,7 @@ export default function Index() {
               <MenuToggle onToggle={toggleNav} />
             </div>
             {/* Displays on > 720px  */}
-            <div className={styles.menu_extended_container}>
+            <div className={styles.menu_container}>
               <Link to="/faq" className={styles.menu_extended_links}>
                 Blog
               </Link>
@@ -56,10 +54,10 @@ export default function Index() {
                 Launch App
               </Link>
             </div>
-          </div>
+           </div>
           {/* 'expanded' = menu is dropped down       */}
           {isNavExpanded && (
-            <div className={styles.menu_container}>
+            <div className={styles.dropdown_container}>
               <Link to="/path1" className={styles.menu_links}>
                 Link 1
               </Link>
@@ -71,9 +69,9 @@ export default function Index() {
               </Link>
             </div>
           )}
+       
           <hr className={styles.hr} />
-        </div>
-      </div>
+       </div>
 
       <div className={styles.main_container}>
         <div className={styles.top_container}>

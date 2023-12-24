@@ -48,14 +48,14 @@
 }
 
 /* Style the scrollbar handle */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   background: var(--secondary-dark);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--primary-dark);
   border-radius: 2rem;
-}
+} */
 
 .chat_message_container {
   width: 100%;

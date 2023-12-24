@@ -81,7 +81,6 @@
   width: 100%;
   max-width: 1440px;
   color: white;
-  height: inherit;
 }
 
 .nav_container,
@@ -118,20 +117,19 @@
   to {
     opacity: 1;
     transform: translateY(0);
-    visibility: visible;
   }
 }
 .dropdown_container {
   display: flex;
   flex-direction: column;
+  gap: 40px;
   align-items: center;
   margin-top: 20px;
   width: 100%;
 }
 
 .dropdown_container .dropdown_links {
-  animation: fadeInUp 1s ease forwards; /* Apply the animation */
-  animation-delay: 5ms; /* Delay the animation */
+  animation: fadeInUp 1.2s ease forwards; /* Apply the animation */
 }
 
 
@@ -147,6 +145,8 @@
     background-color: #f0f0f0;
   }
 }
+
+
 
 .menu_app_button {
   background-color: white;

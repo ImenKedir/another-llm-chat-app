@@ -5,6 +5,9 @@
   --tertiary-dark: #2b2b2c;
   --quadrary-dark: #212121;
 
+  --primary-light: #ffffff;
+  --secondary-light: #fcfafacf;
+
   --primary-accent: #7a01de;
   --secondary-accent: #bd0695;
   --gradient: linear-gradient(to bottom right, #7a01de, #bd0695);

@@ -84,7 +84,7 @@ export default function Index() {
             Spicy conversation with your favorite characters, completely
             uncensored.
           </h3>
-          <Link to="/app">
+          <Link to="/app/chat">
             <button className={styles.start_chatting_button}>
               <h4>Get Started</h4>
             </button>
@@ -97,7 +97,36 @@ export default function Index() {
         <h3>FEATURES</h3>
         <FeatureGrid />
       </div>
-      <div className={styles.features}>Hello</div>
+
+      <div className={styles.footer}>
+        <Link to="/app/chat">
+          <button className={styles.start_chatting_button}>
+            <h4>Get Started</h4>
+          </button>
+        </Link>
+        <div className={styles.footer_text}>
+          <h2>Join the Community</h2>
+          <p>
+            Join like-minded fans and AI enthusiastis in the lorem ipsum sum
+            lorem ipsum sum Lorem ipsum dolor, sit amet consectetur adipisicing
+            elit. Amet fugit doloremque quo beatae repellat cum quaerat quam.
+            Placeat perspiciatis repellendus saepe quibusdam id. Fugiat, rem sed
+            id architecto velit accusantium!
+          </p>
+        </div>
+
+        <div className={styles.footer_links}>
+          <Link to="/faq" className={styles.footer_link}>
+            Join Discord
+          </Link>
+          <Link to="/app" className={styles.footer_link}>
+            Follow on Twitter
+          </Link>
+          <Link to="/app/chat" className={styles.footer_link}>
+            Follow on Instagram
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

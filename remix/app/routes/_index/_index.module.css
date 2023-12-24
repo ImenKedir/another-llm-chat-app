@@ -20,27 +20,23 @@
   flex-direction: column;
   gap: 40px;
   align-items: center;
-  margin-top: 20%; 
-  
+  margin-top: 20%;
+
   h3 {
     color: var(--primary-accent);
-    font-family: 'Geist-Light';
-
+    font-family: "Geist-Light";
   }
 }
-
-
 
 /* Grid Container Layout */
 .grid_container {
   display: grid;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   padding-right: 30px;
   padding-left: 30px;
   width: 100%;
   gap: 30px;
   grid-template-columns: 1fr; /* Creates two columns */
-
 }
 
 /* Card Container Styles */
@@ -65,27 +61,24 @@
 .card {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Align items to the center of the flex container */
-  justify-content: center; /* Align items to the center of the flex container */
-  height: 100%; /* Make sure the card takes full height of the container */
-
+  align-items: center; 
+  justify-content: center; 
+  height: 100%; 
 }
 
 .card h2 {
   font-size: 1.5rem;
-  margin-top: 0; /* Remove any top margin to stick it to the top */
-  font-family: 'Geist-Bold';
-
+  margin-top: 0; 
+  font-family: "Geist-Bold";
+  color: var(--primary-light)
 }
 
 .card h3 {
-  text-align: start; /* Align text to the start */
-  margin-top: 0; /* Remove any top margin to stick it to the top */
-
+  text-align: start; 
+  margin-top: 0; 
+  color: var(--secondary-light);
 }
 /* -------------------------------------- */
-
-
 
 /* Navigation Container Styles */
 .sticky {
@@ -123,10 +116,10 @@
   align-items: center;
   justify-content: center;
   display: flex;
-  height: 60px;
+  height: 70px;
 }
 
-.nav_container_dropdown{
+.nav_container_dropdown {
   height: 400px;
   padding-top: 20px;
 }
@@ -142,11 +135,11 @@
   }
 }
 
-
-.dropdown_container, .dropdown_links, .dropdown_button {
+.dropdown_container,
+.dropdown_links,
+.dropdown_button {
   animation: fadeInUp 1.2s ease forwards; /* Apply the animation */
 }
-
 
 .dropdown_container {
   display: flex;
@@ -155,10 +148,11 @@
   align-items: center;
   margin-top: 50px;
   width: 100%;
-  color: black
+  color: black;
 }
 
-.dropdown_links, .dropdown_button {
+.dropdown_links,
+.dropdown_button {
   background-color: black;
   border: 1px solid gray;
   color: white;
@@ -171,7 +165,6 @@
   background-color: var(--primary-accent);
 }
 
-
 .dropdown_links,
 .dropdown_button,
 .menu_links,
@@ -182,12 +175,11 @@
   text-decoration: none;
   &:hover {
     opacity: 0.4;
-    }
+  }
 }
 
 .menu_links {
   color: white;
-
 }
 
 .app_button {
@@ -196,7 +188,6 @@
   color: white;
   width: 125px;
   padding: 10px 0;
-
 }
 
 /* Horizontal Rule Styles */
@@ -235,8 +226,8 @@
 .toggle_container {
   display: inline-block;
   cursor: pointer;
-margin-right: 20px;
-}  
+  margin-right: 20px;
+}
 
 .bar1,
 .bar2,
@@ -274,6 +265,7 @@ margin-right: 20px;
   font-size: 3.1rem;
   margin-bottom: 35px;
   font-family: "Geist", sans-serif;
+  color: var(--primary-light);
 }
 
 .top_container h3 {
@@ -281,6 +273,7 @@ margin-right: 20px;
   margin-top: 0;
   margin-bottom: 25px;
   font-family: "Geist-Light", sans-serif;
+  color: var(--secondary-light);
 }
 
 .top_container h4 {
@@ -466,7 +459,69 @@ margin-right: 20px;
   display: none;
 }
 
-/* Media Queries */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-dark);
+  margin-top: 10%;
+  width: 100%;
+  color: var(--primary-light);
+  padding-bottom: 30%;
+
+  h2 {
+    margin-top: 10%;
+    font-size: 2.5rem;
+    font-family: "Geist-Bold", sans-serif;
+  }
+  p {
+    color: var(--secondary-light);
+  }
+}
+
+.footer_links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  align-items: center;
+  color: white;
+  border-radius: 10px;
+  padding: 4px 0;
+  margin-top: 0px;
+}
+
+.footer_links :hover {
+  opacity: 0.4;
+}
+
+.footer_link {
+  display: flex;
+  border: 1px solid var(--primary-accent);
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+  width: 200px;
+  height: 75px;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer_text {
+  display: flex;
+  padding: 50px;
+  flex-direction: column;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+
+  font-family: "Geist", sans-serif;
+}
+
+/* ------------------------------------- */
+/* MEDIA QUERIES */
+/* ------------------------------------- */
 
 /* md  */
 @media (min-width: 720px) {
@@ -477,7 +532,6 @@ margin-right: 20px;
   .grid_container {
     grid-template-columns: repeat(2, 1fr); /* Creates two columns */
     width: 100%;
-
   }
 
   .top_container {
@@ -515,7 +569,11 @@ margin-right: 20px;
     max-width: 800px;
   }
 
-  
+  .footer_links {
+    flex-direction: row;
+    gap: 60px;
+
+  }
 }
 
 /* lg  */
@@ -546,11 +604,9 @@ margin-right: 20px;
   }
 
   .grid_container {
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
     width: 100%;
   }
-
-  
 }
 
 /* xl  */

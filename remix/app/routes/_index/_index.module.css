@@ -3,21 +3,45 @@
   display: flex;
   width: 100%;
   min-height: 100vh;
-  position: relative;
   flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
   background-color: var(--primary-dark);
   font-family: "Geist", sans-serif;
   color: white;
   align-items: center;
- 
+}
+
+/* feature_grid STYLES  */
+/* ---------------------------- */
+/* Feature Container Layout */
+.feature_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid yellow;
+  margin-top: 20%;
+  
+}
+
+
+/* Grid Container Layout */
+.grid_container {
+  display: grid;
+  box-sizing: border-box; 
+  padding-right: 50px;
+  padding-left: 50px;
+  width: 100%;
+  gap: 30px;
+  grid-template-columns: 1fr; /* Creates two columns */
+
 }
 
 /* Card Container Styles */
 .card_container {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  
   border: 1px solid white;
+  padding: 10px;
+  padding-bottom: 60%;
   transition: 0.3s;
   border-radius: 10px;
 }
@@ -39,31 +63,9 @@
   text-align: start; /* Align text to the start */
   margin-top: 0; /* Remove any top margin to stick it to the top */
 }
-/* Center Container Layout */
-.center_container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 5%;
-}
+/* -------------------------------------- */
 
-.features {
-  margin-top: 50%;
-}
 
-/* Feature Container Layout */
-.feature_container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50%;
-}
-
-/* Grid Container Layout */
-.grid_container {
-  display: grid;
-  gap: 30px;
-}
 
 /* Navigation Container Styles */
 .sticky {
@@ -81,7 +83,7 @@
   align-items: center;
   width: 100%;
   max-width: 1440px;
-  color: white;
+  height: 60px;
 }
 
 .nav_container,
@@ -109,7 +111,6 @@
   padding-top: 20px;
 }
 
-/* Expanded Nav Styles  */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -122,32 +123,37 @@
 }
 
 
-.dropdown_container .dropdown_links {
+.dropdown_container, .dropdown_links, .dropdown_button {
   animation: fadeInUp 1.2s ease forwards; /* Apply the animation */
 }
+
 
 .dropdown_container {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 40px;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 50px;
   width: 100%;
   color: black
 }
 
-.dropdown_links {
-  background-color: white;
-  color: black;
+.dropdown_links, .dropdown_button {
+  background-color: black;
+  border: 1px solid gray;
+  color: white;
   border-radius: 10px;
   width: 70%;
   padding: 12px 0;
+}
 
-
+.dropdown_button {
+  background-color: var(--primary-accent);
 }
 
 
 .dropdown_links,
+.dropdown_button,
 .menu_links,
 .app_button {
   margin: 5px 0;
@@ -183,7 +189,6 @@
   background-color: white;
   position: absolute;
   bottom: 0;
-  left: 0;
 }
 
 /* Name Styles */
@@ -198,12 +203,6 @@
   font-weight: 600;
   color: white;
 }
-/* Login Placeholder Styles */
-.toggle_container {
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-}
 
 /* Main Container Layout */
 .main_container {
@@ -215,7 +214,8 @@
 .toggle_container {
   display: inline-block;
   cursor: pointer;
-}
+margin-right: 20px;
+}  
 
 .bar1,
 .bar2,
@@ -224,7 +224,7 @@
   height: 1.5px;
   background-color: white;
   margin: 6.5px 0;
-  transition: 0.4s;
+  transition: 0.6s;
 }
 
 .change .bar1 {
@@ -455,7 +455,9 @@
   }
 
   .grid_container {
-    grid-template-columns: 1fr 1fr; /* 2x2 grid layout */
+    grid-template-columns: repeat(2, 1fr); /* Creates two columns */
+    width: 100%;
+
   }
 
   .top_container {
@@ -492,6 +494,8 @@
   .scroller_container {
     max-width: 800px;
   }
+
+  
 }
 
 /* lg  */
@@ -520,6 +524,13 @@
     width: 50%; /* Adjust as needed */
     margin-left: 20px;
   }
+
+  /* .grid_container {
+    grid-template-columns: repeat(3, 1fr); 
+    width: 100%;
+  } */
+
+  
 }
 
 /* xl  */

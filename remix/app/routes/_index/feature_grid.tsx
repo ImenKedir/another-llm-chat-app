@@ -10,6 +10,7 @@ const cardData = [
 const FeatureGrid = () => {
   return (
     <div className={styles.grid_container}>
+      
       {cardData.map((card) => (
         <div key={card.id} className={styles.card_container}>
           <div className={styles.card}>

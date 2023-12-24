@@ -65,8 +65,8 @@ export default function Index() {
               <Link to="/path2" className={styles.dropdown_links}>
                 Link 2
               </Link>
-              <Link to="/path3" className={styles.dropdown_links}>
-                Link 3
+              <Link to="/app/chat" className={styles.dropdown_button}>
+                Launch App
               </Link>
             </div>
           )}
@@ -86,17 +86,17 @@ export default function Index() {
           </h3>
           <Link to="/app">
             <button className={styles.start_chatting_button}>
-              <h4>Start Chatting</h4>
+              <h4>Get Started</h4>
             </button>
           </Link>
         </div>
         <Scroller />
       </div>
 
-      {/* <div className={styles.feature_container}>
+      <div className={styles.feature_container}>
         <h2>Features</h2>
         <FeatureGrid />
-      </div> */}
+      </div>
       <div className={styles.features}>Hello</div>
     </div>
   );

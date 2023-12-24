@@ -32,7 +32,7 @@ export default function Index() {
         <div
           className={
             isDropdownExpanded
-              ? `${styles.nav_container_expanded}`
+              ? `${styles.nav_container_dropdown}`
               : styles.nav_container
           }
         >
@@ -52,7 +52,7 @@ export default function Index() {
               <Link to="/app" className={styles.menu_links}>
                 Community
               </Link>
-              <Link to="/about" className={styles.menu_app_button}>
+              <Link to="/app/chat" className={styles.app_button}>
                 Launch App
               </Link>
             </div>

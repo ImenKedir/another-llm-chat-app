@@ -1,10 +1,29 @@
 import styles from "@/routes/_index/_index.module.css";
 
 const cardData = [
-  { id: 1, title: "Card Title 1", content: "Content for card 1" },
-  { id: 2, title: "Card Title 2", content: "Content for card 2" },
-  { id: 3, title: "Card Title 3", content: "Content for card 3" },
-  { id: 4, title: "Card Title 4", content: "Content for card 4" },
+  {
+    id: 1,
+    title: "Personas",
+    content:
+      "Chat from multiple perspectives, lorem ipsum sum lorem ipsum sum lorem",
+  },
+  {
+    id: 2,
+    title: "Immersive Text RPG Experience",
+    content: "Dive into lorem ipsum sum lorem ipsum sum lorem ipsum sum",
+  },
+  {
+    id: 3,
+    title: "Images and Text, All-in-one",
+    content:
+      "Create high-quality images of what is happening during a conversaion in real-time lorem ipsum sum lorem ipsum sum",
+  },
+  {
+    id: 4,
+    title: "Create Your Own Chats",
+    content:
+      "Design your own characters to chat with abd add lorem ipsum sum lorem ipsum sum lorem",
+  },
 ];
 
 const FeatureGrid = () => {
@@ -13,7 +32,7 @@ const FeatureGrid = () => {
       {cardData.map((card) => (
         <div key={card.id} className={styles.card_container}>
           <div className={styles.card}>
-            <h4>{card.title}</h4>
+            <h2>{card.title}</h2>
             <p>{card.content}</p>
           </div>
         </div>

@@ -2,8 +2,11 @@
 :root {
   --primary-dark: #000000;
   --secondary-dark: #0C0B0B;
-  --tertiary-dark: #161617;
+  --tertiary-dark: #2b2b2c;
   --quadrary-dark: #212121;
+
+  --primary-light: #ffffff;
+  --secondary-light: #fcfafacf;
 
   --primary-accent: #7a01de;
   --secondary-accent: #bd0695;
@@ -55,7 +58,6 @@ body {
   padding: 0;
   /* This ensures the page takes up the full height */
   height: 100vh;
-  width: 100vw;
+  max-width: 100%;
   background-color: var(--secondary-dark);
-  overflow: overlay;
 }

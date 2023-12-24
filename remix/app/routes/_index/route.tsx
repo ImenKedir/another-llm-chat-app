@@ -20,10 +20,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
-  const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const [isDropdownExpanded, setIsDropdownExpanded] = useState(false);
 
   const toggleNav = () => {
-    setIsNavExpanded(!isNavExpanded);
+    setIsDropdownExpanded(!isDropdownExpanded);
   };
 
   return (
@@ -31,8 +31,8 @@ export default function Index() {
       <div className={styles.sticky}>
         <div
           className={
-            isNavExpanded
-              ? `${styles.nav_container_expanded}`
+            isDropdownExpanded
+              ? `${styles.nav_container_dropdown}`
               : styles.nav_container
           }
         >
@@ -41,33 +41,32 @@ export default function Index() {
               <h3>NaughtyML</h3>
             </div>
             {/* Displays on < 720px  */}
-            <div className={styles.login_placeholder}>
+            <div className={styles.toggle_container}>
               <MenuToggle onToggle={toggleNav} />
             </div>
             {/* Displays on > 720px  */}
-            <div className={styles.menu_extended_container}>
-              <Link to="/faq" className={styles.menu_extended_links}>
+            <div className={styles.menu_container}>
+              <Link to="/faq" className={styles.menu_links}>
                 Blog
               </Link>
-              <Link to="/app" className={styles.menu_extended_links}>
+              <Link to="/app" className={styles.menu_links}>
                 Community
               </Link>
-              <Link to="/about" className={styles.menu_app_button}>
+              <Link to="/app/chat" className={styles.app_button}>
                 Launch App
               </Link>
             </div>
           </div>
-          {/* 'expanded' = menu is dropped down       */}
-          {isNavExpanded && (
-            <div className={styles.menu_container}>
-              <Link to="/path1" className={styles.menu_links}>
+          {isDropdownExpanded && (
+            <div className={styles.dropdown_container}>
+              <Link to="/path1" className={styles.dropdown_links}>
                 Link 1
               </Link>
-              <Link to="/path2" className={styles.menu_links}>
+              <Link to="/path2" className={styles.dropdown_links}>
                 Link 2
               </Link>
-              <Link to="/path3" className={styles.menu_links}>
-                Link 3
+              <Link to="/app/chat" className={styles.dropdown_button}>
+                Launch App
               </Link>
             </div>
           )}
@@ -85,20 +84,49 @@ export default function Index() {
             Spicy conversation with your favorite characters, completely
             uncensored.
           </h3>
-          <Link to="/app">
+          <Link to="/app/chat">
             <button className={styles.start_chatting_button}>
-              <h4>Start Chatting</h4>
+              <h4>Get Started</h4>
             </button>
           </Link>
         </div>
         <Scroller />
       </div>
 
-      {/* <div className={styles.feature_container}>
-        <h2>Features</h2>
+      <div className={styles.feature_container}>
+        <h3>FEATURES</h3>
         <FeatureGrid />
-      </div> */}
-      <div className={styles.features}>Hello</div>
+      </div>
+
+      <div className={styles.footer}>
+        <Link to="/app/chat">
+          <button className={styles.start_chatting_button}>
+            <h4>Get Started</h4>
+          </button>
+        </Link>
+        <div className={styles.footer_text}>
+          <h2>Join the Community</h2>
+          <p>
+            Join like-minded fans and AI enthusiastis in the lorem ipsum sum
+            lorem ipsum sum Lorem ipsum dolor, sit amet consectetur adipisicing
+            elit. Amet fugit doloremque quo beatae repellat cum quaerat quam.
+            Placeat perspiciatis repellendus saepe quibusdam id. Fugiat, rem sed
+            id architecto velit accusantium!
+          </p>
+        </div>
+
+        <div className={styles.footer_links}>
+          <Link to="/faq" className={styles.footer_link}>
+            Join Discord
+          </Link>
+          <Link to="/app" className={styles.footer_link}>
+            Follow on Twitter
+          </Link>
+          <Link to="/app/chat" className={styles.footer_link}>
+            Follow on Instagram
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

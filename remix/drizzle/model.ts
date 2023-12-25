@@ -2,7 +2,7 @@ import { db } from "drizzle/db";
 import { eq } from "drizzle-orm";
 import { users } from "drizzle/schema";
 
-type User = typeof users.$inferInsert
+type User = typeof users.$inferInsert;
 
 export async function createUser(user: User) {
   await db.insert(users).values({
@@ -14,11 +14,14 @@ export async function createUser(user: User) {
 }
 
 export async function updateUser(user: User) {
-  await db.update(users).set({
-    name: user.name,
-    email: user.email,
-    image: user.image,
-  }).where(eq(users.id, user.id));
+  await db
+    .update(users)
+    .set({
+      name: user.name,
+      email: user.email,
+      image: user.image,
+    })
+    .where(eq(users.id, user.id));
 }
 
 export async function getUser(userId: string) {

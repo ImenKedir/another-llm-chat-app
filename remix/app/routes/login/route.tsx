@@ -40,7 +40,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       },
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     // redirect back to login page with error message
     session.flash("error", "Error while validating auth token");
     return redirect("/login", {

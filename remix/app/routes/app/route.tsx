@@ -8,8 +8,9 @@ import { LeftSidebarVisibleContext } from "@/contexts/LeftSidebarVisibleContext"
 import styles from "@/routes/app/app.module.css";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const session = await getSession(request.headers.get("Cookie"));
-  const userId = session.get("userId");
+  const userId = getSession(request.headers.get("Cookie")).then((session) =>
+    session.get("userId"),
+  );
 
   if (!userId) {
     return redirect("/login");

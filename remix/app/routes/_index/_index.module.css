@@ -61,21 +61,21 @@
 .card {
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  justify-content: center; 
-  height: 100%; 
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .card h2 {
   font-size: 1.5rem;
-  margin-top: 0; 
+  margin-top: 0;
   font-family: "Geist-Bold";
-  color: var(--primary-light)
+  color: var(--primary-light);
 }
 
 .card h3 {
-  text-align: start; 
-  margin-top: 0; 
+  text-align: start;
+  margin-top: 0;
   color: var(--secondary-light);
 }
 /* -------------------------------------- */
@@ -571,7 +571,6 @@
   .footer_links {
     flex-direction: row;
     gap: 60px;
-
   }
 }
 
@@ -606,8 +605,6 @@
     grid-template-columns: repeat(3, 1fr);
     width: 100%;
   }
- 
-  
 }
 
 /* xl  */

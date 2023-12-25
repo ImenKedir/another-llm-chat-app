@@ -1,5 +1,5 @@
 import type { SSTConfig } from "sst";
-import { Api, Auth, RemixSite } from "sst/constructs";
+import { Api, Auth, RemixSite, Config } from "sst/constructs";
 
 export default {
   config(_input) {
@@ -10,18 +10,25 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
+      const GOOGLE_AUTH_CLIENT_ID = 
+        new Config.Secret(stack, "GOOGLE_AUTH_CLIENT_ID");
+
+      const PLANETSCALE_DATABASE_URI = 
+        new Config.Secret(stack, "PLANETSCALE_DATABASE_URI");
+
       const authApi = new Api(stack, "authApi");
+      const AUTH_API_URL = new Config.Parameter(stack, "AUTH_API_URL", {
+        value: authApi.url + "/auth",
+      });
 
       const site = new RemixSite(stack, "site", {
-        environment: {
-          AUTH_API_URL: authApi.url + "/auth",
-        },
+        bind: [AUTH_API_URL, PLANETSCALE_DATABASE_URI]
       });
 
       const auth = new Auth(stack, "auth", {
         authenticator: {
           handler: "functions/auth.handler",
-          bind: [site],
+          bind: [site, PLANETSCALE_DATABASE_URI, GOOGLE_AUTH_CLIENT_ID],
         },
       });
 

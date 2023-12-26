@@ -1,82 +1,76 @@
-import { useEffect } from "react";
-import { useLoaderData, Form } from "@remix-run/react";
+import { v4 as uuidv4 } from "uuid";
 import { useConversationStore } from "@/hooks/useConversationStore";
+import { useAutoResizeTextarea } from "@/hooks/useAutoResizeTextarea";
+import { Form } from "@remix-run/react";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
-import { json } from "@remix-run/node";
 import styles from "@/routes/app.chat/app.chat.module.css";
 
-import type { Message } from "@/hooks/useConversationStore";
+export function Input() {
+  // lil custom hook to resize the textarea as the user types
+  useAutoResizeTextarea("chat-input");
+  // set the streaming state
+  const setStreaming = useConversationStore((state) => state.setStreaming);
+  // add a token to the last message
+  const appendToLastMessage = useConversationStore(
+    (state) => state.appendToLastMessage,
+  );
+  // add a message to the conversation history
+  const addToConversationHistory = useConversationStore(
+    (state) => state.addToConversationHistory,
+  );
 
-interface InputProps {
-  infrence_api: string;
-}
-
-export function Input({ infrence_api }: InputProps) {
-  const {
-    isStreaming,
-    streamedResponse,
-    setIsStreaming,
-    updateStreamedResponse,
-    clearStreamedResponse,
-    addToChatHistory,
-  } = useConversationStore();
-
-  useEffect(() => {
-    // This will resize the textarea as the user types
-    function handleTextareaInputResize() {
-      const textarea = document.getElementById("chat-input");
-      textarea?.addEventListener("input", function () {
-        this.style.height = "auto";
-        this.style.height = this.scrollHeight + "px";
-      });
-    }
-    handleTextareaInputResize(); // run once on mount
-  }, []);
-
+  // handles sending a request to the server & getting a stream of tokens
   function SendMessage(event: React.FormEvent) {
-    event.preventDefault(); // normally the form hits the remix server action
-    setIsStreaming(true); // but we want to stream tokens directly to the client's browser
+    event.preventDefault(); // normally the event hits the remix server action
+    setStreaming(true); // but we want to add our own lil streaming logic
 
-    // get the query from the form submission
-    const prompt = new FormData(event.target as HTMLFormElement).get("prompt");
-    if (!prompt || typeof prompt !== "string") {
+    // get the message from the form submission
+    const message = new FormData(event.target as HTMLFormElement).get(
+      "message",
+    );
+    if (!message || typeof message !== "string") {
       console.error("prompt is empty or not a string.");
       return;
     }
 
-    console.log("prompt: ", prompt);
-    // add the user prompt to the chat history
-    const userMessage: Message = {
-      id: Date.now().toString(),
+    // add the user message to the chat history
+    addToConversationHistory({
+      id: uuidv4(),
       author: "user",
-      content: prompt,
-    };
-    addToChatHistory(userMessage);
-    // clear the prev streamed response
-    if (streamedResponse.length > 0) {
-      console.log("streamedResponse: ", streamedResponse);
-      const aiMessage: Message = {
-        id: Date.now().toString(),
-        author: "ai",
-        content: streamedResponse,
-      };
-      addToChatHistory(aiMessage);
-      clearStreamedResponse();
-    }
-    // send the query to the streaming infrence api
-    const url = `${infrence_api}/completion?prompt=${encodeURIComponent(
-      prompt,
-    )}`;
-    const sse = new EventSource(url, { withCredentials: true });
+      content: message,
+      created: new Date().toISOString(),
+    });
+
+    // add the ai message to the chat history
+    addToConversationHistory({
+      id: uuidv4(),
+      author: "ai",
+      content: "", // we will stream the content in later
+      created: new Date().toISOString(),
+    });
+
+    // start the event stream
+    const sse = new EventSource(
+      `/completion/openrouter?prompt=${encodeURIComponent(message)}`,
+      { withCredentials: true },
+    );
+
     // handle incoming tokens
     sse.addEventListener("message", (event) => {
-      const token = JSON.parse(event.data).text as string;
-      updateStreamedResponse(token);
+      const token = event.data as string;
+      if (token !== "[DONE]") {
+        appendToLastMessage(token);
+      } else {
+        sse.close();
+        setStreaming(false);
+      }
     });
+
+    // handle errors
     sse.addEventListener("error", (event) => {
       console.log("error: ", event);
-      setIsStreaming(false);
       sse.close();
+      setStreaming(false);
     });
   }
 
@@ -85,7 +79,11 @@ export function Input({ infrence_api }: InputProps) {
       <button type="submit">
         <ArrowUpIcon color="black" width={20} height={20} />
       </button>
-      <textarea id="chat-input" name="prompt" placeholder="Enter a prompt" />
+      <textarea
+        id="chat-input"
+        name="message"
+        placeholder="*Describe your actions in asterisks*, Or just type something."
+      />
     </Form>
   );
 }

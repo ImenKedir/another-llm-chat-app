@@ -1,25 +1,11 @@
-import {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-  json,
-  redirect,
-} from "@remix-run/node";
-import { useLoaderData, Link } from "@remix-run/react";
-import { getSession, destroySession } from "@/sessions.server";
+import { Link } from "@remix-run/react";
 import Scroller from "@/routes/_index/scroller";
 import FeatureGrid from "@/routes/_index/feature_grid";
 import MenuToggle from "@/routes/_index/menu_toggle";
 import styles from "@/routes/_index/_index.module.css";
 import { useState } from "react";
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const session = await getSession(request.headers.get("Cookie"));
-
-  return json({ userId: session.get("userId") });
-}
-
 export default function Index() {
-  const data = useLoaderData<typeof loader>();
   const [isDropdownExpanded, setIsDropdownExpanded] = useState(false);
 
   const toggleNav = () => {
@@ -130,12 +116,3 @@ export default function Index() {
     </div>
   );
 }
-
-export const action = async ({ request }: ActionFunctionArgs) => {
-  const session = await getSession(request.headers.get("Cookie"));
-  return redirect("/", {
-    headers: {
-      "Set-Cookie": await destroySession(session),
-    },
-  });
-};

@@ -21,7 +21,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   if (!token) {
     return json({
       error: session.get("error"),
-      authApiURL: Config.AUTH_API_URL,
+      authAPI: Config.AUTH_API_URL,
     });
   }
 
@@ -40,7 +40,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       },
     });
   } catch (error) {
-    console.log(error);
+    console.log("ERROR", error);
     // redirect back to login page with error message
     session.flash("error", "Error while validating auth token");
     return redirect("/login", {
@@ -53,8 +53,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Login() {
   const data = useLoaderData<typeof loader>();
-
-  console.log(data);
 
   return (
     <div className={styles.container}>
@@ -71,7 +69,7 @@ export default function Login() {
             <div className={styles.center_button}>
               <button className={styles.login_button}>
                 <Link
-                  to={data.authApiURL + "/google/authorize"}
+                  to={data.authAPI + "/google/authorize"}
                   className={styles.link}
                 >
                   <p>Sign in with Google</p>

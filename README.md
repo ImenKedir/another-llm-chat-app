@@ -22,6 +22,20 @@ Install dependencies
 pnpm install
 ```
 
+Set environment variables
+
+```bash
+pnpm sst secrets set GOOGLE_AUTH_CLIENT_ID <GOOGLE_AUTH_CLIENT_ID>
+```
+
+```bash
+pnpm sst secrets set OPENROUTER_API_KEY <YOUR_OPENROUTER_API_KEY>
+```
+
+```bash
+pnpm sst secrets set PLANETSCALE_DATABASE_URI <PLANETSCALE_DATABASE_URI>
+```
+
 Start the sst development server
 
 ```bash

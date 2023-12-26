@@ -1,17 +1,12 @@
 import { useEffect } from "react";
-import { useLoaderData, Form } from "@remix-run/react";
+import { Form } from "@remix-run/react";
 import { useConversationStore } from "@/hooks/useConversationStore";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
-import { json } from "@remix-run/node";
 import styles from "@/routes/app.chat/app.chat.module.css";
 
 import type { Message } from "@/hooks/useConversationStore";
 
-interface InputProps {
-  infrence_api: string;
-}
-
-export function Input({ infrence_api }: InputProps) {
+export function Input() {
   const {
     isStreaming,
     streamedResponse,
@@ -35,7 +30,7 @@ export function Input({ infrence_api }: InputProps) {
 
   function SendMessage(event: React.FormEvent) {
     event.preventDefault(); // normally the form hits the remix server action
-    setIsStreaming(true); // but we want to stream tokens directly to the client's browser
+    setIsStreaming(true);
 
     // get the query from the form submission
     const prompt = new FormData(event.target as HTMLFormElement).get("prompt");
@@ -44,14 +39,6 @@ export function Input({ infrence_api }: InputProps) {
       return;
     }
 
-    console.log("prompt: ", prompt);
-    // add the user prompt to the chat history
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      author: "user",
-      content: prompt,
-    };
-    addToChatHistory(userMessage);
     // clear the prev streamed response
     if (streamedResponse.length > 0) {
       console.log("streamedResponse: ", streamedResponse);
@@ -63,16 +50,30 @@ export function Input({ infrence_api }: InputProps) {
       addToChatHistory(aiMessage);
       clearStreamedResponse();
     }
-    // send the query to the streaming infrence api
-    const url = `${infrence_api}/completion?prompt=${encodeURIComponent(
-      prompt,
-    )}`;
-    const sse = new EventSource(url, { withCredentials: true });
+    // add the user prompt to the chat history
+    addToChatHistory({
+      id: Date.now().toString(),
+      author: "user",
+      content: prompt,
+    });
+
+    // start the event stream
+    const sse = new EventSource(
+      `/completion/openrouter?prompt=${encodeURIComponent(prompt)}`,
+      { withCredentials: true },
+    );
+
     // handle incoming tokens
     sse.addEventListener("message", (event) => {
-      const token = JSON.parse(event.data).text as string;
-      updateStreamedResponse(token);
+      const token = event.data as string;
+      if (token === "[DONE]") {
+        setIsStreaming(false);
+        sse.close();
+      } else {
+        updateStreamedResponse(token);
+      }
     });
+
     sse.addEventListener("error", (event) => {
       console.log("error: ", event);
       setIsStreaming(false);

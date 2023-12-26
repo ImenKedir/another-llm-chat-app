@@ -1,5 +1,5 @@
-import { getSession } from "@/sessions.server";
-import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
+import { requireAuth } from "@/sessions.server";
+import { LoaderFunctionArgs, json } from "@remix-run/node";
 
 import { useState } from "react";
 import { Outlet, useLoaderData } from "@remix-run/react";
@@ -8,13 +8,7 @@ import { LeftSidebarVisibleContext } from "@/contexts/LeftSidebarVisibleContext"
 import styles from "@/routes/app/app.module.css";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const userId = getSession(request.headers.get("Cookie")).then((session) =>
-    session.get("userId"),
-  );
-
-  if (!userId) {
-    return redirect("/login");
-  }
+  const userId = await requireAuth(request);
 
   return json({
     userId: userId,

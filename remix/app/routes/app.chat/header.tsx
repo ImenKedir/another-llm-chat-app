@@ -10,8 +10,8 @@ export function Header() {
     LeftSidebarVisibleContext,
   )!;
 
-  const clearChatHistory = useConversationStore(
-    (state) => state.clearChatHistory,
+  const setConversationHistory = useConversationStore(
+    (state) => state.setConversationHistory,
   );
 
   return (
@@ -29,7 +29,7 @@ export function Header() {
         color="white"
         width={20}
         height={20}
-        onClick={() => clearChatHistory()}
+        onClick={() => setConversationHistory([])}
       />
     </div>
   );

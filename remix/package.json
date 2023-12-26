@@ -27,6 +27,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remix-utils": "^7.4.0",
+    "uuid": "^9.0.1",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
@@ -34,6 +35,7 @@
     "@remix-run/dev": "^2.4.0",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
+    "@types/uuid": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "aws-cdk-lib": "2.110.1",
     "constructs": "10.3.0",

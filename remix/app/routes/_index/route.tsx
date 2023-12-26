@@ -5,7 +5,6 @@ import MenuToggle from "@/routes/_index/menu_toggle";
 import styles from "@/routes/_index/_index.module.css";
 import { useState } from "react";
 
-
 export default function Index() {
   const [isDropdownExpanded, setIsDropdownExpanded] = useState(false);
 

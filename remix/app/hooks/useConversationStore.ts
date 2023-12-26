@@ -6,20 +6,19 @@ export interface Message {
   id: string;
   author: "user" | "ai";
   content: string;
+  created: string;
 }
 
 interface ConversationState {
-  chatHistory: Message[];
   isStreaming: boolean;
-  streamedResponse: string;
+  conversationHistory: Message[];
 }
 
 interface ConversationMethods {
-  setIsStreaming: (nextState: boolean) => void;
-  addToChatHistory: (message: Message) => void;
-  clearChatHistory: () => void;
-  clearStreamedResponse: () => void;
-  updateStreamedResponse: (token: string) => void;
+  setStreaming: (nextState: boolean) => void;
+  addToConversationHistory: (message: Message) => void;
+  setConversationHistory: (state: Message[]) => void;
+  appendToLastMessage: (token: string) => void;
 }
 
 // the store is a combination of state and methods
@@ -31,24 +30,39 @@ export const useConversationStore = create<ConversationStore>()(
       (set) => ({
         // are we streaming tokens?
         isStreaming: false,
+        // the conversation history
+        conversationHistory: [],
         // toogle the streaming state
-        setIsStreaming: (nextState) => set({ isStreaming: nextState }),
-        // the last message, seperate from rest of state because it is updated frequently
-        streamedResponse: "",
-        // clear the streamed response
-        clearStreamedResponse: () => set({ streamedResponse: "" }),
-        // updates the last message as tokens are streamed in
-        updateStreamedResponse: (token) =>
-          set((state) => ({
-            streamedResponse: state.streamedResponse + token,
-          })),
-        // the chat history
-        chatHistory: [],
+        setStreaming: (state) => set({ isStreaming: state }),
         // moves user input and last message to chat history
-        addToChatHistory: (message: Message) =>
-          set((state) => ({ chatHistory: [...state.chatHistory, message] })),
+        addToConversationHistory: (message: Message) =>
+          set((state) => ({
+            conversationHistory: [...state.conversationHistory, message],
+          })),
         // clears the chat history
-        clearChatHistory: () => set({ chatHistory: [], streamedResponse: "" }),
+        setConversationHistory: (state: Message[]) =>
+          set({ conversationHistory: state }),
+        // append a token to the last message (helpful for streaming)
+        appendToLastMessage: (token: string) =>
+          set((state) => {
+            // Make a copy of the current conversation history
+            const newHistory = [...state.conversationHistory];
+
+            // Check if there is at least one message in the history
+            if (newHistory.length > 0) {
+              // Get the last message
+              const lastMessage = newHistory[newHistory.length - 1];
+
+              // Update its content
+              newHistory[newHistory.length - 1] = {
+                ...lastMessage,
+                content: lastMessage.content + token,
+              };
+            }
+
+            // Update the state with the modified history
+            return { conversationHistory: newHistory };
+          }),
       }),
       {
         name: "conversation-store",

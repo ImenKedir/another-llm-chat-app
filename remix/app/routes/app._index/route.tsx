@@ -1,13 +1,34 @@
+import { LoaderFunctionArgs, json } from "@remix-run/node";
+import { getCharacters } from "drizzle/model";
+import { Link, useLoaderData } from "@remix-run/react";
+import type { Character } from "drizzle/model";
 import styles from "@/routes/app._index/app._index.module.css";
-// This is the default outlet for the app route.
-export default function AppDefaultOutlet() {
+
+export async function loader() {
+  const characters = await getCharacters();
+  return json({ characters: characters });
+}
+
+function Character({ id, name, description }: Character) {
   return (
-    <div className={styles.default_container}>
-      <div className={styles.card}>
-        <div className={styles.name}>
-          <h3>Character Name</h3>
-        </div>
+    <div className={styles.character_container}>
+      <div>
+      {name}{description}
       </div>
+      <Link to={`/app/chat/${id}`}>Chat</Link>
+    </div>
+  );
+}
+
+export default function Explore() {
+  const data = useLoaderData<typeof loader>();
+  console.log("app/index data:", data);
+
+  return (
+    <div className={styles.container}>
+      {data.characters.map((character) => (
+        <Character key={character.id} {...character} />
+      ))}
     </div>
   );
 }

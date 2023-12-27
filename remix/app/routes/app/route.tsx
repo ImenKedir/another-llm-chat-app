@@ -7,20 +7,8 @@ import { LeftSidebar } from "@/routes/app/left-sidebar";
 import { LeftSidebarVisibleContext } from "@/contexts/LeftSidebarVisibleContext";
 import styles from "@/routes/app/app.module.css";
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const userId = await requireAuth(request);
-
-  return json({
-    userId: userId,
-  });
-}
-
 export default function App() {
-  const data = useLoaderData<typeof loader>();
-
-  const [sidebarVisible, setSidebarVisible] = useState(false);
-
-  console.log(data);
+  const [sidebarVisible, setSidebarVisible] = useState(true);
 
   return (
     <div className={styles.app_container}>

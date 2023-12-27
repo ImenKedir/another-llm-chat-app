@@ -2,12 +2,13 @@ import { useContext } from "react";
 import {
   ExitIcon,
   GlobeIcon,
-  MagnifyingGlassIcon,
+  PlusIcon,
   ArchiveIcon,
   AvatarIcon,
 } from "@radix-ui/react-icons";
 import { LeftSidebarVisibleContext } from "@/contexts/LeftSidebarVisibleContext";
 import styles from "@/routes/app/app.module.css";
+import { Link } from "@remix-run/react";
 
 export function LeftSidebar() {
   const { setSidebarVisible } = useContext(LeftSidebarVisibleContext)!;
@@ -25,16 +26,12 @@ export function LeftSidebar() {
       </div>
       <div className={styles.sidebar_nav_container}>
         <div className={styles.sidebar_nav_item}>
-          <MagnifyingGlassIcon color="white" width={20} height={20} />
-          <p>Search</p>
-        </div>
-        <div className={styles.sidebar_nav_item}>
           <GlobeIcon color="white" width={20} height={20} />
-          <p>Explore</p>
+          <Link to="/app">Explore</Link>
         </div>
         <div className={styles.sidebar_nav_item}>
-          <ArchiveIcon color="white" width={20} height={20} />
-          <p>My Stuff</p>
+          <PlusIcon color="white" width={20} height={20} />
+          <Link to="/app/create">Create</Link>
         </div>
       </div>
       <div className={styles.sidebar_footer}>

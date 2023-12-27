@@ -3,23 +3,22 @@ import { useConversationStore } from "@/hooks/useConversationStore";
 import { useAutoResizeTextarea } from "@/hooks/useAutoResizeTextarea";
 import { Form } from "@remix-run/react";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
-import styles from "@/routes/app.chat/app.chat.module.css";
+import styles from "@/routes/app.chat.$characterId/app.chat.module.css";
+
 
 export function Input() {
-  // lil custom hook to resize the textarea as the user types
   useAutoResizeTextarea("chat-input");
-  // set the streaming state
+  // sets the streaming state to let other components know if we are streaming
   const setStreaming = useConversationStore((state) => state.setStreaming);
-  // add a token to the last message
+  // adds a token to the last message in the conversation history
   const appendToLastMessage = useConversationStore(
     (state) => state.appendToLastMessage,
   );
-  // add a message to the conversation history
+  // adds a message to the conversation history
   const addToConversationHistory = useConversationStore(
     (state) => state.addToConversationHistory,
   );
 
-  // handles sending a request to the server & getting a stream of tokens
   function SendMessage(event: React.FormEvent) {
     event.preventDefault(); // normally the event hits the remix server action
     setStreaming(true); // but we want to add our own lil streaming logic
@@ -39,6 +38,7 @@ export function Input() {
       author: "user",
       content: message,
       created: new Date().toISOString(),
+      conversation: uuidv4(),
     });
 
     // add the ai message to the chat history
@@ -47,6 +47,7 @@ export function Input() {
       author: "ai",
       content: "", // we will stream the content in later
       created: new Date().toISOString(),
+      conversation: uuidv4(),
     });
 
     // start the event stream

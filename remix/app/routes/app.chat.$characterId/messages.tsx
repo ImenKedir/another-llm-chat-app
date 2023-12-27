@@ -1,10 +1,10 @@
 import { EyeOpenIcon, PersonIcon } from "@radix-ui/react-icons";
 import { Spinner } from "@/components/spinner";
 import { useConversationStore } from "@/hooks/useConversationStore";
-import type { Message } from "@/hooks/useConversationStore";
-import styles from "@/routes/app.chat/app.chat.module.css";
+import type { Message } from "drizzle/model";
+import styles from "@/routes/app.chat.$characterId/app.chat.module.css";
 
-function ChatMessage(message: Message) {
+function Message(message: Message) {
   return (
     <div className={styles.chat_message_container}>
       <div className={styles.chat_message_header}>
@@ -19,14 +19,14 @@ function ChatMessage(message: Message) {
   );
 }
 
-export function ChatMessages() {
+export function Messages() {
   const conversationHistory = useConversationStore(
     (state) => state.conversationHistory,
   );
   return (
     <div className={styles.chat_messages_container}>
       {conversationHistory.map((message) => (
-        <ChatMessage key={message.id} {...message} />
+        <Message key={message.id} {...message} />
       ))}
     </div>
   );

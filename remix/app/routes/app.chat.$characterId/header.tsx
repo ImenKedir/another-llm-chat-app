@@ -1,14 +1,16 @@
 import { useContext } from "react";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { LeftSidebarVisibleContext } from "@/contexts/LeftSidebarVisibleContext";
-import { ReloadIcon } from "@radix-ui/react-icons";
-import styles from "@/routes/app.chat/app.chat.module.css";
 import { useConversationStore } from "@/hooks/useConversationStore";
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import styles from "@/routes/app.chat.$characterId/app.chat.module.css";
 
 export function Header() {
   const { sidebarVisible, setSidebarVisible } = useContext(
     LeftSidebarVisibleContext,
   )!;
+
+  const character = useConversationStore((state) => state.character);
 
   const setConversationHistory = useConversationStore(
     (state) => state.setConversationHistory,
@@ -24,7 +26,7 @@ export function Header() {
           onClick={() => setSidebarVisible(true)}
         />
       )}
-      <h1>Fantasy</h1>
+      <h1>{character && character.name}</h1>
       <ReloadIcon
         color="white"
         width={20}

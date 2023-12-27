@@ -1,21 +1,18 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import type {} from "@redux-devtools/extension"; // required for devtools typing
 
-export interface Message {
-  id: string;
-  author: "user" | "ai";
-  content: string;
-  created: string;
-}
+import type { Character, Message } from "drizzle/model";
+import type {} from "@redux-devtools/extension"; // required for devtools typing
 
 interface ConversationState {
   isStreaming: boolean;
+  character: Character | undefined;
   conversationHistory: Message[];
 }
 
 interface ConversationMethods {
   setStreaming: (nextState: boolean) => void;
+  setCharacter: (character: Character) => void;
   addToConversationHistory: (message: Message) => void;
   setConversationHistory: (state: Message[]) => void;
   appendToLastMessage: (token: string) => void;
@@ -30,10 +27,14 @@ export const useConversationStore = create<ConversationStore>()(
       (set) => ({
         // are we streaming tokens?
         isStreaming: false,
+        // the character we are talking to
+        character: undefined,
         // the conversation history
         conversationHistory: [],
         // toogle the streaming state
         setStreaming: (state) => set({ isStreaming: state }),
+        // set the character we are talking to
+        setCharacter: (character: Character) => set({ character }),
         // moves user input and last message to chat history
         addToConversationHistory: (message: Message) =>
           set((state) => ({

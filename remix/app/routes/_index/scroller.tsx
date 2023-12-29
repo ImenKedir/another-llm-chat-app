@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import styles from "@/routes/_index/_index.module.css";
 
+
 const Scroller: React.FC = () => {
   useEffect(() => {
     const scrollers = document.querySelectorAll(`.${styles.scroller}`);
@@ -32,12 +33,13 @@ const Scroller: React.FC = () => {
       <div className={styles.scroller} data-speed="fast">
         <div className={styles.scroller__inner}>
           <ul className={`${styles.tag_list} ${styles.scroller__inner}`}>
-            <img src="https://i.pravatar.cc/150?img=1" alt="" />
-            <img src="https://i.pravatar.cc/150?img=2" alt="" />
-            <img src="https://i.pravatar.cc/150?img=3" alt="" />
-            <img src="https://i.pravatar.cc/150?img=4" alt="" />
-            <img src="https://i.pravatar.cc/150?img=5" alt="" />
-            <img src="https://i.pravatar.cc/150?img=6" alt="" />
+            <img src="/images/image1.jpeg" alt="" />
+            <img src="/images/image2.jpeg" alt="" />
+            <img src="/images/image3.jpeg" alt="" />
+            <img src="/images/image4.jpeg" alt="" />
+            <img src="/images/image5.jpeg" alt="" />
+            <img src="/images/image6.jpeg" alt="" />
+            <img src="/images/image7.jpeg" alt="" />
           </ul>
         </div>
       </div>
@@ -46,12 +48,13 @@ const Scroller: React.FC = () => {
         <div className={styles.scroller_bottom}>
           <div className={styles.scroller__inner}>
             <ul className={`${styles.tag_list} ${styles.scroller__inner}`}>
-              <img src="https://i.pravatar.cc/150?img=1" alt="" />
-              <img src="https://i.pravatar.cc/150?img=2" alt="" />
-              <img src="https://i.pravatar.cc/150?img=3" alt="" />
-              <img src="https://i.pravatar.cc/150?img=4" alt="" />
-              <img src="https://i.pravatar.cc/150?img=5" alt="" />
-              <img src="https://i.pravatar.cc/150?img=6" alt="" />
+              <img src="/images/image8.jpeg" alt="" />
+              <img src="/images/image9.jpeg" alt="" />
+              <img src="/images/image10.jpeg" alt="" />
+              <img src="/images/image11.jpeg" alt="" />
+              <img src="/images/image12.jpeg" alt="" />
+              <img src="/images/image13.jpeg" alt="" />
+              <img src="/images/image14.jpeg" alt="" />
             </ul>
           </div>
         </div>

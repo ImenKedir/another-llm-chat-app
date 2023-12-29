@@ -227,77 +227,6 @@
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem -0.25rem var(--clr-primary-900);
 }
-/* -------------------------------------- */
-
-/* feature_grid STYLES  */
-/* ---------------------------- */
-/* Feature Container Layout */
-.feature_container {
-  display: flex;
-  max-width: 1440px;
-  width: 100%;
-  flex-direction: column;
-  gap: 40px;
-  align-items: center;
-  margin-top: 20%;
-
-  h3 {
-    color: var(--primary-accent);
-    font-family: "Geist-Light";
-  }
-}
-
-/* Grid Container Layout */
-.grid_container {
-  display: grid;
-  box-sizing: border-box;
-  padding-right: 30px;
-  padding-left: 30px;
-  width: 100%;
-  gap: 30px;
-  grid-template-columns: 1fr; /* Creates two columns */
-}
-
-/* Card Container Styles */
-.card_container {
-  display: flex;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background-color: var(--secondary-dark);
-  justify-content: center;
-  text-align: center;
-  border: 3px solid var(--tertiary-dark);
-  padding: 10%;
-  padding-bottom: 60%;
-  transition: 0.3s;
-  border-radius: 10px;
-}
-
-.card_container:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-/* Card Styles */
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.card h2 {
-  font-size: 1.5rem;
-  margin-top: 0;
-  font-family: "Geist-Bold";
-  color: var(--primary-light);
-}
-
-.card h3 {
-  text-align: start;
-  margin-top: 0;
-  color: var(--secondary-light);
-}
-
 
 
 
@@ -350,7 +279,7 @@
   transform: translate(0, -8px) rotate(45deg);
 }
 
-
+/* ------------------------------------  */
 /* Header Container Styles */
 .header_container {
   display: flex;
@@ -480,65 +409,193 @@
     }
   }
 }
+/* ------------------------------------  */
 
-.footer {
+/* ------------------------------------  */
+/* AI Models Container Styles  */
+/* ------------------------------------  */
+.models_container {
+  display: none;
+}
+
+
+
+
+
+/* -------------------------------------- */
+/* feature_grid STYLES  */
+/* ---------------------------- */
+/* Feature Container Layout */
+.feature_container {
+  display: flex;
+  max-width: 1440px;
+  width: 100%;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  margin-top: 15%;
+
+  h2 {
+
+    color: var(--primary-accent);
+    font-family: "Geist-Light";
+  }
+}
+
+/* Grid Container Layout */
+.grid_container {
+  display: grid;
+  box-sizing: border-box;
+  padding-right: 20px;
+  padding-left: 20px;
+  height: 100%;
+  width: 100%;
+  gap: 30px;
+  grid-template-columns: 1fr; /* Creates two columns */
+}
+
+
+
+/* Card Container Styles */
+.card_container {
+  display: flex;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: var(--secondary-dark);
+  justify-content: center;
+  text-align: center;
+  border: 3px solid var(--tertiary-dark);
+  padding: 10%;
+  transition: 0.3s;
+  border-radius: 10px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.card_container:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  border: 3px solid var(--primary-accent);
+
+}
+
+/* Card Styles */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 4%;
+    font-family: "Geist-Bold";
+    color: var(--primary-light);
+  }
+
+  p {
+    text-align: start;
+    margin-top: 0;
+    color: var(--secondary-light);
+  }
+
+  img {
+    border-radius: 12px;
+  }
+}
+/* ------------------------------  */
+/* FAQ ACCORDION STYLES  */
+/* ------------------------------  */
+.faq_container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 12%;
+  margin-bottom: 10%;
+  color: var(--primary-light);
+  width: 100%;
+  max-width: 1000px;
+
+  h1 {
+    font-size: 2.25rem;
+  }
+}
+
+
+.accordion_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #fff;
+  margin-left: 30px;
+  margin-right: 30px;
+
+}
+
+.accordion_container {
+  top: 30%;
+  box-shadow: 2px 10px 35px 1px rgba(153, 153, 153, 0.3);
+}
+
+.accordion_wrap {
+  background: #272727;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+
+  h2 {
+    padding: 1.75rem 100px;
+    font-size: 1.25rem;
+    font-family: "Geist", sans-serif;
+  }
+
+  span {
+    margin-right: 1.5rem;
+  }
+}
+
+.accordion_dropdown {
+  background: #1c1c1c;
+  color: var(--secondary-light);
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--primary-accent);
+  border-top: 1px solid var(--primary-accent);
+
+  p {
+    font-size: 1rem;
+  }
+}
+
+/* ------------------------------------- */
+/* FOOTER STYLES  */
+/* ------------------------------------- */
+.footer_container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: var(--primary-dark);
+  width: 100%;
+  height: 100%;
+  padding: 30px;
   margin-top: 10%;
-  max-width: 1440px;
-  color: var(--primary-light);
-  padding-bottom: 30%;
-
-  h2 {
-    margin-top: 10%;
-    font-size: 2.5rem;
-    font-family: "Geist-Bold", sans-serif;
-  }
-  p {
-    color: var(--secondary-light);
-  }
-}
-
-.footer_links {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  text-align: center;
-  align-items: center;
-  color: white;
-  border-radius: 10px;
-  padding: 4px 0;
-  margin-top: 0px;
-
-  :hover {
-    opacity: 0.4;
-  }
-}
-
-
-.footer_link {
-  display: flex;
-  border: 1px solid var(--primary-accent);
-  border-radius: 10px;
-  text-decoration: none;
-  color: white;
-  width: 200px;
-  height: 75px;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer_text {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-content: center;
-  justify-content: center;
-  margin-bottom: 5%;
-  font-family: "Geist", sans-serif;
+  margin-bottom: 40%;
+  
 }
 
 /* ------------------------------------- */
@@ -592,9 +649,8 @@
     max-width: 800px;
   }
 
-  .footer_links {
-    flex-direction: row;
-    gap: 60px;
+  .faq {
+    padding: 5%;
   }
 }
 
@@ -605,10 +661,13 @@
     flex-direction: row;
     align-items: start; /* Aligns items to the top */
     max-width: 1440px;
-    margin-top: 5%;
+    margin-top: 8%;
   }
 
-  
+  .grid_container {
+    grid-template-columns: repeat(3, 1fr); 
+
+  }
 
   .header_container {
     width: 50%; /* Adjust as needed */
@@ -632,10 +691,7 @@
     margin-left: 20px;
   }
 
-  .grid_container {
-    grid-template-columns: repeat(3, 1fr);
-    width: 100%;
-  }
+ 
 }
 
 /* xl  */

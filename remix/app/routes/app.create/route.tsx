@@ -6,30 +6,30 @@ import { v4 as uuidv4 } from "uuid";
 import { Form } from "@remix-run/react";
 
 export default function Create() {
-    return (
-        <Form method="post" style={{color: "white"}}>
-            <p>Name</p>
-            <input name="name" type="text" />
-            <p>Description</p>
-            <input name="description" type="text" />
-            <button type="submit">Create</button>
-        </Form>
-    );
+  return (
+    <Form method="post" style={{ color: "white" }}>
+      <p>Name</p>
+      <input name="name" type="text" />
+      <p>Description</p>
+      <input name="description" type="text" />
+      <button type="submit">Create</button>
+    </Form>
+  );
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-    const userId = await requireAuth(request);
-    const formData = await request.formData();
+  const userId = await requireAuth(request);
+  const formData = await request.formData();
 
-    const name = String(formData.get("name"));
-    const description = String(formData.get("description"))
+  const name = String(formData.get("name"));
+  const description = String(formData.get("description"));
 
-    const character = await createCharacter({
-        id: uuidv4(),
-        name: name, 
-        description: description,
-        creator: userId,
-    });
+  const character = await createCharacter({
+    id: uuidv4(),
+    name: name,
+    description: description,
+    creator: userId,
+  });
 
-    return redirect(`/app/chat/${character.id}`);
+  return redirect(`/app/chat/${character.id}/new`);
 }

@@ -2,6 +2,8 @@ import { Link } from "@remix-run/react";
 import Scroller from "@/routes/_index/scroller";
 import FeatureGrid from "@/routes/_index/feature_grid";
 import MenuToggle from "@/routes/_index/menu_toggle";
+import FAQ from "@/routes/_index/faq";
+import logos from "/logos/logos.png";
 import styles from "@/routes/_index/_index.module.css";
 import { useState } from "react";
 
@@ -61,7 +63,7 @@ export default function Index() {
       </div>
 
       <div className={styles.main_container}>
-        <div className={styles.top_container}>
+        <div className={styles.header_container}>
           <h1>
             Where Characters <br /> Do{" "}
             <span className={styles.highlight}>Whatever</span> You Want
@@ -70,49 +72,27 @@ export default function Index() {
             Spicy conversation with your favorite characters, completely
             uncensored.
           </h3>
-          <Link to="/app/chat">
-            <button className={styles.start_chatting_button}>
+          <Link className={styles.link} to="/app/chat">
+            <div className={styles.start_chatting_button}>
               <h4>Get Started</h4>
-            </button>
+            </div>
           </Link>
         </div>
         <Scroller />
       </div>
-
       <div className={styles.feature_container}>
-        <h3>FEATURES</h3>
+        {/* <h2>FEATURES</h2> */}
         <FeatureGrid />
       </div>
 
-      <div className={styles.footer}>
-        <Link to="/app/chat">
-          <button className={styles.start_chatting_button}>
-            <h4>Get Started</h4>
-          </button>
-        </Link>
-        <div className={styles.footer_text}>
-          <h2>Join the Community</h2>
-          <p>
-            Join like-minded fans and AI enthusiastis in the lorem ipsum sum
-            lorem ipsum sum Lorem ipsum dolor, sit amet consectetur adipisicing
-            elit. Amet fugit doloremque quo beatae repellat cum quaerat quam.
-            Placeat perspiciatis repellendus saepe quibusdam id. Fugiat, rem sed
-            id architecto velit accusantium!
-          </p>
-        </div>
-
-        <div className={styles.footer_links}>
-          <Link to="/faq" className={styles.footer_link}>
-            Join Discord
-          </Link>
-          <Link to="/app" className={styles.footer_link}>
-            Follow on Twitter
-          </Link>
-          <Link to="/app/chat" className={styles.footer_link}>
-            Follow on Instagram
-          </Link>
-        </div>
-      </div>
+      {/* <div className={styles.faq_container}>
+          <h1>Frequently Asked Questions</h1>
+          <FAQ />
+ 
+      </div> */}
+      {/* <div className={styles.footer_container}>
+        Footer
+      </div> */}
     </div>
   );
 }

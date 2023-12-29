@@ -1,9 +1,16 @@
 import { Config } from "sst/node/config";
-import { LoaderFunctionArgs } from "@remix-run/node";
 import { eventStream } from "remix-utils/sse/server";
+import { LoaderFunctionArgs } from "@remix-run/node";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const prompt = new URL(request.url).searchParams.get("prompt");
+
+  if (!prompt) {
+    return {
+      status: 400,
+      statusText: "Bad Request",
+    };
+  }
 
   return eventStream(request.signal, function setup(send) {
     fetch(Config.OPENROUTER_API_URL, {
@@ -13,9 +20,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        model: "gryphe/mythomist-7b",
+        prompt: prompt,
         stream: true,
-        model: "nousresearch/nous-capybara-7b",
-        messages: [{ role: "user", content: prompt }],
       }),
     })
       .then((response) => response.body)
@@ -42,7 +49,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
               if (message !== "OPENROUTER PROCESSING") {
                 try {
                   const parsed = JSON.parse(message);
-                  const delta = parsed.choices[0].delta?.content;
+                  const delta = parsed.choices[0].text;
                   send({ data: delta });
                 } catch (error) {
                   console.error(error);

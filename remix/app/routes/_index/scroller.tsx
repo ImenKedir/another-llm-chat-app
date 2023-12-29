@@ -30,7 +30,7 @@ const Scroller: React.FC = () => {
 
   return (
     <div className={styles.scroller_container}>
-      <div className={styles.scroller} data-speed="fast">
+      <div className={styles.scroller} data-speed="slow">
         <div className={styles.scroller__inner}>
           <ul className={`${styles.tag_list} ${styles.scroller__inner}`}>
             <img src="/images/image1.jpeg" alt="" />

@@ -61,7 +61,7 @@ export default function Index() {
       </div>
 
       <div className={styles.main_container}>
-        <div className={styles.top_container}>
+        <div className={styles.header_container}>
           <h1>
             Where Characters <br /> Do{" "}
             <span className={styles.highlight}>Whatever</span> You Want
@@ -70,10 +70,10 @@ export default function Index() {
             Spicy conversation with your favorite characters, completely
             uncensored.
           </h3>
-          <Link to="/app/chat">
-            <button className={styles.start_chatting_button}>
+          <Link className={styles.link} to="/app/chat">
+            <div className={styles.start_chatting_button}>
               <h4>Get Started</h4>
-            </button>
+            </div>
           </Link>
         </div>
         <Scroller />

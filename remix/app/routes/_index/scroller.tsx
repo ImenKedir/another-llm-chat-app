@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import styles from "@/routes/_index/_index.module.css";
 
-
 const Scroller: React.FC = () => {
   useEffect(() => {
     const scrollers = document.querySelectorAll(`.${styles.scroller}`);

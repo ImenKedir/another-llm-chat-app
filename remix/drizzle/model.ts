@@ -45,6 +45,7 @@ export async function createCharacter(character: Character) {
     id: character.id,
     name: character.name,
     description: character.description,
+    greeting: character.greeting,
     creator: character.creator,
   });
 
@@ -101,10 +102,8 @@ export async function getChat(chatId?: string) {
 }
 
 export async function getChats(userId: string) {
-  return await db.select().from(chats)
-  .where(eq(chats.user, userId))
+  return await db.select().from(chats).where(eq(chats.user, userId));
 }
-
 
 export type Message = typeof messages.$inferInsert;
 

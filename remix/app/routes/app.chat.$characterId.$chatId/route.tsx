@@ -31,6 +31,10 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     getCharacter(params.characterId),
   ]);
 
+  console.log("user: ", user);
+  console.log("chat: ", chat);
+  console.log("character: ", character);
+
   if (!character || !user) {
     throw new Response(null, {
       status: 404,
@@ -46,6 +50,14 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       user: userId,
       character: character.id,
       created: new Date().toISOString(),
+    });
+
+    await createMessage({
+      id: uuidv4(),
+      created: new Date().toISOString(),
+      author: "ai",
+      content: character.greeting,
+      chat: newChat.id,
     });
 
     return redirect(`/app/chat/${character.id}/${newChat.id}`);
@@ -82,7 +94,7 @@ export default function Chat() {
   const appendTokenToLastMessage = useChatStore(
     (state) => state.appendTokenToLastMessage,
   );
-  
+
   function SendMessage(event: React.FormEvent) {
     event.preventDefault(); // normally the event hits the remix server action
     setStreaming(true); // but we want to add our own lil streaming logic
@@ -118,7 +130,7 @@ export default function Chat() {
       data.user,
       data.character,
       userInput,
-      data.messages
+      data.messages,
     );
 
     // start the event stream
@@ -160,7 +172,7 @@ export default function Chat() {
     <div className={styles.chat_container}>
       <Header />
       <Messages />
-      <Input SendMessage={SendMessage}/>
+      <Input SendMessage={SendMessage} />
     </div>
   );
 }

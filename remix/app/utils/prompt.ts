@@ -19,5 +19,8 @@ export function generateMythoMaxPrompt(
   const y = formatedMessages.join("\n");
   const z = `${user.name}: ${userInput}\n\n${character.name}:`;
 
+  let ret = `${w}\n\n${x}\n\n${y}${z}`;
+  console.log(ret);
+
   return `${w}\n\n${x}\n\n${y}${z}`;
 }

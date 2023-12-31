@@ -13,9 +13,10 @@ function Character({ id, name, description }: Character) {
   return (
     <div className={styles.character_container}>
       <div>
-      {name}{description}
+        {name}
+        {description}
       </div>
-      <Link to={`/app/chat/${id}`}>Chat</Link>
+      <Link to={`/app/chat/${id}/new`}>Chat</Link>
     </div>
   );
 }

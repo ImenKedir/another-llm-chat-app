@@ -11,12 +11,16 @@ interface InputProps {
 
 export function Input({ SendMessage }: InputProps) {
   useAutoResizeTextarea("chat-input");
-  
+
   const isStreaming = useChatStore((state) => state.isStreaming);
 
   return (
     <Form className={styles.chat_input_form} onSubmit={SendMessage}>
-      <button style={{opacity: isStreaming ? "50%" : "100%"}} disabled={isStreaming} type="submit">
+      <button
+        style={{ opacity: isStreaming ? "50%" : "100%" }}
+        disabled={isStreaming}
+        type="submit"
+      >
         <ArrowUpIcon color="black" width={20} height={20} />
       </button>
       <textarea

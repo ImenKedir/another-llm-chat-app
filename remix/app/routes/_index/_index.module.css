@@ -118,7 +118,6 @@
   display: none;
 }
 
-
 .app_button {
   background-color: var(--primary-accent);
   border-radius: 15px;
@@ -139,14 +138,12 @@
   bottom: 0;
 }
 
-
 /* -------------------------------------- */
 /* Scroller Styles */
 /* -------------------------------------- */
 
 .scroller {
   margin-bottom: 0;
-
 }
 
 .scroller_bottom {
@@ -159,7 +156,6 @@
   gap: 1.5rem;
   padding: 0;
   margin-bottom: 2px;
-
 }
 
 /* Scroller Container Styles */
@@ -227,8 +223,6 @@
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem -0.25rem var(--clr-primary-900);
 }
-
-
 
 /* Name Styles */
 .name {
@@ -418,10 +412,6 @@
   display: none;
 }
 
-
-
-
-
 /* -------------------------------------- */
 /* feature_grid STYLES  */
 /* ---------------------------- */
@@ -436,7 +426,6 @@
   margin-top: 15%;
 
   h2 {
-
     color: var(--primary-accent);
     font-family: "Geist-Light";
   }
@@ -453,8 +442,6 @@
   gap: 30px;
   grid-template-columns: 1fr; /* Creates two columns */
 }
-
-
 
 /* Card Container Styles */
 .card_container {
@@ -477,7 +464,6 @@
 .card_container:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   border: 3px solid var(--primary-accent);
-
 }
 
 /* Card Styles */
@@ -525,7 +511,6 @@
   }
 }
 
-
 .accordion_section {
   display: flex;
   flex-direction: column;
@@ -535,7 +520,6 @@
   background: #fff;
   margin-left: 30px;
   margin-right: 30px;
-
 }
 
 .accordion_container {
@@ -595,7 +579,6 @@
   padding: 30px;
   margin-top: 10%;
   margin-bottom: 40%;
-  
 }
 
 /* ------------------------------------- */
@@ -656,7 +639,6 @@
 
 /* lg  */
 @media (min-width: 1024px) {
-
   .main_container {
     flex-direction: row;
     align-items: start; /* Aligns items to the top */
@@ -665,8 +647,7 @@
   }
 
   .grid_container {
-    grid-template-columns: repeat(3, 1fr); 
-
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .header_container {
@@ -690,8 +671,6 @@
     width: 50%; /* Adjust as needed */
     margin-left: 20px;
   }
-
- 
 }
 
 /* xl  */

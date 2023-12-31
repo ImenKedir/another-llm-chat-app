@@ -12,6 +12,8 @@ export default function Create() {
       <input name="name" type="text" />
       <p>Description</p>
       <input name="description" type="text" />
+      <p>Greeting</p>
+      <input name="greeting" type="text" />
       <button type="submit">Create</button>
     </Form>
   );
@@ -23,11 +25,13 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const name = String(formData.get("name"));
   const description = String(formData.get("description"));
+  const greeting = String(formData.get("greeting"));
 
   const character = await createCharacter({
     id: uuidv4(),
     name: name,
     description: description,
+    greeting: greeting,
     creator: userId,
   });
 

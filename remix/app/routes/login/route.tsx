@@ -80,7 +80,7 @@ export default function Login() {
         </div>
         <div className={styles.right_content}>
           <div className={styles.right_text}>
-            <img src="/woman.png" className={styles.responsive_image} />
+            {/* <img src="/woman.png" className={styles.responsive_image} /> */}
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ export async function loader() {
   return json({ characters: characters });
 }
 
-function Character({ id, name, description }: Character) {
+function CharacterCard({ id, name, description }: Character) {
   return (
     <div className={styles.character_container}>
       <div>
@@ -23,12 +23,11 @@ function Character({ id, name, description }: Character) {
 
 export default function Explore() {
   const data = useLoaderData<typeof loader>();
-  console.log("app/index data:", data);
 
   return (
     <div className={styles.container}>
       {data.characters.map((character) => (
-        <Character key={character.id} {...character} />
+        <CharacterCard key={character.id} {...character} />
       ))}
     </div>
   );

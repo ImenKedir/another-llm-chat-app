@@ -16,6 +16,7 @@ import { useChatStore } from "@/hooks/useChatStore";
 import { Header } from "@/routes/app.chat.$characterId.$chatId/header";
 import { Messages } from "@/routes/app.chat.$characterId.$chatId/messages";
 import { Input } from "@/routes/app.chat.$characterId.$chatId/input";
+import { ToggleLeftSidebar } from "@/components/toogle-sidebar";
 
 import { v4 as uuidv4 } from "uuid";
 import { generateMythoMaxPrompt } from "@/utils/prompt";
@@ -30,10 +31,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     getChat(params.chatId),
     getCharacter(params.characterId),
   ]);
-
-  console.log("user: ", user);
-  console.log("chat: ", chat);
-  console.log("character: ", character);
 
   if (!character || !user) {
     throw new Response(null, {
@@ -54,10 +51,10 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
     await createMessage({
       id: uuidv4(),
-      created: new Date().toISOString(),
       author: "ai",
       content: character.greeting,
       chat: newChat.id,
+      created: new Date().toISOString(),
     });
 
     return redirect(`/app/chat/${character.id}/${newChat.id}`);

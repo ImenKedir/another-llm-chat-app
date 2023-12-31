@@ -1,36 +1,17 @@
-import { useContext } from "react";
-import { LeftSidebarVisibleContext } from "@/contexts/LeftSidebarVisibleContext";
+import { ToggleLeftSidebar } from "@/components/toogle-sidebar";
 import { useChatStore } from "@/hooks/useChatStore";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import { ReloadIcon } from "@radix-ui/react-icons";
 
 import styles from "./app.chat.module.css";
+import { useNavStore } from "@/hooks/useNavStore";
 
 export function Header() {
-  const { sidebarVisible, setSidebarVisible } = useContext(
-    LeftSidebarVisibleContext,
-  )!;
-
-  const character = useChatStore((state) => state.character);
-  const setMessages = useChatStore((state) => state.setMessages);
+  const chat = useChatStore((state) => state.chat);
+  const isLeftSidebarOpen = useNavStore((state) => state.isLeftSidebarOpen);
 
   return (
     <div className={styles.chat_header}>
-      {!sidebarVisible && (
-        <HamburgerMenuIcon
-          color="white"
-          width={20}
-          height={20}
-          onClick={() => setSidebarVisible(true)}
-        />
-      )}
-      <h1>{character && character.name}</h1>
-      <ReloadIcon
-        color="white"
-        width={20}
-        height={20}
-        onClick={() => setMessages([])}
-      />
+      {!isLeftSidebarOpen && <ToggleLeftSidebar />}
+      <h1>{chat && chat.title}</h1>
     </div>
   );
 }

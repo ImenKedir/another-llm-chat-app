@@ -1,5 +1,5 @@
 import { db } from "drizzle/db";
-import { and, asc, eq } from "drizzle-orm";
+import { asc, desc, eq } from "drizzle-orm";
 import { users, characters, chats, messages } from "drizzle/schema";
 
 export type User = typeof users.$inferInsert;
@@ -101,8 +101,13 @@ export async function getChat(chatId?: string) {
   return results[0];
 }
 
-export async function getChats(userId: string) {
-  return await db.select().from(chats).where(eq(chats.user, userId));
+export async function getRecentChats(userId: string, limit: number = 10) {
+  return await db
+    .select()
+    .from(chats)
+    .orderBy(desc(chats.created))
+    .where(eq(chats.user, userId))
+    .limit(limit);
 }
 
 export type Message = typeof messages.$inferInsert;

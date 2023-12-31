@@ -5,25 +5,22 @@ import type { Character, Message, Chat } from "drizzle/model";
 import type {} from "@redux-devtools/extension"; // required for devtools typing
 
 interface ChatState {
-  isStreaming: boolean;
-  chat: Chat | undefined;
-  character: Character | undefined;
+  chat?: Chat;
   messages: Message[];
+  character?: Character;
+  isStreaming: boolean;
 }
 
 interface ChatMethods {
-  setStreaming: (nextState: boolean) => void;
   setChat: (chat: Chat) => void;
-  setCharacter: (character: Character) => void;
   setMessages: (state: Message[]) => void;
+  setCharacter: (character: Character) => void;
   addToMessages: (message: Message) => void;
   appendTokenToLastMessage: (token: string) => void;
+  setStreaming: (nextState: boolean) => void;
 }
 
-// the store is a combination of state and methods
-type ChatStore = ChatState & ChatMethods;
-
-export const useChatStore = create<ChatStore>()(
+export const useChatStore = create<ChatState & ChatMethods>()(
   devtools(
     persist(
       (set) => ({

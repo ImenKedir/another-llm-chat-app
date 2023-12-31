@@ -1,12 +1,12 @@
 /* CSS Variables */
 :root {
   --primary-dark: #000000;
-  --secondary-dark: #0C0B0B;
-  --tertiary-dark: #2b2b2c;
-  --quadrary-dark: #212121;
+  --secondary-dark: #0c0a0a;
+  --tertiary-dark: #2d2d2d;
+  --quadrary-dark: #535353;
 
   --primary-light: #ffffff;
-  --secondary-light: #fcfafacf;
+  --secondary-light: #d7d7d7cf;
 
   --primary-accent: #7a01de;
   --secondary-accent: #bd0695;

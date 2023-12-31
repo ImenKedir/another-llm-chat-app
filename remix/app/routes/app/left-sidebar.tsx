@@ -43,10 +43,7 @@ export function LeftSidebar() {
   return (
     <div className={styles.sidebar_container}>
       <div className={styles.sidebar_header}>
-        <Link
-        className={styles.sidebar_header_title}
-        to="/app"
-        >
+        <Link className={styles.sidebar_header_title} to="/app">
           HyperChat
         </Link>
         <DoubleArrowLeftIcon

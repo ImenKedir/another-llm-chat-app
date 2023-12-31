@@ -6,16 +6,16 @@ import { ArrowUpIcon } from "@radix-ui/react-icons";
 import styles from "./app.chat.module.css";
 
 interface InputProps {
-  SendMessage: (e: React.FormEvent<HTMLFormElement>) => void;
+  sendMessage: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export function Input({ SendMessage }: InputProps) {
+export function Input({ sendMessage }: InputProps) {
   useAutoResizeTextarea("chat-input");
 
   const isStreaming = useChatStore((state) => state.isStreaming);
 
   return (
-    <Form className={styles.chat_input_form} onSubmit={SendMessage}>
+    <Form className={styles.chat_input_form} onSubmit={sendMessage}>
       <button
         style={{ opacity: isStreaming ? "50%" : "100%" }}
         disabled={isStreaming}

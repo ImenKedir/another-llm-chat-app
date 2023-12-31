@@ -18,6 +18,7 @@ export const characters = mysqlTable("characters", {
   name: varchar("name", { length: 256 }).notNull(),
   description: text("description").notNull(),
   greeting: text("greeting").notNull(),
+  image: varchar("image", { length: 2048 }).notNull(),
   creator: varchar("userId", { length: 256 }).notNull(),
 });
 

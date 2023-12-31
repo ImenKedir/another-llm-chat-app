@@ -1,12 +1,11 @@
 import {
   getChat,
   getUser,
-  createChat,
   getCharacter,
   createMessage,
   getChatMessages,
 } from "drizzle/model";
-import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
+import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { requireAuth } from "@/sessions.server";
 
 import { useEffect } from "react";
@@ -16,9 +15,7 @@ import { useChatStore } from "@/hooks/useChatStore";
 import { Header } from "@/routes/app.chat.$characterId.$chatId/header";
 import { Messages } from "@/routes/app.chat.$characterId.$chatId/messages";
 import { Input } from "@/routes/app.chat.$characterId.$chatId/input";
-import { ToggleLeftSidebar } from "@/components/toogle-sidebar";
 
-import { v4 as uuidv4 } from "uuid";
 import { generateMythoMaxPrompt } from "@/utils/prompt";
 
 import styles from "./app.chat.module.css";
@@ -32,32 +29,11 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     getCharacter(params.characterId),
   ]);
 
-  if (!character || !user) {
+  if (!user || !chat || !character) {
     throw new Response(null, {
       status: 404,
       statusText: "Not Found",
     });
-  }
-
-  if (!chat) {
-    // this is a new chat
-    const newChat = await createChat({
-      id: uuidv4(),
-      title: character.name,
-      user: userId,
-      character: character.id,
-      created: new Date().toISOString(),
-    });
-
-    await createMessage({
-      id: uuidv4(),
-      author: "ai",
-      content: character.greeting,
-      chat: newChat.id,
-      created: new Date().toISOString(),
-    });
-
-    return redirect(`/app/chat/${character.id}/${newChat.id}`);
   }
 
   const messages = await getChatMessages(chat.id);
@@ -84,6 +60,7 @@ export default function Chat() {
   }, [data.character, data.messages, data.chat]);
 
   const submit = useSubmit();
+
   const chat = useChatStore((state) => state.chat);
   const character = useChatStore((state) => state.character);
   const setStreaming = useChatStore((state) => state.setStreaming);
@@ -92,7 +69,7 @@ export default function Chat() {
     (state) => state.appendTokenToLastMessage,
   );
 
-  function SendMessage(event: React.FormEvent) {
+  function sendMessage(event: React.FormEvent) {
     event.preventDefault(); // normally the event hits the remix server action
     setStreaming(true); // but we want to add our own lil streaming logic
 
@@ -107,7 +84,7 @@ export default function Chat() {
 
     // add the user message to the chat history
     addToMessages({
-      id: uuidv4(),
+      id: crypto.randomUUID(),
       author: "user",
       content: userInput,
       created: new Date().toISOString(),
@@ -116,7 +93,7 @@ export default function Chat() {
 
     // add the ai message to the chat history
     addToMessages({
-      id: uuidv4(),
+      id: crypto.randomUUID(),
       author: "ai",
       content: "", // we will stream the content in later
       created: new Date().toISOString(),
@@ -169,7 +146,7 @@ export default function Chat() {
     <div className={styles.chat_container}>
       <Header />
       <Messages />
-      <Input SendMessage={SendMessage} />
+      <Input sendMessage={sendMessage} />
     </div>
   );
 }
@@ -190,14 +167,14 @@ export async function action({ request, params }: LoaderFunctionArgs) {
   const creationTime = new Date();
   await Promise.all([
     createMessage({
-      id: uuidv4(),
+      id: crypto.randomUUID(),
       author: "user",
       content: String(formData.get("userContent")),
       created: creationTime.toISOString(),
       chat: chat.id,
     }),
     createMessage({
-      id: uuidv4(),
+      id: crypto.randomUUID(),
       author: "ai",
       content: String(formData.get("aiContent")),
       created: new Date(creationTime.getTime() + 100).toISOString(),

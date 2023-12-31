@@ -1,5 +1,5 @@
 import type { SSTConfig } from "sst";
-import { Api, Auth, RemixSite, Config } from "sst/constructs";
+import { Api, Auth, RemixSite, Bucket, Config } from "sst/constructs";
 
 export default {
   config(_input) {
@@ -29,8 +29,11 @@ export default {
         value: authApi.url + "/auth",
       });
 
+      const bucket = new Bucket(stack, "naughtyml");
+
       const site = new RemixSite(stack, "site", {
         bind: [
+          bucket,
           AUTH_API_URL,
           OPENROUTER_API_KEY,
           OPENROUTER_API_URL,

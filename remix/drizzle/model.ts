@@ -46,6 +46,7 @@ export async function createCharacter(character: Character) {
     name: character.name,
     description: character.description,
     greeting: character.greeting,
+    image: character.image,
     creator: character.creator,
   });
 

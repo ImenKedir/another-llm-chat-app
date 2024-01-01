@@ -1,5 +1,6 @@
 import type { SSTConfig } from "sst";
 import { Api, Auth, RemixSite, Bucket, Config } from "sst/constructs";
+import * as lambda from "aws-cdk-lib/aws-lambda";
 
 export default {
   config(_input) {
@@ -29,7 +30,29 @@ export default {
         value: authApi.url + "/auth",
       });
 
-      const bucket = new Bucket(stack, "naughtyml");
+      const bucket = new Bucket(stack, "image", {
+        notifications: {
+          resize: {
+            function: {
+              handler: "packages/functions/src/resize.main",
+              nodejs: {
+                esbuild: {
+                  external: ["sharp"],
+                },
+              },
+              layers: [
+                new lambda.LayerVersion(stack, "SharpLayer", {
+                  code: lambda.Code.fromAsset("layers/sharp"),
+                }),
+              ],
+            },
+            events: ["object_created"],
+          },
+        },
+      });
+
+      // Allow the notification functions to access the bucket
+      bucket.attachPermissions([bucket]);
 
       const site = new RemixSite(stack, "site", {
         bind: [
@@ -58,9 +81,10 @@ export default {
       });
 
       stack.addOutputs({
+        SiteURL: site.url || "Site URL not available until after deployment",
+        ImageBucket: bucket.bucketName,
         GoogleAuth: authApi.url + "/auth/google/authorize",
         GoogleAuthCallback: authApi.url + "/auth/google/callback",
-        SiteURL: site.url || "Site URL not available until after deployment",
       });
     });
   },

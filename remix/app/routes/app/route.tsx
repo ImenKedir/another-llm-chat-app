@@ -2,12 +2,13 @@ import { requireAuth } from "@/sessions.server";
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { getRecentChats } from "drizzle/model";
 
-import { Outlet, useLoaderData } from "@remix-run/react";
+import { useEffect } from "react";
+import { Outlet, useLoaderData, useLocation } from "@remix-run/react";
 import { LeftSidebar } from "@/routes/app/left-sidebar";
 import { useNavStore } from "@/hooks/useNavStore";
+import { AnimatePresence, motion } from "framer-motion";
 
 import styles from "@/routes/app/app.module.css";
-import { useEffect } from "react";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const userId = await requireAuth(request);
@@ -31,7 +32,17 @@ export default function App() {
   return (
     <div className={styles.app_container}>
       {isLeftSidebarOpen && <LeftSidebar />}
-      <Outlet />
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.main 
+          className={styles.app_animation_container}
+          key={useLocation().pathname}
+          initial={{ opacity: 0.9 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Outlet />
+        </motion.main>
+      </AnimatePresence>
     </div>
   );
 }

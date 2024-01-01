@@ -5,17 +5,74 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+
+  background-color: #000000;
+  opacity: 1;
+  background-image: linear-gradient(
+      30deg,
+      #aba4a4 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #aba4a4 87.5%,
+      #aba4a4
+    ),
+    linear-gradient(
+      150deg,
+      #aba4a4 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #aba4a4 87.5%,
+      #aba4a4
+    ),
+    linear-gradient(
+      30deg,
+      #aba4a4 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #aba4a4 87.5%,
+      #aba4a4
+    ),
+    linear-gradient(
+      150deg,
+      #aba4a4 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #aba4a4 87.5%,
+      #aba4a4
+    ),
+    linear-gradient(
+      60deg,
+      #aba4a477 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #aba4a477 75%,
+      #aba4a477
+    ),
+    linear-gradient(
+      60deg,
+      #aba4a477 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #aba4a477 75%,
+      #aba4a477
+    );
+  background-size: 80px 140px;
+  background-position:
+    0 0,
+    0 0,
+    40px 70px,
+    40px 70px,
+    0 0,
+    40px 70px;
 }
 
 /* Style the scrollbar handle */
 .chat_container ::-webkit-scrollbar {
   position: absolute;
-  background: var(--secondary-dark);
 }
 
 .chat_container ::-webkit-scrollbar-thumb {
   position: absolute;
-  background: var(--primary-dark);
   border-radius: 2rem;
 }
 
@@ -53,7 +110,6 @@
   padding-left: 1rem;
   padding-right: 1rem;
   box-sizing: border-box;
-  background-color: var(--secondary-dark);
   overflow-y: scroll;
   overflow: show;
 }
@@ -68,7 +124,7 @@
   color: #c1c2c5;
   border: 2px solid var(--quadrary-dark);
   border-radius: 0.75rem;
-  background-color: var(--tertiary-dark);
+  background-color: var(--secondary-dark);
 }
 
 .chat_message_header {
@@ -108,7 +164,7 @@
     color: #c1c2c5;
     border: 2px solid var(--quadrary-dark);
     border-radius: 0.75rem;
-    background-color: var(--tertiary-dark);
+    background-color: var(--secondary-dark);
     resize: none;
   }
 

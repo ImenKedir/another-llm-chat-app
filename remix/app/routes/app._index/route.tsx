@@ -22,9 +22,7 @@ function CharacterCard({ id, name, description, greeting, image }: Character) {
   }
 
   return (
-    <div 
-    onClick={handleClick} 
-    className={styles.character_container}>
+    <div onClick={handleClick} className={styles.character_container}>
       <img src={image} width={100} height={100} />
       <div>
         {name}

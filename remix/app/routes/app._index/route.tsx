@@ -60,7 +60,7 @@ export async function action({ request }: LoaderFunctionArgs) {
 
   await Promise.all([
     createChat({
-      id: crypto.randomUUID(),
+      id: chatId,
       title: name,
       user: userId,
       character: characterId,

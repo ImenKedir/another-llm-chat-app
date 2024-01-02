@@ -27,10 +27,8 @@ function CharacterCard({ id, name, description, greeting, image }: Character) {
 
   return (
     <div onClick={handleClick} className={styles.character_container}>
-      <img src={formatS3ImageUrl(image)}/>
-      <div>
-        {name}
-      </div>
+      <img src={formatS3ImageUrl(image)} />
+      <div>{name}</div>
     </div>
   );
 }

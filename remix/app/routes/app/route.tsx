@@ -33,7 +33,7 @@ export default function App() {
     <div className={styles.app_container}>
       {isLeftSidebarOpen && <LeftSidebar />}
       <AnimatePresence mode="popLayout" initial={false}>
-        <motion.main 
+        <motion.main
           className={styles.app_animation_container}
           key={useLocation().pathname}
           initial={{ opacity: 0.9 }}

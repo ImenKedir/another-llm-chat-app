@@ -42,11 +42,6 @@ function writeStreamToS3({ Bucket, Key }: { Bucket: string; Key: string }) {
   };
 }
 
-// Sharp resize stream
-function streamToSharp(width: number, height: number) {
-  return sharp().resize(width, height).toFormat("webp");
-}
-
 import type { S3Handler } from "aws-lambda";
 
 export const handler: S3Handler = async (event: { Records: { s3: any }[] }) => {
@@ -73,7 +68,7 @@ export const handler: S3Handler = async (event: { Records: { s3: any }[] }) => {
     // Stream to read the file from the bucket
     const readStream = await readStreamFromS3({ Key, Bucket });
     // Stream to resize the image
-    const resizeStream = streamToSharp(size.width, size.height);
+    const resizeStream = sharp().resize(size.width, size.height).toFormat("webp");
     // Stream to upload to the bucket
     const { writeStream, upload } = writeStreamToS3({
       Bucket,

@@ -25,8 +25,6 @@ export default function Create() {
       },
     });
 
-    console.log("HELLO", resp.url.split("?")[0])
-
     const formData = new FormData(event.target as HTMLFormElement);
 
     formData.append("image", imageId);

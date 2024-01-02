@@ -7,7 +7,6 @@ import {
 } from "drizzle/model";
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { requireAuth } from "@/sessions.server";
-import { Bucket } from "sst/node/bucket"
 
 import { useEffect } from "react";
 import { useLoaderData, useSubmit } from "@remix-run/react";
@@ -23,8 +22,6 @@ import styles from "./app.chat.module.css";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const userId = await requireAuth(request);
-
-  console.log("BUCKET", Bucket)
 
   const [user, chat, character] = await Promise.all([
     getUser(userId),

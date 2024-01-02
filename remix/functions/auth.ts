@@ -1,7 +1,7 @@
 import { Config } from "sst/node/config";
 import { RemixSite } from "sst/node/site";
 import { AuthHandler, Session, GoogleAdapter } from "sst/node/auth";
-import { getUser, createUser, updateUser } from "drizzle/model"
+import { getUser, createUser, updateUser } from "drizzle/model";
 
 declare module "sst/node/auth" {
   export interface SessionTypes {
@@ -39,7 +39,7 @@ export const handler = AuthHandler({
 
         const redirectURL =
           RemixSite.site.url === "localhost"
-            ? "http://localhost:3000"+ "/login"
+            ? "http://localhost:3000" + "/login"
             : RemixSite.site.url + "/login";
 
         return Session.parameter({

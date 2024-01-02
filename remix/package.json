@@ -7,7 +7,7 @@
     "build": "remix build",
     "dev": "sst bind remix dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "fmt": "prettier --write \"app/**/*.{tsx,ts,css}\" \"drizzle/**/*.ts\" --plugin=prettier-plugin-tailwindcss",
+    "fmt": "prettier --write \"app/**/*.{tsx,ts,css}\" \"drizzle/**/*.ts\" \"functions/**/*.ts\" --plugin=prettier-plugin-tailwindcss",
     "start": "remix-serve ./build/index.js",
     "push": "drizzle-kit push:mysql",
     "studio": "drizzle-kit studio",

@@ -4,11 +4,6 @@ import stream from "stream";
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 
-const width = 400;
-const height = 225;
-
-const prefix = `${width}w${height}h`;
-
 const S3 = new S3Client({});
 
 // Read stream for downloading from S3
@@ -49,12 +44,12 @@ function writeStreamToS3({ Bucket, Key }: { Bucket: string; Key: string }) {
 
 // Sharp resize stream
 function streamToSharp(width: number, height: number) {
-  return sharp().resize(width, height).toFormat("webp")
+  return sharp().resize(width, height).toFormat("webp");
 }
 
 import type { S3Handler } from "aws-lambda";
 
-export const handler: S3Handler = async (event: { Records: { s3: any; }[]; }) => {
+export const handler: S3Handler = async (event: { Records: { s3: any }[] }) => {
   const s3Record = event.Records[0].s3;
 
   // Grab the filename and bucket name
@@ -62,32 +57,39 @@ export const handler: S3Handler = async (event: { Records: { s3: any; }[]; }) =>
   const Bucket = s3Record.bucket.name;
 
   // Check if the file has already been resized
-  if (Key.startsWith(prefix)) {
+  if (Key.startsWith("resized")) {
     return;
   }
 
-  // Create the new filename with the dimensions
-  const newKey = `${prefix}-${Key}`;
+  const sizes = [
+    { width: 50, height: 50 }, // profile pictures
+    { width: 400, height: 225 }, // thumbnails
+  ];
 
-  // Stream to read the file from the bucket
-  const readStream = await readStreamFromS3({ Key, Bucket });
-  // Stream to resize the image
-  const resizeStream = streamToSharp(width, height);
-  // Stream to upload to the bucket
-  const { writeStream, upload } = writeStreamToS3({
-    Bucket,
-    Key: newKey,
-  });
+  for (const size of sizes) {
+    // Create the new filename with the dimensions
+    const newKey = `resized-${size.width}w${size.height}h-${Key}`;
 
-  // Trigger the streams
-  (readStream?.Body as NodeJS.ReadableStream)
-    .pipe(resizeStream)
-    .pipe(writeStream);
+    // Stream to read the file from the bucket
+    const readStream = await readStreamFromS3({ Key, Bucket });
+    // Stream to resize the image
+    const resizeStream = streamToSharp(size.width, size.height);
+    // Stream to upload to the bucket
+    const { writeStream, upload } = writeStreamToS3({
+      Bucket,
+      Key: newKey,
+    });
 
-  try {
-    // Wait for the file to upload
-    await upload.done();
-  } catch (err) {
-    console.log(err);
+    // Trigger the streams
+    (readStream?.Body as NodeJS.ReadableStream)
+      .pipe(resizeStream)
+      .pipe(writeStream);
+
+    try {
+      // Wait for the file to upload
+      await upload.done();
+    } catch (err) {
+      console.log(err);
+    }
   }
 };

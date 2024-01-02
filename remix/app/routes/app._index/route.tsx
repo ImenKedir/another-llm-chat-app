@@ -1,9 +1,13 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
 import { createChat, createMessage, getCharacters } from "drizzle/model";
-import { Link, useLoaderData, useSubmit } from "@remix-run/react";
-import type { Character } from "drizzle/model";
-import styles from "@/routes/app._index/app._index.module.css";
+
+import { useLoaderData, useSubmit } from "@remix-run/react";
+import { formatS3ImageUrl } from "@/utils/s3";
+
 import { requireAuth } from "@/sessions.server";
+import type { Character } from "drizzle/model";
+
+import styles from "@/routes/app._index/app._index.module.css";
 
 export async function loader() {
   const characters = await getCharacters();
@@ -23,10 +27,9 @@ function CharacterCard({ id, name, description, greeting, image }: Character) {
 
   return (
     <div onClick={handleClick} className={styles.character_container}>
-      <img src={image} width={100} height={100} />
+      <img src={formatS3ImageUrl(image)}/>
       <div>
         {name}
-        {description}
       </div>
     </div>
   );

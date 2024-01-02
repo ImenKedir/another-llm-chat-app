@@ -10,15 +10,13 @@ export default function Create() {
   async function submitHandler(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const fileUploadUrl = await fetch("/upload", {
+    const { fileUploadUrl, imageId } = await fetch("/upload", {
       method: "POST",
-    })
-      .then((res) => res.json())
-      .then((res) => res.url);
+    }).then((res) => res.json());
 
     const file = (event.target as HTMLFormElement).file.files?.[0]!;
 
-    const image = await fetch(fileUploadUrl, {
+    const resp = await fetch(fileUploadUrl, {
       body: file,
       method: "PUT",
       headers: {
@@ -27,11 +25,11 @@ export default function Create() {
       },
     });
 
-    const imageUrl = image.url.split("?")[0];
+    console.log("HELLO", resp.url.split("?")[0])
 
     const formData = new FormData(event.target as HTMLFormElement);
 
-    formData.append("imageUrl", imageUrl);
+    formData.append("image", imageId);
 
     submit(formData, { method: "post" });
   }
@@ -55,10 +53,11 @@ export async function action({ request }: ActionFunctionArgs) {
   const userId = await requireAuth(request);
 
   const formData = await request.formData();
+
   const name = String(formData.get("name"));
   const description = String(formData.get("description"));
   const greeting = String(formData.get("greeting"));
-  const imageUrl = String(formData.get("imageUrl"));
+  const image = String(formData.get("image"));
 
   const characterId = crypto.randomUUID();
   const chatId = crypto.randomUUID();
@@ -70,12 +69,12 @@ export async function action({ request }: ActionFunctionArgs) {
       name: name,
       description: description,
       greeting: greeting,
-      image: imageUrl,
+      image: image,
       creator: userId,
     }),
     createChat({
       id: chatId,
-      title: name,
+      title: `First chat with ${name}`,
       user: userId,
       character: characterId,
       created: new Date().toISOString(),

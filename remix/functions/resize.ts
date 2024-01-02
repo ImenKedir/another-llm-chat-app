@@ -5,7 +5,9 @@ import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 
 const width = 400;
-const prefix = `${width}w`;
+const height = 225;
+
+const prefix = `${width}w${height}h`;
 
 const S3 = new S3Client({});
 
@@ -32,6 +34,7 @@ function writeStreamToS3({ Bucket, Key }: { Bucket: string; Key: string }) {
   const upload = new Upload({
     client: S3,
     params: {
+      ACL: "public-read",
       Bucket,
       Key,
       Body: pass,
@@ -45,13 +48,13 @@ function writeStreamToS3({ Bucket, Key }: { Bucket: string; Key: string }) {
 }
 
 // Sharp resize stream
-function streamToSharp(width: number) {
-  return sharp().resize(width);
+function streamToSharp(width: number, height: number) {
+  return sharp().resize(width, height).toFormat("webp")
 }
 
 import type { S3Handler } from "aws-lambda";
 
-export const main: S3Handler = async (event: { Records: { s3: any; }[]; }) => {
+export const handler: S3Handler = async (event: { Records: { s3: any; }[]; }) => {
   const s3Record = event.Records[0].s3;
 
   // Grab the filename and bucket name
@@ -69,7 +72,7 @@ export const main: S3Handler = async (event: { Records: { s3: any; }[]; }) => {
   // Stream to read the file from the bucket
   const readStream = await readStreamFromS3({ Key, Bucket });
   // Stream to resize the image
-  const resizeStream = streamToSharp(width);
+  const resizeStream = streamToSharp(width, height);
   // Stream to upload to the bucket
   const { writeStream, upload } = writeStreamToS3({
     Bucket,

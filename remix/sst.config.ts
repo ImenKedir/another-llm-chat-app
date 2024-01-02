@@ -30,11 +30,11 @@ export default {
         value: authApi.url + "/auth",
       });
 
-      const bucket = new Bucket(stack, "image", {
+      const bucket = new Bucket(stack, "content", {
         notifications: {
           resize: {
             function: {
-              handler: "packages/functions/src/resize.main",
+              handler: "functions/resize.handler",
               nodejs: {
                 esbuild: {
                   external: ["sharp"],
@@ -51,7 +51,6 @@ export default {
         },
       });
 
-      // Allow the notification functions to access the bucket
       bucket.attachPermissions([bucket]);
 
       const site = new RemixSite(stack, "site", {

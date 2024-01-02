@@ -9,13 +9,15 @@ import { Bucket } from "sst/node/bucket";
 export async function action({ request }: ActionFunctionArgs) {
   await requireAuth(request);
 
+  const key = crypto.randomUUID();
+
   const command = new PutObjectCommand({
     ACL: "public-read",
-    Key: crypto.randomUUID(),
-    Bucket: Bucket.naughtyml.bucketName,
+    Key: key,
+    Bucket: Bucket.content.bucketName,
   });
 
   const url = await getSignedUrl(s3Client, command);
 
-  return json({ url });
+  return json({ fileUploadUrl: url, imageId: key });
 }

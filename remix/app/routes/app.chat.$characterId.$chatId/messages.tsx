@@ -1,19 +1,23 @@
 import { Spinner } from "@/components/spinner";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { useChatStore } from "@/hooks/useChatStore";
+import { formatS3ImageUrl } from "@/utils/s3";
+
+
 import type { Message } from "drizzle/model";
 
 import styles from "./app.chat.module.css";
 
 function Message(message: Message) {
   const character = useChatStore((state) => state.character);
+
   return (
     <div className={styles.chat_message_container}>
       <div className={styles.chat_message_header}>
         {message.author === "user" ? (
           <PersonIcon width={20} height={20} color="white" />
         ) : (
-          <img src={character!.image} width={50} height={50} />
+          <img src={formatS3ImageUrl(character!.image)} width={50} height={50} />
         )}
       </div>
       {message.content.length > 0 ? message.content : <Spinner />}

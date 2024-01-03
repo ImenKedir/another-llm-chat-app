@@ -3,11 +3,19 @@ import { ActionFunctionArgs, redirect } from "@remix-run/node";
 import { createCharacter, createChat, createMessage } from "drizzle/model";
 
 import { Form, useSubmit } from "@remix-run/react";
+import { useState } from "react";
 
 export default function Create() {
   const submit = useSubmit();
 
-  async function submitHandler(event: React.FormEvent<HTMLFormElement>) {
+  const [file, setFile] = useState<string>();
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) return;
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const { fileUploadUrl, imageId } = await fetch("/upload", {
@@ -16,7 +24,7 @@ export default function Create() {
 
     const file = (event.target as HTMLFormElement).file.files?.[0]!;
 
-    const resp = await fetch(fileUploadUrl, {
+    await fetch(fileUploadUrl, {
       body: file,
       method: "PUT",
       headers: {
@@ -33,7 +41,12 @@ export default function Create() {
   }
 
   return (
-    <Form method="post" onSubmit={submitHandler} style={{ color: "white" }}>
+    <Form
+      className="h-full w-full"
+      method="post"
+      onSubmit={handleSubmit}
+      style={{ color: "white" }}
+    >
       <p>Name</p>
       <input name="name" type="text" />
       <p>Description</p>
@@ -41,8 +54,14 @@ export default function Create() {
       <p>Greeting</p>
       <input name="greeting" type="text" />
       <p>Image</p>
-      <input name="file" type="file" accept="image/png, image/jpeg" />
+      <input
+        name="file"
+        type="file"
+        accept="image/png, image/jpeg"
+        onChange={handleFileChange}
+      />
       <button type="submit">Create</button>
+      <img src={file} />
     </Form>
   );
 }

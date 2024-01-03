@@ -1,26 +1,38 @@
 import { Spinner } from "@/components/spinner";
-import { PersonIcon } from "@radix-ui/react-icons";
 import { useChatStore } from "@/hooks/useChatStore";
 import { formatS3ImageUrl } from "@/utils/s3";
 
-import type { Message } from "drizzle/model";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/shadcn/avatar";
+
+import type { User, Message } from "drizzle/model";
 
 import styles from "./app.chat.module.css";
 
-function Message(message: Message) {
+interface MessageProps {
+  user: User;
+  message: Message;
+}
+
+function Message({ user, message }: MessageProps) {
   const character = useChatStore((state) => state.character);
 
   return (
-    <div className={styles.chat_message_container}>
-      <div className={styles.chat_message_header}>
+    <div className="flex w-full gap-2 rounded border border-[var(--tertiary-dark)] bg-[var(--secondary-dark)] p-2 font-[Geist] text-[var(--secondary-light)]">
+      <div>
         {message.author === "user" ? (
-          <PersonIcon width={20} height={20} color="white" />
+          <Avatar>
+            <AvatarImage src={user.image || ""} />
+            <AvatarFallback>{user.name || ""}</AvatarFallback>
+          </Avatar>
         ) : (
-          <img
-            src={formatS3ImageUrl(character!.image)}
-            width={50}
-            height={50}
-          />
+          <Avatar>
+            <AvatarImage src={formatS3ImageUrl(character!.image, "sm")} />
+            <AvatarFallback>{character!.name[0]}</AvatarFallback>
+          </Avatar>
         )}
       </div>
       {message.content.length > 0 ? message.content : <Spinner />}
@@ -28,12 +40,16 @@ function Message(message: Message) {
   );
 }
 
-export function Messages() {
+interface MessagesProps {
+  user: User;
+}
+
+export function Messages({ user }: MessagesProps) {
   const messages = useChatStore((state) => state.messages);
   return (
     <div className={styles.chat_messages_container}>
       {messages!.map((message) => (
-        <Message key={message.id} {...message} />
+        <Message user={user} key={message.id} message={message} />
       ))}
     </div>
   );

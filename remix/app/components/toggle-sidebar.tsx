@@ -4,15 +4,13 @@ import {
 } from "@radix-ui/react-icons";
 import { useNavStore } from "@/hooks/useNavStore";
 
-import styles from "@/components/toogle-sidebar/toogle-sidebar.module.css";
-
 export function ToggleLeftSidebar() {
   const isLeftSidebarOpen = useNavStore((state) => state.isLeftSidebarOpen);
   const toggleLeftSidebar = useNavStore((state) => state.toggleLeftSidebar);
 
   return (
     <div
-      className={styles.toggle_left_sidebar_icon}
+      className="absolute left-0 flex h-10 w-10 cursor-pointer items-center justify-center"
       onClick={() => toggleLeftSidebar()}
     >
       {isLeftSidebarOpen ? (

@@ -1,46 +1,31 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
 import { createChat, createMessage, getCharacters } from "drizzle/model";
-
-import { useLoaderData, useSubmit } from "@remix-run/react";
-import { formatS3ImageUrl } from "@/utils/s3";
-
 import { requireAuth } from "@/sessions.server";
-import type { Character } from "drizzle/model";
 
-import styles from "@/routes/app._index/app._index.module.css";
+import { useLoaderData } from "@remix-run/react";
+
+import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
+import { CharacterCard } from "@/routes/app._index/character-card";
 
 export async function loader() {
   const characters = await getCharacters();
   return json({ characters: characters });
 }
 
-function CharacterCard({ id, name, description, greeting, image }: Character) {
-  const submit = useSubmit();
-
-  function handleClick() {
-    const formData = new FormData();
-    formData.append("characterId", id);
-    formData.append("name", name);
-    formData.append("greeting", greeting);
-    submit(formData, { method: "post" });
-  }
-
-  return (
-    <div onClick={handleClick} className={styles.character_container}>
-      <img src={formatS3ImageUrl(image)} />
-      <div>{name}</div>
-    </div>
-  );
-}
-
 export default function Explore() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className={styles.container}>
-      {data.characters.map((character) => (
-        <CharacterCard key={character.id} {...character} />
-      ))}
+    <div className="h-full w-full overflow-y-scroll">
+      <header className="sticky top-0 flex h-[50px] items-center justify-center border-b-2 border-[var(--secondary-dark)] bg-[var(--primary-dark)]">
+        <ToggleLeftSidebar />
+        <h1 className="font-[Geist] text-2xl text-white">Explore</h1>
+      </header>
+      <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {data.characters.map((character) => (
+          <CharacterCard key={character.id} {...character} />
+        ))}
+      </div>
     </div>
   );
 }

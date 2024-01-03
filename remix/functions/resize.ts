@@ -70,7 +70,7 @@ export const handler: S3Handler = async (event: { Records: { s3: any }[] }) => {
     // Stream to resize the image
     const resizeStream = sharp()
       .resize(size.width, size.height, {
-        fit: "contain",
+        fit: "cover",
         position: "top",
       })
       .toFormat("webp");

@@ -20,7 +20,7 @@ export const characters = mysqlTable("characters", {
   long_description: text("long_description").notNull(),
   example_dialogue: text("example_dialogue").notNull(),
   greeting: text("greeting").notNull(),
-  image: varchar("image", { length: 2048 }).notNull(),
+  image: varchar("image", { length: 256 }).notNull(),
   creator: varchar("userId", { length: 256 }).notNull(),
 });
 

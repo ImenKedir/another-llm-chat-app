@@ -72,7 +72,7 @@ export default function Index() {
             Spicy conversation with your favorite characters, completely
             uncensored.
           </h3>
-          <Link className={styles.link} to="/app/chat">
+          <Link className={styles.link} to="/app/create">
             <div className={styles.start_chatting_button}>
               <h4>Get Started</h4>
             </div>

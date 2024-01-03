@@ -5,7 +5,7 @@ import { formatS3ImageUrl } from "@/utils/s3";
 export function CharacterCard({
   id,
   name,
-  description,
+  short_description,
   greeting,
   image,
 }: Character) {
@@ -27,6 +27,7 @@ export function CharacterCard({
       onClick={handleClick}
     >
       <img
+      // how much space for html to reserve, not size of actual img
         width={400}
         height={225}
         src={formatS3ImageUrl(image)}
@@ -34,7 +35,7 @@ export function CharacterCard({
       />
       <div className="flex w-full flex-col justify-start font-[Geist] text-white">
         <div className="font-[Geist-Bold]">{name}</div>
-        <div className="text-sm">{description}</div>
+        <div className="text-sm">{short_description}</div>
       </div>
     </div>
   );

@@ -40,6 +40,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
             for (const line of lines) {
               const message = line.toString().replace(/^data: /, "");
 
+              // Add stop token for user's name
               if (message === "[DONE]") {
                 // indicate to browser that we're done
                 send({ data: "[DONE]" });

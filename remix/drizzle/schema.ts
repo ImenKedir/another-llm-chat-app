@@ -16,7 +16,9 @@ export const userRelations = relations(users, ({ many }) => ({
 export const characters = mysqlTable("characters", {
   id: varchar("id", { length: 256 }).primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
-  description: text("description").notNull(),
+  short_description: text("short_description").notNull(),
+  long_description: text("long_description").notNull(),
+  example_dialogue: text("example_dialogue").notNull(),
   greeting: text("greeting").notNull(),
   image: varchar("image", { length: 2048 }).notNull(),
   creator: varchar("userId", { length: 256 }).notNull(),

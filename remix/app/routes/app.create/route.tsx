@@ -42,17 +42,20 @@ export default function Create() {
 
   return (
     <Form
-      className="h-full w-full"
+      className="h-full w-full text-white"
       method="post"
       onSubmit={handleSubmit}
-      style={{ color: "white" }}
     >
       <p>Name</p>
-      <input name="name" type="text" />
-      <p>Description</p>
-      <input name="description" type="text" />
+      <input className="text-black" name="name" type="text" />
+      <p>Short Description</p>
+      <input className="text-black" name="short_description" type="text" />
+      <p>Long Description</p>   
+      <input className="text-black" name="greeting" type="text" />
+      <p>Example Dialogue</p>
+      <input className="text-black" name="long_description" type="text" />
       <p>Greeting</p>
-      <input name="greeting" type="text" />
+      <input className="text-black" name="example_dialogue" type="text" />
       <p>Image</p>
       <input
         name="file"
@@ -72,7 +75,10 @@ export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
 
   const name = String(formData.get("name"));
-  const description = String(formData.get("description"));
+  const short_description = String(formData.get("short_description"));
+  const long_description = String(formData.get("long_description"));
+  const example_dialogue = String(formData.get("example_dialogue"));
+
   const greeting = String(formData.get("greeting"));
   const image = String(formData.get("image"));
 
@@ -84,7 +90,9 @@ export async function action({ request }: ActionFunctionArgs) {
     createCharacter({
       id: characterId,
       name: name,
-      description: description,
+      short_description: short_description,
+      long_description: long_description,
+      example_dialogue: example_dialogue,
       greeting: greeting,
       image: image,
       creator: userId,

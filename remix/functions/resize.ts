@@ -69,7 +69,10 @@ export const handler: S3Handler = async (event: { Records: { s3: any }[] }) => {
     const readStream = await readStreamFromS3({ Key, Bucket });
     // Stream to resize the image
     const resizeStream = sharp()
-      .resize(size.width, size.height)
+      .resize(size.width, size.height, {
+        fit: "contain",
+        position: "top",
+      })
       .toFormat("webp");
     // Stream to upload to the bucket
     const { writeStream, upload } = writeStreamToS3({

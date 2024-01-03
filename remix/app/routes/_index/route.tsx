@@ -34,26 +34,26 @@ export default function Index() {
             </div>
             {/* Displays on > 720px  */}
             <div className={styles.menu_container}>
-              <Link to="/faq" className={styles.menu_links}>
+              <Link to="/app" className={styles.menu_links}>
                 Blog
               </Link>
               <Link to="/app" className={styles.menu_links}>
                 Community
               </Link>
-              <Link to="/app/chat" className={styles.app_button}>
+              <Link to="/app" className={styles.app_button}>
                 Launch App
               </Link>
             </div>
           </div>
           {isDropdownExpanded && (
             <div className={styles.dropdown_container}>
-              <Link to="/path1" className={styles.dropdown_links}>
+              <Link to="/app" className={styles.dropdown_links}>
                 Link 1
               </Link>
-              <Link to="/path2" className={styles.dropdown_links}>
+              <Link to="/app" className={styles.dropdown_links}>
                 Link 2
               </Link>
-              <Link to="/app/chat" className={styles.dropdown_button}>
+              <Link to="/app" className={styles.dropdown_button}>
                 Launch App
               </Link>
             </div>

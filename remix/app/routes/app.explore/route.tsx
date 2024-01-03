@@ -5,7 +5,7 @@ import { requireAuth } from "@/sessions.server";
 import { useLoaderData } from "@remix-run/react";
 
 import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
-import { CharacterCard } from "@/routes/app._index/character-card";
+import { CharacterCard } from "@/routes/app.explore/character-card";
 
 export async function loader() {
   const characters = await getCharacters();

@@ -145,7 +145,7 @@ export default function Chat() {
   return (
     <div className={styles.chat_container}>
       <Header />
-      <Messages />
+      <Messages user={data.user} />
       <Input sendMessage={sendMessage} />
     </div>
   );

@@ -6,7 +6,38 @@ import { Bucket } from "sst/node/bucket";
 import { useLoaderData } from "@remix-run/react";
 
 import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/shadcn/card";
 import { CharacterCard } from "@/routes/app.explore/character-card";
+
+const cardInfo = [
+  {
+    name: "Akiko",
+    content: "Ratched from Ratched and Clank rift apart video game for PS5",
+    footer: "Card Footer",
+  },
+  {
+    name: "Glitch",
+    content: "Edgy, uneasy, and a little bit of a jerk",
+    footer: "Card Footer",
+  },
+  {
+    name: "Mr. Rogers",
+    content: "Super kind, but a little bit of a pushover",
+    footer: "Card Footer",
+  },
+  {
+    name: "Batman",
+    content: "Dark, brooding, and a little bit of a jerk",
+    footer: "Card Footer",
+  },
+];
 
 export async function loader() {
   const characters = await getCharacters();
@@ -31,6 +62,25 @@ export default function Explore() {
           />
         ))}
       </div>
+      {
+        <div className="grid w-full grid-cols-1 gap-4 px-2 text-white md:grid-cols-2 lg:grid-cols-3">
+          {cardInfo.map((card) => (
+            <Card
+              className="flex h-auto w-auto flex-row justify-center"
+              key={card.name}
+            >
+              <CardHeader className="flex flex-col items-center justify-start px-2 py-2">
+                <img src="/images/image20.jpeg" alt="" />
+              </CardHeader>
+              <CardContent className="flex flex-col items-start pl-0 pr-2 pt-2 text-left">
+                <CardTitle>{card.name}</CardTitle>
+                <div><p>hi</p></div>
+                <p className="text-xs">{card.content}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      }
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
 import { createChat, createMessage, getCharacters } from "drizzle/model";
 import { requireAuth } from "@/sessions.server";
+import { Bucket } from "sst/node/bucket";
 
 import { useLoaderData } from "@remix-run/react";
 
@@ -9,7 +10,7 @@ import { CharacterCard } from "@/routes/app.explore/character-card";
 
 export async function loader() {
   const characters = await getCharacters();
-  return json({ characters: characters });
+  return json({ characters: characters, bucket: Bucket.content.bucketName });
 }
 
 export default function Explore() {
@@ -23,7 +24,11 @@ export default function Explore() {
       </header>
       <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {data.characters.map((character) => (
-          <CharacterCard key={character.id} {...character} />
+          <CharacterCard
+            key={character.id}
+            {...character}
+            bucket={data.bucket}
+          />
         ))}
       </div>
     </div>

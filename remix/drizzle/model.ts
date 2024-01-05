@@ -44,9 +44,10 @@ export async function createCharacter(character: Character) {
   await db.insert(characters).values({
     id: character.id,
     name: character.name,
-    short_description: character.short_description,
-    long_description: character.long_description,
-    example_dialogue: character.example_dialogue,
+    title: character.title,
+    shortDescription: character.shortDescription,
+    longDescription: character.longDescription,
+    exampleDialogue: character.exampleDialogue,
     greeting: character.greeting,
     image: character.image,
     creator: character.creator,

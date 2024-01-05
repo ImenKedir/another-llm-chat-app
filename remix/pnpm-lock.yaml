@@ -14,6 +14,9 @@ dependencies:
   '@aws-sdk/s3-request-presigner':
     specifier: ^3.484.0
     version: 3.484.0
+  '@hookform/resolvers':
+    specifier: ^3.3.4
+    version: 3.3.4(react-hook-form@7.49.2)
   '@planetscale/database':
     specifier: ^1.13.0
     version: 1.13.0
@@ -65,12 +68,15 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  react-hook-form:
+    specifier: ^7.49.2
+    version: 7.49.2(react@18.2.0)
   react-icons:
     specifier: ^4.12.0
     version: 4.12.0(react@18.2.0)
   remix-utils:
     specifier: ^7.4.0
-    version: 7.4.0(@remix-run/node@2.4.0)(@remix-run/react@2.4.0)(react@18.2.0)
+    version: 7.4.0(@remix-run/node@2.4.0)(@remix-run/react@2.4.0)(react@18.2.0)(zod@3.22.4)
   sharp:
     specifier: ^0.33.1
     version: 0.33.1
@@ -80,6 +86,9 @@ dependencies:
   tailwindcss-animate:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.4.0)
+  zod:
+    specifier: ^3.22.4
+    version: 3.22.4
   zustand:
     specifier: ^4.4.7
     version: 4.4.7(@types/react@18.2.45)(immer@9.0.21)(react@18.2.0)
@@ -3340,6 +3349,14 @@ packages:
       '@repeaterjs/repeater': 3.0.5
       tslib: 2.6.2
     dev: true
+
+  /@hookform/resolvers@3.3.4(react-hook-form@7.49.2):
+    resolution: {integrity: sha512-o5cgpGOuJYrd+iMKvkttOclgwRW86EsWJZZRC23prf0uU2i48Htq4PuT73AVb9ionFyZrwYEITuOFGF+BydEtQ==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.49.2(react@18.2.0)
+    dev: false
 
   /@httptoolkit/websocket-stream@6.0.1:
     resolution: {integrity: sha512-A0NOZI+Glp3Xgcz6Na7i7o09+/+xm2m0UCU8gdtM2nIv6/cjLmhMZMqehSpTlgbx9omtLmV8LVqOskPEyWnmZQ==}
@@ -10327,6 +10344,15 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+  /react-hook-form@7.49.2(react@18.2.0):
+    resolution: {integrity: sha512-TZcnSc17+LPPVpMRIDNVITY6w20deMdNi6iehTFLV1x8SqThXGwu93HjlUVU09pzFgZH7qZOvLMM7UYf2ShAHA==}
+    engines: {node: '>=18', pnpm: '8'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /react-icons@4.12.0(react@18.2.0):
     resolution: {integrity: sha512-IBaDuHiShdZqmfc/TwHu6+d6k2ltNCf3AszxNmjJc1KUfXdEeRJOKyNvLmAHaarhzGmTSVygNdyu8/opXv2gaw==}
     peerDependencies:
@@ -10509,7 +10535,7 @@ packages:
     resolution: {integrity: sha512-KzdPP0PCxSdafrJlaaNOvxGCout+qNBb9lefLLbWBC6YOpskVXbOA4hmSGnKHe5/MRHjIa8qhsZjvbE2eU/l2w==}
     dev: true
 
-  /remix-utils@7.4.0(@remix-run/node@2.4.0)(@remix-run/react@2.4.0)(react@18.2.0):
+  /remix-utils@7.4.0(@remix-run/node@2.4.0)(@remix-run/react@2.4.0)(react@18.2.0)(zod@3.22.4):
     resolution: {integrity: sha512-Bq5frrMqixGoeTKaexQeCASFQUHreY3dD/cBuowdb6G8uQe006p3HJkxmElRc4ez25yLqlmi08hq6EQX/U8fpw==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -10549,6 +10575,7 @@ packages:
       '@remix-run/react': 2.4.0(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       react: 18.2.0
       type-fest: 4.8.3
+      zod: 3.22.4
     dev: false
 
   /require-directory@2.1.1:
@@ -12149,7 +12176,6 @@ packages:
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
-    dev: true
 
   /zustand@4.4.7(@types/react@18.2.45)(immer@9.0.21)(react@18.2.0):
     resolution: {integrity: sha512-QFJWJMdlETcI69paJwhSMJz7PPWjVP8Sjhclxmxmxv/RYI7ZOvR5BHX+ktH0we9gTWQMxcne8q1OY8xxz604gw==}

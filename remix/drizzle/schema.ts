@@ -15,11 +15,15 @@ export const userRelations = relations(users, ({ many }) => ({
 
 export const characters = mysqlTable("characters", {
   id: varchar("id", { length: 256 }).primaryKey(),
+
   name: varchar("name", { length: 256 }).notNull(),
-  short_description: text("short_description").notNull(),
-  long_description: text("long_description").notNull(),
-  example_dialogue: text("example_dialogue").notNull(),
+  title: varchar("title", { length: 256 }).notNull(),
+
   greeting: text("greeting").notNull(),
+  shortDescription: text("shortDescription").notNull(),
+  longDescription: text("longDescription").notNull(),
+  exampleDialogue: text("exampleDialogue"),
+
   image: varchar("image", { length: 256 }).notNull(),
   creator: varchar("userId", { length: 256 }).notNull(),
 });

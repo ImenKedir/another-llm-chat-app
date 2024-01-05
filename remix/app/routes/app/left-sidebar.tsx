@@ -70,23 +70,22 @@ export function LeftSidebar() {
           {recentChats.map((chat) => {
             return (
               <div className="w-full px-4 py-2">
-              <NavLink
-                key={chat.id}
-                className={({ isActive }) =>
-                  cn(
-                    "flex w-full cursor-pointer flex-col rounded p-2 items-start font-[Geist]",
-                    isActive && "bg-white text-black",
-                  )
-                }
-                to={`/app/chat/${chat.character}/${chat.id}`}
-              >
-                <h1 className="text-lg">{chat.title}</h1>
-                <p className="text-sm text-[var(--quadrary-dark)]">
-                  {formatISOToDayAndHour(chat.created)}
-                </p>
-              </NavLink>
+                <NavLink
+                  key={chat.id}
+                  className={({ isActive }) =>
+                    cn(
+                      "flex w-full cursor-pointer flex-col items-start rounded p-2 font-[Geist]",
+                      isActive && "bg-white text-black",
+                    )
+                  }
+                  to={`/app/chat/${chat.character}/${chat.id}`}
+                >
+                  <h1 className="text-lg">{chat.title}</h1>
+                  <p className="text-sm text-[var(--quadrary-dark)]">
+                    {formatISOToDayAndHour(chat.created)}
+                  </p>
+                </NavLink>
               </div>
-
             );
           })}
         </div>

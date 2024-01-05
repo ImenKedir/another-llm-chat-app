@@ -7,8 +7,8 @@ import { useLoaderData } from "@remix-run/react";
 import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
 import { CharacterCard } from "@/routes/app.explore/character-card";
 import { Input } from "@/components/shadcn/input";
-import { FilterBox } from "@/components/shadcn/filter";
-import { Filters } from "./filters";
+import { FilterBox } from "@/components/shadcn/combobox";
+import { FilterGrid } from "./filter-grid";
 import { ToggleBlock } from "./toggleBlock";
 import { Toggle } from "@radix-ui/react-toggle";
 
@@ -27,25 +27,33 @@ export default function Explore() {
         <h1 className="font-[Geist] text-2xl text-white">Explore</h1>
       </header>
       <div className="flex flex-col gap-6 px-4 pt-6 lg:px-10">
-        <div className="flex flex-row justify-between w-full">
+        <div className="flex w-full flex-row justify-between">
           <h1 className=" m-0 p-0 font-[Geist] text-xl text-white">
             Search Characters
           </h1>
-        
         </div>
         <Input
           type="email"
           id="email"
           placeholder="Type here to search for character"
-          className="bg-[var(--tertiary-dark)] border border-[var(--quadrary-dark)] text-white"
+          className="border border-[var(--quadrary-dark)] bg-[var(--tertiary-dark)] text-white"
         />
-        <div className="flex flex-row justify-between">
-          <Filters />
+        <div className="flex w-full flex-row justify-between pt-2">
+          <ToggleBlock />
+          <FilterBox />
         </div>
-        <div className="grid w-full grid-cols-2 items-center justify-center gap-4 md:gap-8 text-white md:grid-cols-3 xl:grid-cols-4">
+
+        <div className="flex flex-row justify-between pb-4 pt-2">
+          <FilterGrid />
+        </div>
+        <div className="grid w-full grid-cols-2 items-center justify-center gap-4 text-white md:grid-cols-3 md:gap-8 xl:grid-cols-4">
           {data.characters.map((character) => (
-            <div className="transform transition duration-300 hover:scale-105">
-                <CharacterCard key={character.id} {...character} bucket={data.bucket} />
+            <div className="transform transition duration-300 sm:hover:scale-105">
+              <CharacterCard
+                key={character.id}
+                {...character}
+                bucket={data.bucket}
+              />
             </div>
           ))}
         </div>

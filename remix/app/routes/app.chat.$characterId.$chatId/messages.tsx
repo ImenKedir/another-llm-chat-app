@@ -39,7 +39,7 @@ function Message({ user, message, bucket }: MessageProps) {
         )}
       </div>
       <div className="px-2">
-      {message.content.length > 0 ? message.content : <Spinner />}
+        {message.content.length > 0 ? message.content : <Spinner />}
       </div>
     </div>
   );

@@ -55,7 +55,7 @@ export function CharacterCard({
               </div>
             </CardTitle>
             <p className="pt-3 text-xs text-gray-300">{title}</p>
-            <p className="pt-5 sm:pb-1 text-xs">@creator </p>
+            <p className="pt-5 text-xs sm:pb-1">@creator </p>
           </CardContent>
         </Card>
       </div>

@@ -22,7 +22,7 @@ import { Input } from "@/routes/app.chat.$characterId.$chatId/input";
 
 // misc
 import { generatePrompt } from "@/utils/prompt";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 
 import styles from "./app.chat.module.css";
 
@@ -114,11 +114,13 @@ export default function Chat() {
       data.messages,
     );
 
-    console.log(prompt)
+    console.log(prompt);
 
     // start the event stream
     const sse = new EventSource(
-      `/completion?prompt=${encodeURIComponent(prompt)}&special=${encodeURIComponent(data.user.name || "Anonymous")}`,
+      `/completion?prompt=${encodeURIComponent(
+        prompt,
+      )}&special=${encodeURIComponent(data.user.name || "Anonymous")}`,
       { withCredentials: true },
     );
 

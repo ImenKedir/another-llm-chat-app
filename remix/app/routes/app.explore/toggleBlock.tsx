@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from "react";
+import { Button } from "@/components/shadcn/button";
 
 export const ToggleBlock: React.FC = () => {
   const [selectedButton, setSelectedButton] = useState<number | null>(null);
@@ -8,30 +9,37 @@ export const ToggleBlock: React.FC = () => {
   };
 
   const isSelected = (buttonNumber: number): string => {
-    return selectedButton === buttonNumber ? 'bg-blue-500 text-white' : 'bg-slate-500 text-black';
+    return selectedButton === buttonNumber
+      ? "bg-black text-white"
+      : "bg-[var(--tertiary-dark)] text-[var(--secondary-light)]";
   };
 
   return (
-    <div className="flex rounded-full">
-      <button
-        className={`p-2 rounded-l-xl ${isSelected(1)}`}
+    <div className="flex">
+      <Button
+        className={`h-7 rounded-r-none border border-[var(--quadrary-dark)] ${isSelected(
+          1,
+        )}`}
         onClick={() => handleButtonClick(1)}
       >
-        Button 1
-      </button>
-      <button
-        className={`p-2   ${isSelected(2)}`}
+        All
+      </Button>
+      <Button
+        className={`h-7 rounded-none border border-[var(--quadrary-dark)] ${isSelected(
+          2,
+        )}`}
         onClick={() => handleButtonClick(2)}
       >
-        Button 2
-      </button>
-      <button
-        className={`p-2 rounded-r-xl ${isSelected(3)}`}
+        NSFW
+      </Button>
+      <Button
+        className={`h-7 rounded-l-none border border-[var(--quadrary-dark)] ${isSelected(
+          3,
+        )}`}
         onClick={() => handleButtonClick(3)}
       >
-        Button 3
-      </button>
+        SFW
+      </Button>
     </div>
   );
 };
-

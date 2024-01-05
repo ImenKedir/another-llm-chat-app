@@ -1,81 +1,150 @@
+// server
 import { requireAuth } from "@/sessions.server";
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
 import { createCharacter, createChat, createMessage } from "drizzle/model";
 
-import { Form, useSubmit } from "@remix-run/react";
+// hooks
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useSubmit } from "@remix-run/react";
+
+// components
 import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
 import { Textarea } from "@/components/shadcn/textarea";
+import { Form } from "@remix-run/react";
 
-const fromSections = [
+// validation
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+// consts
+const MAX_FILE_SIZE = 1024 * 1024 * 1;
+const ACCEPTED_IMAGE_MIME_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
+
+const formSections = [
   {
-    title: "Name",
-    description: "First and last(optional) name",
+    id: "name",
+    label: "Name",
+    description: "Give your character a name.",
     placeholder: "Elon Musk",
   },
   {
-    title: "Short Description",
-    description: "Describe your character using 1-2 word adjectives",
+    id: "title",
+    label: "Title",
+    placeholder: "The World's Richest Man",
+    description:
+      "Give your character a title.\n" +
+      "This is used for display purposes only, it has no effect the personality of your character.",
+  },
+  {
+    id: "greeting",
+    label: "Greeting",
+    description:
+      "Describe what your character will say at the start of a conversation.",
+    placeholder:
+      "Hi, I'm Elon Musk. I'm the CEO of Tesla and SpaceX. I'm also a billionaire.",
+  },
+  {
+    id: "shortDescription",
+    label: "Short Description",
+    description:
+      "Describe your character using 1-2 word adjectives seperated by commas.",
     placeholder: "Self-reliant, Morally gray, Competitive",
   },
   {
-    title: "Long Description",
-    description: "Expand the description with short sentences",
-    placeholder: "Elon Musk is the CEO of Tesla and SpaceX. Elon thinks he is God's blessing to humanity."
+    id: "longDescription",
+    label: "Long Description",
+    description: "Expand apon the short description with full sentences.",
+    placeholder:
+      "Elon Musk is the CEO of Tesla and SpaceX. Elon thinks he is God's blessing to humanity.",
   },
   {
-    title: "Sample Conversation",
-    description: "Descibe how you want your character to respond",
-    placeholder: "User: Hi Elon, I've been really impressed with SpaceX's progress. &#10;Elon Musk: Hey there! Thanks for your interest."
-  },
-  {
-    title: "Greeting",
+    id: "exampleDialogue",
+    label: "Example Dialogue (Optional)",
     description:
-      "Describe what your character will say at the start of a conversation",
-    placeholder: "Hi, I'm Elon Musk. I'm the CEO of Tesla and SpaceX. I'm also a billionaire.",
-  }
+      "Provide some example dialouge, this helps the AI get in character.\n" +
+      "For the best results use the {{user}} and {{char}} placeholders when refering to the current user and character.",
+    placeholder:
+      "{{user}}: Hi Elon, I've been really impressed with SpaceX's progress.\n" +
+      "{{char}}: Hey, Thanks for your interest. I belive it is essential for humans get to mars",
+  },
 ];
 
+const formSchema = z.object({
+  name: z
+    .string()
+    .min(1, { message: "Name can't be empty!" })
+    .max(256, { message: "Name must be less than 256 characters long." }),
+  title: z
+    .string()
+    .min(1, { message: "Title can't be empty!" })
+    .max(256, { message: "Title must be less than 256 characters long" }),
+  greeting: z.string().min(1, { message: "Greeting can't be empty!" }),
+  shortDescription: z.string().min(1, {
+    message: "Short Description can't be empty!",
+  }),
+  longDescription: z.string().min(1, {
+    message: "Long description can't be empty!",
+  }),
+  image: z
+    .any()
+    .refine((file) => {
+      return file.length > 0;
+    }, "You must upload an image for your character")
+    .refine((files) => {
+      return files?.[0]?.size <= MAX_FILE_SIZE;
+    }, `Max image size is 1MB.`)
+    .refine(
+      (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
+      "Only .jpg, .jpeg, .png and .webp formats are supported.",
+    ),
+  exampleDialogue: z.string().optional(),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 export default function Create() {
   const submit = useSubmit();
 
-  const [file, setFile] = useState<string>();
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (!e.target.files) return;
-    setFile(URL.createObjectURL(e.target.files[0]));
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({ resolver: zodResolver(formSchema) });
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
+  async function onSubmit(values: FormValues) {
     const { fileUploadUrl, imageId } = await fetch("/upload", {
       method: "POST",
     }).then((res) => res.json());
 
-    const file = (event.target as HTMLFormElement).file.files?.[0]!;
-
     await fetch(fileUploadUrl, {
-      body: file,
+      body: values.image[0],
       method: "PUT",
       headers: {
-        "Content-Type": file.type,
-        "Content-Disposition": `attachment; filename="${file.name}"`,
+        "Content-Type": values.image[0].type,
+        "Content-Disposition": `attachment; filename="${values.image[0].name}"`,
       },
     });
 
-    const formData = new FormData(event.target as HTMLFormElement);
+    const formData = new FormData();
 
-    formData.append("image", imageId);
+    for (const key in values) {
+      if (key === "image") {
+        formData.append(key, imageId);
+      } else {
+        formData.append(key, values[key as keyof FormValues]);
+      }
+    }
 
     submit(formData, { method: "post" });
   }
-
-
-
-
-
 
   return (
     <div className="h-full w-full overflow-y-scroll">
@@ -84,73 +153,116 @@ export default function Create() {
         <h1 className="font-[Geist] text-2xl text-white">Create</h1>
       </header>
       <Form
-        className="flex flex-col gap-4 py-2 px-4 h-full w-full max-w-[1440px]  text-white "
+        className="mx-auto flex h-full w-full max-w-[1440px] flex-col gap-4 px-4 pt-4 font-[Geist] text-white md:px-8"
         method="post"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
       >
-        {fromSections.map((section) => (
-          <>
-          <div className="flex flex-row">
-            <h3 className="font-['Geist-Bold']">{section.title}</h3>
-            <p className="ml-4">{section.description}</p>
-          </div>
-          <Textarea
-            name={section.title.toLowerCase().replace(" ", "_")}
-            placeholder={section.placeholder}
+        {formSections.map((section) => (
+          <div key={section.id} className="flex flex-col gap-2">
+            <h3 className="font-['Geist-Bold'] text-xl">{section.label}</h3>
+            <p className="text-sm text-[var(--secondary-light)]">
+              {section.description}
+            </p>
+            <Textarea
+              {...register(section.id as keyof FormValues)}
+              placeholder={section.placeholder}
             />
-            </>
+            <p className="text-sm text-red-600">
+              {
+                // @ts-ignore
+                errors[section.id]?.message
+              }
+            </p>
+          </div>
         ))}
-         <h3 className="font-['Geist-Bold']">Image</h3>
-        <input
-          name="file"
-          type="file"
-          accept="image/png, image/jpeg"
-          onChange={handleFileChange}
-        />
+        <div className="flex flex-col gap-2">
+          <h3 className="font-['Geist-Bold']">Image</h3>
+          <p className="text-sm text-[var(--secondary-light)]">
+            Upload an image for your character
+          </p>
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            {...register("image")}
+            onChange={(e) => setSelectedImage(e.target.files?.[0] || null)}
+          />
+          <p className="text-sm text-red-600">
+            {errors.image?.message as string}
+          </p>
+        </div>
+        {selectedImage && (
+          <div className="md:max-w-[200px]">
+            <img src={URL.createObjectURL(selectedImage)} alt="Selected" />
+          </div>
+        )}
         <button
-          className="rounded bg-[var(--primary-accent)] px-4 py-2 mb-10 max-w-[200px] font-bold text-white hover:opacity-80"
+          className="max-w-[200px] rounded bg-[var(--primary-accent)] px-4 py-2 font-bold text-white hover:opacity-80"
+          disabled={isSubmitting}
           type="submit"
         >
           Create
         </button>
-        <img src={file} />
       </Form>
-
     </div>
   );
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const userId = await requireAuth(request);
+  const [userId, formData] = await Promise.all([
+    requireAuth(request),
+    request.formData(),
+  ]);
 
-  const formData = await request.formData();
+  const [
+    name,
+    title,
+    greeting,
+    shortDescription,
+    longDescription,
+    exampleDialogue,
+    image,
+  ] = [
+    formData.get("name"),
+    formData.get("title"),
+    formData.get("greeting"),
+    formData.get("shortDescription"),
+    formData.get("longDescription"),
+    formData.get("exampleDialogue"),
+    formData.get("image"),
+  ];
 
-  const name = String(formData.get("name"));
-  const short_description = String(formData.get("short_description"));
-  const long_description = String(formData.get("long_description"));
-  const example_dialogue = String(formData.get("example_dialogue"));
+  if (
+    name === null ||
+    title === null ||
+    greeting === null ||
+    shortDescription === null ||
+    longDescription === null ||
+    image === null
+  ) {
+    throw new Response("Bad Request", { status: 400 });
+  }
 
-  const greeting = String(formData.get("greeting"));
-  const image = String(formData.get("image"));
-
-  const characterId = crypto.randomUUID();
-  const chatId = crypto.randomUUID();
-  const messageId = crypto.randomUUID();
+  const [characterId, chatId, messageId] = [
+    crypto.randomUUID(),
+    crypto.randomUUID(),
+    crypto.randomUUID(),
+  ];
 
   await Promise.all([
     createCharacter({
       id: characterId,
-      name: name,
-      short_description: short_description,
-      long_description: long_description,
-      example_dialogue: example_dialogue,
-      greeting: greeting,
-      image: image,
+      name: String(name),
+      title: String(title),
+      shortDescription: String(shortDescription),
+      longDescription: String(longDescription),
+      exampleDialogue: String(exampleDialogue),
+      greeting: String(greeting),
+      image: String(image),
       creator: userId,
     }),
     createChat({
       id: chatId,
-      title: `First chat with ${name}`,
+      title: String(name),
       user: userId,
       character: characterId,
       created: new Date().toISOString(),
@@ -158,7 +270,7 @@ export async function action({ request }: ActionFunctionArgs) {
     createMessage({
       id: messageId,
       author: "ai",
-      content: greeting,
+      content: String(greeting),
       chat: chatId,
       created: new Date().toISOString(),
     }),

@@ -12,7 +12,7 @@ import { cn } from "@/utils/cn";
 
 function IconWrapper(Icon: typeof GearIcon) {
   return function (active: boolean) {
-    return <Icon color={active ? "black" : "white"} width={20} height={20} />;
+    return <Icon color={active ? "black" : "white"} width={25} height={25} />;
   };
 }
 
@@ -36,10 +36,10 @@ export function LeftSidebar() {
   const toggleLeftSidebar = useNavStore((state) => state.toggleLeftSidebar);
 
   return (
-    <div className="fixed z-[1] flex h-full w-full flex-col bg-black md:relative md:w-[320px]">
+    <div className="fixed z-[1] flex h-full w-full flex-col bg-[var(--primary-dark)] md:relative md:w-[320px]">
       <header className="flex h-[50px] w-full items-center border-b-2 border-[var(--secondary-dark)] bg-[var(--primary-dark)] pl-4 ">
         <Link className="font-[Geist] text-2xl text-white" to="/">
-          HyperChat
+          NaughtyML
         </Link>
         <DoubleArrowLeftIcon
           className="absolute right-0 mr-4 cursor-pointer md:hidden"
@@ -57,7 +57,7 @@ export function LeftSidebar() {
               to={item.link}
               className={({ isActive }) =>
                 cn(
-                  "flex h-[30px] w-[30px] items-center justify-center rounded-full",
+                  "flex h-[40px] w-[40px] items-center justify-center rounded-full",
                   isActive && "bg-white",
                 )
               }
@@ -79,7 +79,7 @@ export function LeftSidebar() {
                 }
                 to={`/app/chat/${chat.character}/${chat.id}`}
               >
-                <h1 className="text-2xl">{chat.title}</h1>
+                <h1 className="text-lg">{chat.title}</h1>
                 <p className="text-sm text-[var(--quadrary-dark)]">
                   {formatISOToDayAndHour(chat.created)}
                 </p>

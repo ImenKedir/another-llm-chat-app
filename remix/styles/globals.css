@@ -5,8 +5,8 @@
 /* CSS Variables */
 :root {
   --primary-dark: #000000;
-  --secondary-dark: #0c0a0a;
-  --tertiary-dark: #2d2d2d;
+  --secondary-dark: #18181B;
+  --tertiary-dark: rgb(18, 18, 18);
   --quadrary-dark: #535353;
 
   --primary-light: #ffffff;

@@ -15,10 +15,13 @@ import styles from "./app.chat.module.css";
 interface MessageProps {
   user: User;
   message: Message;
+  bucket: string;
 }
 
-function Message({ user, message }: MessageProps) {
+function Message({ user, message, bucket }: MessageProps) {
   const character = useChatStore((state) => state.character);
+
+  console.log(formatS3ImageUrl(character!.image, "sm"));
 
   return (
     <div className="flex w-full gap-2 rounded border border-[var(--tertiary-dark)] bg-[var(--secondary-dark)] p-2 font-[Geist] text-[var(--secondary-light)]">
@@ -30,7 +33,9 @@ function Message({ user, message }: MessageProps) {
           </Avatar>
         ) : (
           <Avatar>
-            <AvatarImage src={formatS3ImageUrl(character!.image, "sm")} />
+            <AvatarImage
+              src={formatS3ImageUrl(character!.image, bucket, "sm")}
+            />
             <AvatarFallback>{character!.name[0]}</AvatarFallback>
           </Avatar>
         )}
@@ -42,14 +47,20 @@ function Message({ user, message }: MessageProps) {
 
 interface MessagesProps {
   user: User;
+  bucket: string;
 }
 
-export function Messages({ user }: MessagesProps) {
+export function Messages({ user, bucket }: MessagesProps) {
   const messages = useChatStore((state) => state.messages);
   return (
     <div className={styles.chat_messages_container}>
       {messages!.map((message) => (
-        <Message user={user} key={message.id} message={message} />
+        <Message
+          user={user}
+          key={message.id}
+          message={message}
+          bucket={bucket}
+        />
       ))}
     </div>
   );

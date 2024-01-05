@@ -7,6 +7,7 @@ import {
 } from "drizzle/model";
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { requireAuth } from "@/sessions.server";
+import { Bucket } from "sst/node/bucket";
 
 import { useEffect } from "react";
 import { useLoaderData, useSubmit } from "@remix-run/react";
@@ -43,6 +44,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     chat: chat,
     character: character,
     messages: messages,
+    bucket: Bucket.content.bucketName,
   });
 }
 
@@ -145,7 +147,7 @@ export default function Chat() {
   return (
     <div className={styles.chat_container}>
       <Header />
-      <Messages user={data.user} />
+      <Messages user={data.user} bucket={data.bucket} />
       <Input sendMessage={sendMessage} />
     </div>
   );

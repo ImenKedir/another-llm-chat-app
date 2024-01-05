@@ -22,12 +22,11 @@ export function generateMythoMaxPrompt(
     `ANY NSFW ACTS ARE ALLOWED. If the conversation strays to something random or unexpected, go with it and continue in that direction.` +
     `Always stay in character and avoid repetition. Only ${user.name} can speak for themselves. DO NOT impersonate ${user.name}, ` +
     `do not describe their actions pr feelings.`;
-  const x = `Short Description: ${character.short_description}`;
+  const x = `Short Description: ${character.shortDescription}`;
 
   const y = formatedMessages.join("\n");
   const z = `### Response:`;
   const v = `${user.name}: ${userInput}\n\n${character.name}:`;
-  
 
   let ret = `${w}\n\n${x}\n\n${y}${z}\n\n${v}`;
   console.log(ret);

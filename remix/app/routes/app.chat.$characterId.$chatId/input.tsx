@@ -22,7 +22,6 @@ export function Input({ sendMessage }: InputProps) {
       <button
         className="flex h-[30px] w-[30px] items-center justify-center self-end rounded-full bg-white"
         style={{ opacity: isStreaming ? "50%" : "100%" }}
-        disabled={isStreaming}
         type="submit"
       >
         <ArrowUpIcon color="black" width={20} height={20} />

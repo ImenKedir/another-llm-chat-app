@@ -8,7 +8,7 @@ export function formatS3ImageUrl(
   }
 
   if (size === "md") {
-    return `https://${bucket}.s3.us-west-1.amazonaws.com/resized-200w300h-${key}`;
+    return `https://${bucket}.s3.us-west-1.amazonaws.com/resized-300w450h-${key}`;
   }
 
   return `https://${bucket}.s3.us-west-1.amazonaws.com/resized-400w225h-${key}`;

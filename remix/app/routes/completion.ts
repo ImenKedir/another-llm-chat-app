@@ -41,7 +41,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
               const message = line.toString().replace(/^data: /, "");
 
               // Add stop token for user's name
-              if (message === "[DONE]") {
+              if (message === "[DONE]" || message === "\n\n") {
                 // indicate to browser that we're done
                 send({ data: "[DONE]" });
                 return;

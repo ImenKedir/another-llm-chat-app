@@ -30,8 +30,6 @@ export function CharacterCard({
     submit(formData, { method: "post" });
   }
 
-  console.log(formatS3ImageUrl(image, bucket, "md"))
-
   return (
     <div
       className=" flex w-full flex-col items-center justify-center"
@@ -42,7 +40,7 @@ export function CharacterCard({
           className="px-auto flex h-auto w-full flex-col justify-center border border-[var(--quadrary-dark)] bg-[var(--primary-dark)]  pb-0 text-white "
           key={id}
         >
-          <CardHeader className=" px-0 py-0">
+          <CardHeader className="px-0 py-0">
             <img
               src={formatS3ImageUrl(image, bucket, "md")}
               alt=""

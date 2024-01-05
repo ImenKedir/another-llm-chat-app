@@ -39,7 +39,7 @@ export const handler = AuthHandler({
 
         const redirectURL =
           RemixSite.site.url === "localhost"
-            ? "http://localhost:3000" + "/login"
+            ? "http://192.168.0.173:3000" + "/login"
             : RemixSite.site.url + "/login";
 
         return Session.parameter({

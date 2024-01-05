@@ -1,3 +1,4 @@
+// server
 import {
   getChat,
   getUser,
@@ -9,15 +10,19 @@ import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { requireAuth } from "@/sessions.server";
 import { Bucket } from "sst/node/bucket";
 
+// hooks
 import { useEffect } from "react";
 import { useLoaderData, useSubmit } from "@remix-run/react";
 import { useChatStore } from "@/hooks/useChatStore";
 
+// components
 import { Header } from "@/routes/app.chat.$characterId.$chatId/header";
 import { Messages } from "@/routes/app.chat.$characterId.$chatId/messages";
 import { Input } from "@/routes/app.chat.$characterId.$chatId/input";
 
-import { generateMythoMaxPrompt } from "@/utils/prompt";
+// misc
+import { generatePrompt } from "@/utils/prompt";
+import { v4 as uuid } from 'uuid';
 
 import styles from "./app.chat.module.css";
 
@@ -86,7 +91,7 @@ export default function Chat() {
 
     // add the user message to the chat history
     addToMessages({
-      id: crypto.randomUUID(),
+      id: uuid(),
       author: "user",
       content: userInput,
       created: new Date().toISOString(),
@@ -95,23 +100,25 @@ export default function Chat() {
 
     // add the ai message to the chat history
     addToMessages({
-      id: crypto.randomUUID(),
+      id: uuid(),
       author: "ai",
       content: "", // we will stream the content in later
       created: new Date().toISOString(),
       chat: chat!.id,
     });
 
-    const prompt = generateMythoMaxPrompt(
+    const prompt = generatePrompt(
       data.user,
       data.character,
       userInput,
       data.messages,
     );
 
+    console.log(prompt)
+
     // start the event stream
     const sse = new EventSource(
-      `/completion?prompt=${encodeURIComponent(prompt)}`,
+      `/completion?prompt=${encodeURIComponent(prompt)}&special=${encodeURIComponent(data.user.name || "Anonymous")}`,
       { withCredentials: true },
     );
 
@@ -154,11 +161,12 @@ export default function Chat() {
 }
 
 export async function action({ request, params }: LoaderFunctionArgs) {
-  await requireAuth(request);
+  const [, formData, chat] = await Promise.all([
+    requireAuth(request),
+    request.formData(),
+    getChat(params.chatId),
+  ]);
 
-  const formData = await request.formData();
-
-  const chat = await getChat(params.chatId);
   if (!chat) {
     throw new Response(null, {
       status: 404,

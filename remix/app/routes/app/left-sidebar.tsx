@@ -66,14 +66,15 @@ export function LeftSidebar() {
             </NavLink>
           ))}
         </div>
-        <div className="flex h-full w-full flex-col gap-4 overflow-y-scroll text-white">
+        <div className="flex h-full w-full flex-col overflow-y-scroll text-white">
           {recentChats.map((chat) => {
             return (
+              <div className="w-full px-4 py-2">
               <NavLink
                 key={chat.id}
                 className={({ isActive }) =>
                   cn(
-                    "flex w-full cursor-pointer flex-col items-start px-2 font-[Geist] hover:bg-white hover:text-black",
+                    "flex w-full cursor-pointer flex-col rounded p-2 items-start font-[Geist]",
                     isActive && "bg-white text-black",
                   )
                 }
@@ -84,6 +85,8 @@ export function LeftSidebar() {
                   {formatISOToDayAndHour(chat.created)}
                 </p>
               </NavLink>
+              </div>
+
             );
           })}
         </div>

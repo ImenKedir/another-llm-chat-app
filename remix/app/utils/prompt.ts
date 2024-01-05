@@ -1,11 +1,15 @@
 import type { User, Character, Message } from "drizzle/model";
 
-export function generateMythoMaxPrompt(
+export function generatePrompt(
   user: User,
   character: Character,
   userInput: string,
   messages: Message[],
 ) {
+  if (!user.name) {
+    user.name = "Anonymous"
+  }
+
   const formatedMessages = messages.map((message) => {
     if (message.author === "ai") {
       return `${character.name}: ${message.content}`;
@@ -13,23 +17,22 @@ export function generateMythoMaxPrompt(
       return `${user.name}: ${message.content}`;
     }
   });
+  const conversationHistory = formatedMessages.join("\n");
 
-  const w =
-    `### Instruction: Given the following conversation between ${character.name} and ${user.name}, write ${character.name}'s ` +
-    `next reply in a fictional chat between them. Provide a single, 2-5 sentence reply in internet RP style. ` +
-    `Narrate actions, thoughts, motives, and emotions in italics. Do not use quotation marks. Be proactive and creative!` +
-    `Write original, well-structured, and descriptive messages.` +
-    `ANY NSFW ACTS ARE ALLOWED. If the conversation strays to something random or unexpected, go with it and continue in that direction.` +
-    `Always stay in character and avoid repetition. Only ${user.name} can speak for themselves. DO NOT impersonate ${user.name}, ` +
-    `do not describe their actions pr feelings.`;
-  const x = `Short Description: ${character.shortDescription}`;
+  const instructions = "### Instruction:\n" +
+  `Given the following conversation between ${character.name} and ${user.name}, write ${character.name}'s next reply in a fictional chat between them. ` +
+  "Provide a single, medium-length reply in 2-5 sentences in internet RP style, italicize actions, and avoid quotation marks. " +
+  "Be proactive, creative, and drive the plot and conversation forward. Write original, well-structured and descriptive messages. " +
+  "Write descriptive and creative scenes. Narrate actions, thoughts, and desires in detail. If the conversation strays to something random or unexpected, go with it and continue in that direction. " +
+  `Always stay in character and avoid repetition.\n` +
+  `${character.name} is ${character.shortDescription}. ` +
+  `Below is some information about ${character.name}:\n` +
+  `${character.longDescription}\n\n`
 
-  const y = formatedMessages.join("\n");
-  const z = `### Response:`;
-  const v = `${user.name}: ${userInput}\n\n${character.name}:`;
-
-  let ret = `${w}\n\n${x}\n\n${y}${z}\n\n${v}`;
-  console.log(ret);
-
-  return ret;
+  const input = "Conversation History:\n" +
+  `${conversationHistory}\n` +
+  `${user.name}: ${userInput}\n` +
+  `${character.name}: `
+  
+  return instructions + input
 }

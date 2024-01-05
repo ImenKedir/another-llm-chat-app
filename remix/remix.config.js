@@ -2,8 +2,9 @@
 export default {
   ignoredRouteFiles: ["**/.*", "**/*.css"],
   serverDependenciesToBundle: [/^react-icons/, /^remix-utils.*/],
-  // appDirectory: "app",
-  // assetsBuildDirectory: "public/build",
-  // publicPath: "/build/",
-  // serverBuildPath: "build/index.js",
+  browserNodeBuiltinsPolyfill: { modules: { util: true } },
+  appDirectory: "app",
+  assetsBuildDirectory: "public/build",
+  publicPath: "/build/",
+  serverBuildPath: "build/index.js",
 };

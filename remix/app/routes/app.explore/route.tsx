@@ -4,41 +4,13 @@ import { requireAuth } from "@/sessions.server";
 import { Bucket } from "sst/node/bucket";
 
 import { useLoaderData } from "@remix-run/react";
-
 import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/shadcn/card";
 import { CharacterCard } from "@/routes/app.explore/character-card";
-
-const cardInfo = [
-  {
-    name: "Akiko",
-    content: "Ratched from Ratched and Clank rift apart video game for PS5",
-    footer: "Card Footer",
-  },
-  {
-    name: "Glitch",
-    content: "Edgy, uneasy, and a little bit of a jerk",
-    footer: "Card Footer",
-  },
-  {
-    name: "Mr. Rogers",
-    content: "Super kind, but a little bit of a pushover",
-    footer: "Card Footer",
-  },
-  {
-    name: "Batman",
-    content: "Dark, brooding, and a little bit of a jerk",
-    footer: "Card Footer",
-  },
-];
-
+import { Input } from "@/components/shadcn/input";
+import { FilterBox } from "@/components/shadcn/filter";
+import { Filters } from "./filters";
+import { ToggleBlock } from "./toggleBlock";
+import { Toggle } from "@radix-ui/react-toggle";
 export async function loader() {
   const characters = await getCharacters();
   return json({ characters: characters, bucket: Bucket.content.bucketName });
@@ -48,39 +20,37 @@ export default function Explore() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="h-full w-full overflow-y-scroll">
-      <header className="sticky top-0 flex h-[50px] items-center justify-center border-b-2 border-[var(--secondary-dark)] bg-[var(--primary-dark)]">
+    <div className="h-full w-full items-center overflow-y-scroll bg-[#0d0d0f] ">
+      <header className="sticky top-0 z-10 flex h-[50px] items-center justify-center border-b-2 border-[var(--secondary-dark)] bg-[var(--primary-dark)]">
         <ToggleLeftSidebar />
         <h1 className="font-[Geist] text-2xl text-white">Explore</h1>
       </header>
-      <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {data.characters.map((character) => (
-          <CharacterCard
-            key={character.id}
-            {...character}
-            bucket={data.bucket}
-          />
-        ))}
-      </div>
-      {
-        <div className="grid w-full grid-cols-1 gap-4 px-2 text-white md:grid-cols-2 lg:grid-cols-3">
-          {cardInfo.map((card) => (
-            <Card
-              className="flex h-auto w-auto flex-row justify-center"
-              key={card.name}
-            >
-              <CardHeader className="flex flex-col items-center justify-start px-2 py-2">
-                <img src="/images/image20.jpeg" alt="" />
-              </CardHeader>
-              <CardContent className="flex flex-col items-start pl-0 pr-2 pt-2 text-left">
-                <CardTitle>{card.name}</CardTitle>
-                <div><p>hi</p></div>
-                <p className="text-xs">{card.content}</p>
-              </CardContent>
-            </Card>
+      <div className="flex flex-col gap-6 px-4 pt-6 lg:px-10">
+        <div className="flex flex-row justify-between w-full">
+          <h1 className=" m-0 p-0 font-[Geist] text-xl text-white">
+            Search Characters
+          </h1>
+        
+        </div>
+    
+        <Input
+          type="email"
+          id="email"
+          placeholder="Type here to search for character"
+          className="bg-[var(--tertiary-dark)] border border-[var(--quadrary-dark)] text-white"
+        />
+        <div className="flex flex-row justify-between">
+          <Filters />
+        </div>
+        <div className="grid w-full grid-cols-2 items-center justify-center gap-4 md:gap-8 text-white md:grid-cols-3 xl:grid-cols-4">
+          {data.characters.map((character) => (
+            <div className="transform transition duration-300 hover:scale-105">
+                <CharacterCard key={character.id} {...character} />
+
+            </div>
           ))}
         </div>
-      }
+      </div>
     </div>
   );
 }

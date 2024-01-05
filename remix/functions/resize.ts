@@ -58,6 +58,7 @@ export const handler: S3Handler = async (event: { Records: { s3: any }[] }) => {
 
   const sizes = [
     { width: 50, height: 50 }, // profile pictures
+    { width: 200, height: 300 }, // character pictures
     { width: 400, height: 225 }, // thumbnails
   ];
 

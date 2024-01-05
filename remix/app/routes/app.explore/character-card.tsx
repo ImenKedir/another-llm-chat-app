@@ -1,6 +1,14 @@
 import { Character } from "drizzle/model";
 import { useSubmit } from "@remix-run/react";
 import { formatS3ImageUrl } from "@/utils/s3";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/shadcn/card";
 
 export function CharacterCard({
   id,
@@ -24,19 +32,32 @@ export function CharacterCard({
 
   return (
     <div
-      className="mx-auto flex w-full flex-col items-center"
+      className=" flex w-full flex-col items-center justify-center"
       onClick={handleClick}
     >
-      <img
-        // how much space for html to reserve, not size of actual img
-        width={400}
-        height={225}
-        src={formatS3ImageUrl(image, bucket)}
-        className="rounded"
-      />
-      <div className="flex w-full flex-col justify-start font-[Geist] text-white">
-        <div className="font-[Geist-Bold]">{name}</div>
-        <div className="text-sm">{title}</div>
+      <div className="aspect-w-1 aspect-h-1 w-full">
+        <Card
+          className="px-auto flex h-auto w-full flex-col justify-center border border-[var(--quadrary-dark)] bg-[var(--primary-dark)]  pb-0 text-white "
+          key={id}
+        >
+          <CardHeader className=" px-0 py-0">
+            <img
+              src={formatS3ImageUrl(image, "md")}
+              alt=""
+              className="max-h-[350px] rounded-t-xl object-cover"
+            />
+          </CardHeader>
+          <CardContent className="flex h-36 flex-col items-start justify-start px-3 pt-2 text-left">
+            <CardTitle className="flex w-full flex-row items-center justify-between pt-2">
+              <div className=" ">{name}</div>
+              <div className="rounded-xl border border-slate-600 px-2 py-1 font-[Geist-Thin] text-xs">
+                25.4k
+              </div>
+            </CardTitle>
+            <p className="pt-3 text-xs text-gray-300">{short_description}</p>
+            <p className="pt-5 sm:pb-1 text-xs">@creator </p>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

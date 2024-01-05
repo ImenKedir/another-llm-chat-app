@@ -11,6 +11,7 @@ import { FilterBox } from "@/components/shadcn/filter";
 import { Filters } from "./filters";
 import { ToggleBlock } from "./toggleBlock";
 import { Toggle } from "@radix-ui/react-toggle";
+
 export async function loader() {
   const characters = await getCharacters();
   return json({ characters: characters, bucket: Bucket.content.bucketName });
@@ -32,7 +33,6 @@ export default function Explore() {
           </h1>
         
         </div>
-    
         <Input
           type="email"
           id="email"
@@ -45,8 +45,7 @@ export default function Explore() {
         <div className="grid w-full grid-cols-2 items-center justify-center gap-4 md:gap-8 text-white md:grid-cols-3 xl:grid-cols-4">
           {data.characters.map((character) => (
             <div className="transform transition duration-300 hover:scale-105">
-                <CharacterCard key={character.id} {...character} />
-
+                <CharacterCard key={character.id} {...character} bucket={data.bucket} />
             </div>
           ))}
         </div>

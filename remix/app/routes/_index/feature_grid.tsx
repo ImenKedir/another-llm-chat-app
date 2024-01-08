@@ -34,13 +34,13 @@ const cardData = [
 
 const FeatureGrid = () => {
   return (
-    <div className={styles.grid_container}>
+    <div className= "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 box-border px-[20px] h-full w-full gap-[30px] columns-2">
       {cardData.map((card) => (
-        <div key={card.id} className={styles.card_container}>
-          <div className={styles.card}>
+        <div key={card.id} className="flex shadow-lg bg-[var(--secondary-dark)] justify-center text-center p-[10%] transition rounded-xl border border-[var(--secondary-light)] hover:border-[var(--primary-accent)] hover:shadow-2xl">
+          <div className="flex flex-col align-center h-full ">
             <img src={card.source} alt="" />
-            <h2>{card.title}</h2>
-            <p>{card.content}</p>
+            <h1 className="text-2xl text-[var(--primary-light)] font-[Geist-Bold] ">{card.title}</h1>
+            <p className="text-start pt-0 text-white">{card.content}</p>
           </div>
         </div>
       ))}

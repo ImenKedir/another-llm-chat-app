@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import styles from "@/routes/_index/_index.module.css";
 
 const Scroller: React.FC = () => {
@@ -28,10 +28,11 @@ const Scroller: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.scroller_container}>
+    <div className="box-border grid max-w-[1200px] p-[30px] md:max-w-[800px] lg:w-[50%] lg:pl-[20px]">
       <div className={styles.scroller} data-speed="slow">
         <div className={styles.scroller__inner}>
           <ul className={`${styles.tag_list} ${styles.scroller__inner}`}>
+
             <img src="/images/image1.jpeg" alt="" />
             <img src="/images/image2.jpeg" alt="" />
             <img src="/images/image3.jpeg" alt="" />

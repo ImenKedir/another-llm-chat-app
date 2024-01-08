@@ -33,13 +33,13 @@ const Scroller: React.FC = () => {
         <div className={styles.scroller__inner}>
           <ul className={`${styles.tag_list} ${styles.scroller__inner}`}>
 
-            <img src="/images/image1.jpeg" alt="" />
-            <img src="/images/image2.jpeg" alt="" />
-            <img src="/images/image3.jpeg" alt="" />
-            <img src="/images/image4.jpeg" alt="" />
-            <img src="/images/image5.jpeg" alt="" />
-            <img src="/images/image6.jpeg" alt="" />
-            <img src="/images/image7.jpeg" alt="" />
+            <img id="1" src="/images/image1.jpeg" alt="" />
+            <img id="2" src="/images/image2.jpeg" alt="" />
+            <img id="3" src="/images/image3.jpeg" alt="" />
+            <img id="4" src="/images/image4.jpeg" alt="" />
+            <img id="5" src="/images/image5.jpeg" alt="" />
+            <img id="6" src="/images/image6.jpeg" alt="" />
+            <img id="7" src="/images/image7.jpeg" alt="" />
           </ul>
         </div>
       </div>
@@ -48,13 +48,13 @@ const Scroller: React.FC = () => {
         <div className={styles.scroller_bottom}>
           <div className={styles.scroller__inner}>
             <ul className={`${styles.tag_list} ${styles.scroller__inner}`}>
-              <img src="/images/image8.jpeg" alt="" />
-              <img src="/images/image9.jpeg" alt="" />
-              <img src="/images/image10.jpeg" alt="" />
-              <img src="/images/image11.jpeg" alt="" />
-              <img src="/images/image12.jpeg" alt="" />
-              <img src="/images/image13.jpeg" alt="" />
-              <img src="/images/image14.jpeg" alt="" />
+              <img id="8" src="/images/image8.jpeg" alt="" />
+              <img id="9" src="/images/image9.jpeg" alt="" />
+              <img id="10" src="/images/image10.jpeg" alt="" />
+              <img id="11" src="/images/image11.jpeg" alt="" />
+              <img id="12" src="/images/image12.jpeg" alt="" />
+              <img id="13" src="/images/image13.jpeg" alt="" />
+              <img id="14" src="/images/image14.jpeg" alt="" />
             </ul>
           </div>
         </div>

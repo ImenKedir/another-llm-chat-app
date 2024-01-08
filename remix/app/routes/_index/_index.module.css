@@ -70,7 +70,7 @@
 .dropdown_container,
 .dropdown_links,
 .dropdown_button {
-  animation: fadeInUp 1.2s ease forwards; /* Apply the animation */
+  animation: fadeInUp 0.8s ease forwards; /* Apply the animation */
 }
 
 .dropdown_container {
@@ -78,7 +78,7 @@
   flex-direction: column;
   gap: 40px;
   align-items: center;
-  margin-top: 50px;
+  padding-top: 25px;
   width: 100%;
   color: black;
 }
@@ -143,7 +143,7 @@
 /* -------------------------------------- */
 
 .scroller {
-  margin-bottom: 0;
+  padding-bottom: 4px;
 }
 
 .scroller_bottom {
@@ -212,13 +212,13 @@
 }
 
 /* Tag List Styles */
-.tag-list {
+.tag_list {
   list-style: none;
   margin: 0;
   padding-inline: 0;
 }
 
-.tag-list li {
+.tag_list li {
   background: var(--clr-primary-400);
   border-radius: 0.5rem;
   box-shadow: 0 0.5rem 1rem -0.25rem var(--clr-primary-900);
@@ -586,7 +586,7 @@
 /* ------------------------------------- */
 
 /* md  */
-@media (min-width: 720px) {
+@media (min-width: 768px) {
   .scroller_bottom {
     display: grid;
   }
@@ -645,7 +645,6 @@
     max-width: 1440px;
     margin-top: 8%;
   }
-
   .grid_container {
     grid-template-columns: repeat(3, 1fr);
   }

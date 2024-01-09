@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/shadcn/button";
+import { useFilterStore } from "@/hooks/useFilterStore";
 
 let buttonList = [
   {
@@ -21,81 +22,33 @@ let buttonList = [
     name: "Non-Fictional",
     id: "4",
   },
-  {
-    name: "Dominant",
-    id: "5",
-  },
-  {
-    name: "Submissive",
-    id: "6",
-  },
-  {
-    name: "Switch",
-    id: "7",
-  },
-  {
-    name: "Straight",
-    id: "8",
-  },
-  {
-    name: "High",
-    id: "9",
-  },
-  {
-    name: "Medium",
-    id: "10",
-  },
-  {
-    name: "Low",
-    id: "11",
-  },
-  {
-    name: "Small",
-    id: "12",
-  },
-  {
-    name: "Boo",
-    id: "13",
-  },
-  {
-    name: "Average",
-    id: "14",
-  },
-  {
-    name: "Big",
-    id: "15",
-  },
-  {
-    name: "Huge",
-    id: "16",
-  },
-  {
-    name: "Gigantic",
-    id: "17",
-  },
-  {
-    name: "Micro",
-    id: "18",
-  },
-  {
-    name: "Micro",
-    id: "19",
-  },
-  {
-    name: "Micro",
-    id: "20",
-  },
-  {
-    name: "Micro",
-    id: "21",
-  },
+
 ];
 
 export const FilterGrid: React.FC = () => {
+  const { selectedFilters, setSelectedFilters } = useFilterStore();
+
   const [selectedButtons, setSelectedButtons] = useState<string[]>([]);
   const [expanded, setExpanded] = useState(false);
 
   const handleButtonClick = (buttonId: string) => {
+    
+   // Find the button by ID
+   const button = buttonList.find(button => button.id === buttonId);
+
+   // Safety check in case the button is not found
+   if (!button) return;
+
+   // Use the button's name to update the selected filters
+   setSelectedFilters(prevSelectedFilters => {
+     const isAlreadySelected = prevSelectedFilters.includes(button.name);
+     return isAlreadySelected 
+       ? prevSelectedFilters.filter(name => name !== button.name)
+       : [...prevSelectedFilters, button.name];
+   });
+
+
+
     setSelectedButtons((prevSelectedButtons) => {
       if (prevSelectedButtons.includes(buttonId)) {
         return prevSelectedButtons.filter((id) => id !== buttonId);
@@ -103,13 +56,14 @@ export const FilterGrid: React.FC = () => {
         return [...prevSelectedButtons, buttonId];
       }
     });
+    
   };
 
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
 
-  const displayedButtons = expanded ? buttonList : buttonList.slice(0, 10);
+  const displayedButtons = expanded ? buttonList : buttonList.slice(0, 1);
 
   return (
     <div className="overflow-x-auto">

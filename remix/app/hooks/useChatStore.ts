@@ -9,6 +9,7 @@ interface ChatState {
   messages: Message[];
   character?: Character;
   isStreaming: boolean;
+  tags: string[];
 }
 
 interface ChatMethods {
@@ -18,6 +19,9 @@ interface ChatMethods {
   addToMessages: (message: Message) => void;
   appendTokenToLastMessage: (token: string) => void;
   setStreaming: (nextState: boolean) => void;
+
+  setTags: (tags: string[]) => void;
+  addTag: (tag: string) => void;
 }
 
 export const useChatStore = create<ChatState & ChatMethods>()(
@@ -32,6 +36,13 @@ export const useChatStore = create<ChatState & ChatMethods>()(
 
         isStreaming: false,
         setStreaming: (state) => set({ isStreaming: state }),
+
+        tags: [],
+        setTags: (tags: string[]) => set({ tags: tags }),
+        addTag: (tag: string) =>
+          set((state) => ({
+            tags: [...state.tags, tag],
+          })),
 
         messages: [],
         setMessages: (state: Message[]) => set({ messages: state }),

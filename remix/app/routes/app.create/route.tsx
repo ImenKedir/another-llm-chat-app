@@ -64,6 +64,13 @@ const formSections = [
       "Elon Musk is the CEO of Tesla and SpaceX. Elon thinks he is God's blessing to humanity.",
   },
   {
+    id: "tags",
+    label: "Tags",
+    description:
+      "Tags are used to help the AI get in character. Provide a few tags that describe your character.",
+    placeholder: "Billionaire, CEO, Entrepreneur",
+  },
+  {
     id: "exampleDialogue",
     label: "Example Dialogue (Optional)",
     description:
@@ -91,6 +98,7 @@ const formSchema = z.object({
   longDescription: z.string().min(1, {
     message: "Long description can't be empty!",
   }),
+  tags: z.string().min(1, { message: "Tags can't be empty!" }),
   image: z
     .any()
     .refine((file) => {
@@ -221,6 +229,7 @@ export async function action({ request }: ActionFunctionArgs) {
     longDescription,
     exampleDialogue,
     image,
+    tags,
   ] = [
     formData.get("name"),
     formData.get("title"),
@@ -229,6 +238,7 @@ export async function action({ request }: ActionFunctionArgs) {
     formData.get("longDescription"),
     formData.get("exampleDialogue"),
     formData.get("image"),
+    formData.get("tags"),
   ];
 
   if (
@@ -237,7 +247,8 @@ export async function action({ request }: ActionFunctionArgs) {
     greeting === null ||
     shortDescription === null ||
     longDescription === null ||
-    image === null
+    image === null ||
+    tags === null
   ) {
     throw new Response("Bad Request", { status: 400 });
   }
@@ -258,6 +269,7 @@ export async function action({ request }: ActionFunctionArgs) {
       exampleDialogue: String(exampleDialogue),
       greeting: String(greeting),
       image: String(image),
+      tags: [String(tags)], // this could be an issue
       creator: userId,
     }),
     createChat({

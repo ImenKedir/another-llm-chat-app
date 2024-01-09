@@ -1,5 +1,5 @@
 // server
-import { getChat, getUser, getCharacter, getChatMessages } from "drizzle/model";
+import { getChat, getUser, getCharacter } from "drizzle/model";
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { requireAuth } from "@/sessions.server";
 import { Bucket } from "sst/node/bucket";
@@ -7,7 +7,7 @@ import { formatS3ImageUrl } from "@/utils/s3";
 
 // hooks
 import { useEffect } from "react";
-import { useLoaderData, useNavigate, useSubmit } from "@remix-run/react";
+import { useLoaderData, useSubmit } from "@remix-run/react";
 import { useChatStore } from "@/hooks/useChatStore";
 
 // components
@@ -32,6 +32,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   return json({
     user: user,
     character: character,
+    tags: character.tags,
     chatId: params.chatId,
     bucket: Bucket.content.bucketName,
   });
@@ -47,7 +48,6 @@ export default function Character() {
   }, [data.character]);
 
   const character = useChatStore((state) => state.character);
-  const navigate = useNavigate();
 
   return (
     <div className="flex h-full w-full flex-col items-center gap-8 text-white">
@@ -75,6 +75,11 @@ export default function Character() {
             <div className="rounded-xl border border-[var(--primary-light)] p-2">
               <h3>🥳Happy</h3>
             </div>
+            {data.tags?.map((tag) => (
+              <div>
+                <h3>{tag}</h3>
+                </div>
+            ))}
           </div>
           <Button
             className="border border-[var(--primary-light)]"

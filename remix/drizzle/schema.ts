@@ -1,4 +1,4 @@
-import { mysqlEnum, mysqlTable, text, varchar } from "drizzle-orm/mysql-core";
+import { mysqlEnum, mysqlTable, text, varchar, json } from "drizzle-orm/mysql-core";
 import { relations } from "drizzle-orm";
 
 export const users = mysqlTable("users", {
@@ -25,6 +25,8 @@ export const characters = mysqlTable("characters", {
   exampleDialogue: text("exampleDialogue"),
 
   image: varchar("image", { length: 256 }).notNull(),
+  tags: json('tags').$type<string[]>(),
+
   creator: varchar("userId", { length: 256 }).notNull(),
 });
 

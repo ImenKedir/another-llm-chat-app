@@ -11,6 +11,7 @@ import { FilterBox } from "@/components/shadcn/combobox";
 import { FilterGrid } from "./filter-grid";
 import { ToggleBlock } from "./toggleBlock";
 import { Toggle } from "@radix-ui/react-toggle";
+import { useFilterStore } from "@/hooks/useFilterStore";
 
 export async function loader() {
   const characters = await getCharacters();
@@ -19,6 +20,12 @@ export async function loader() {
 
 export default function Explore() {
   const data = useLoaderData<typeof loader>();
+  const { selectedFilters } = useFilterStore();
+  console.log(selectedFilters);
+
+  const filteredCharacters = data.characters.filter(character => 
+    selectedFilters.every(filter => character.tags?.includes(filter))
+  );
 
   return (
     <div className="h-full w-full items-center overflow-y-scroll bg-[#0d0d0f] ">
@@ -47,7 +54,7 @@ export default function Explore() {
           <FilterGrid />
         </div>
         <div className="grid w-full grid-cols-2 items-center justify-center gap-4 text-white md:grid-cols-3 md:gap-8 xl:grid-cols-4">
-          {data.characters.map((character) => (
+          {filteredCharacters.map((character) => (
             <div
               key={character.id}
               className="transform cursor-pointer transition duration-300 sm:hover:scale-105"

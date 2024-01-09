@@ -50,11 +50,13 @@ export async function createCharacter(character: Character) {
     exampleDialogue: character.exampleDialogue,
     greeting: character.greeting,
     image: character.image,
+    tags: character.tags,
     creator: character.creator,
   });
 
   return character;
 }
+
 
 export async function getCharacter(characterId: string | undefined) {
   if (!characterId) {

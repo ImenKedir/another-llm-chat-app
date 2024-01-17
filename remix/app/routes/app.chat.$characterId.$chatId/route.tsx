@@ -77,80 +77,86 @@ export default function Chat() {
   );
 
   function sendMessage(event: React.FormEvent) {
-    event.preventDefault(); // normally the event hits the remix server action
-    setStreaming(true); // but we want to add our own lil streaming logic
+    try {
+      event.preventDefault(); // normally the event hits the remix server action
+      setStreaming(true); // but we want to add our own lil streaming logic
 
-    // get the message from the form submission
-    const userInput = new FormData(event.target as HTMLFormElement).get(
-      "userInput",
-    );
-    if (!userInput || typeof userInput !== "string") {
-      console.error("prompt is empty or not a string.");
-      return;
-    }
+      // get the message from the form submission
+      const userInput = new FormData(event.target as HTMLFormElement).get(
+        "userInput",
+      );
 
-    // add the user message to the chat history
-    addToMessages({
-      id: uuid(),
-      author: "user",
-      content: userInput,
-      created: new Date().toISOString(),
-      chat: chat!.id,
-    });
-
-    // add the ai message to the chat history
-    addToMessages({
-      id: uuid(),
-      author: "ai",
-      content: "", // we will stream the content in later
-      created: new Date().toISOString(),
-      chat: chat!.id,
-    });
-
-    const prompt = generatePrompt(
-      data.user,
-      data.character,
-      userInput,
-      data.messages,
-    );
-
-    console.log(prompt);
-
-    // start the event stream
-    const sse = new EventSource(
-      `/completion?prompt=${encodeURIComponent(
-        prompt,
-      )}&special=${encodeURIComponent(data.user.name || "Anonymous")}`,
-      { withCredentials: true },
-    );
-
-    // handle incoming tokens
-    let ai = "";
-    sse.addEventListener("message", (event) => {
-      const token = event.data as string;
-      if (token !== "[DONE]") {
-        ai += token;
-        appendTokenToLastMessage(token);
-      } else {
-        // close the event stream
-        sse.close();
-        // make a post request to save tokens to db
-        const formData = new FormData();
-        formData.append("chatId", chat!.id);
-        formData.append("characterId", character!.id);
-        formData.append("aiContent", ai);
-        formData.append("userContent", userInput);
-        submit(formData, { method: "post" });
-        setStreaming(false);
+      if (!userInput || typeof userInput !== "string") {
+        console.error("prompt is empty or not a string.");
+        return;
       }
-    });
 
-    // handle errors
-    sse.addEventListener("error", (event) => {
-      console.log("error: ", event);
-      sse.close();
+      // add the user message to the chat history
+      addToMessages({
+        id: uuid(),
+        author: "user",
+        content: userInput,
+        created: new Date().toISOString(),
+        chat: chat!.id,
+      });
+
+      // add the ai message to the chat history
+      addToMessages({
+        id: uuid(),
+        author: "ai",
+        content: "", // we will stream the content in later
+        created: new Date().toISOString(),
+        chat: chat!.id,
+      });
+
+      const prompt = generatePrompt(
+        data.user,
+        data.character,
+        userInput,
+        data.messages,
+      );
+
+      console.log(prompt);
+
+      // start the event stream
+      const sse = new EventSource(
+        `/completion?prompt=${encodeURIComponent(
+          prompt,
+        )}&special=${encodeURIComponent(data.user.name || "Anonymous")}`,
+        { withCredentials: true },
+      );
+
+      // handle incoming tokens
+      let ai = "";
+      sse.addEventListener("message", (event) => {
+        const token = event.data as string;
+        if (token !== "[DONE]") {
+          ai += token;
+          appendTokenToLastMessage(token);
+        } else {
+          // close the event stream
+          sse.close();
+          // make a post request to save tokens to db
+          const formData = new FormData();
+          formData.append("chatId", chat!.id);
+          formData.append("characterId", character!.id);
+          formData.append("aiContent", ai);
+          formData.append("userContent", userInput);
+          submit(formData, { method: "post" });
+        }
+      });
+
+      // handle errors
+      sse.addEventListener("error", (event) => {
+        console.log("error: ", event);
+        sse.close();
+        setStreaming(false);
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
       setStreaming(false);
-    });
+    }
   }
 
   return (

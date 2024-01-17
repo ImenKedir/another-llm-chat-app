@@ -22,7 +22,6 @@ let buttonList = [
     name: "Non-Fictional",
     id: "4",
   },
-
 ];
 
 export const FilterGrid: React.FC = () => {
@@ -32,22 +31,19 @@ export const FilterGrid: React.FC = () => {
   const [expanded, setExpanded] = useState(false);
 
   const handleButtonClick = (buttonId: string) => {
-    
-   // Find the button by ID
-   const button = buttonList.find(button => button.id === buttonId);
+    // Find the button by ID
+    const button = buttonList.find((button) => button.id === buttonId);
 
-   // Safety check in case the button is not found
-   if (!button) return;
+    // Safety check in case the button is not found
+    if (!button) return;
 
-   // Use the button's name to update the selected filters
-   setSelectedFilters(prevSelectedFilters => {
-     const isAlreadySelected = prevSelectedFilters.includes(button.name);
-     return isAlreadySelected 
-       ? prevSelectedFilters.filter(name => name !== button.name)
-       : [...prevSelectedFilters, button.name];
-   });
-
-
+    // Use the button's name to update the selected filters
+    setSelectedFilters((prevSelectedFilters) => {
+      const isAlreadySelected = prevSelectedFilters.includes(button.name);
+      return isAlreadySelected
+        ? prevSelectedFilters.filter((name) => name !== button.name)
+        : [...prevSelectedFilters, button.name];
+    });
 
     setSelectedButtons((prevSelectedButtons) => {
       if (prevSelectedButtons.includes(buttonId)) {
@@ -56,7 +52,6 @@ export const FilterGrid: React.FC = () => {
         return [...prevSelectedButtons, buttonId];
       }
     });
-    
   };
 
   const toggleExpand = () => {

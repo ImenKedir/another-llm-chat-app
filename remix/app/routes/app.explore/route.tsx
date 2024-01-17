@@ -1,6 +1,5 @@
-import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
-import { createChat, createMessage, getCharacters } from "drizzle/model";
-import { requireAuth } from "@/sessions.server";
+import { json } from "@remix-run/node";
+import { getCharacters } from "drizzle/model";
 import { Bucket } from "sst/node/bucket";
 
 import { useLoaderData } from "@remix-run/react";
@@ -10,7 +9,6 @@ import { Input } from "@/components/shadcn/input";
 import { FilterBox } from "@/components/shadcn/combobox";
 import { FilterGrid } from "./filter-grid";
 import { ToggleBlock } from "./toggleBlock";
-import { Toggle } from "@radix-ui/react-toggle";
 import { useFilterStore } from "@/hooks/useFilterStore";
 
 export async function loader() {
@@ -21,10 +19,9 @@ export async function loader() {
 export default function Explore() {
   const data = useLoaderData<typeof loader>();
   const { selectedFilters } = useFilterStore();
-  console.log(selectedFilters);
 
-  const filteredCharacters = data.characters.filter(character => 
-    selectedFilters.every(filter => character.tags?.includes(filter))
+  const filteredCharacters = data.characters.filter((character) =>
+    selectedFilters.every((filter) => character.tags?.includes(filter)),
   );
 
   return (
@@ -66,36 +63,4 @@ export default function Explore() {
       </div>
     </div>
   );
-}
-
-export async function action({ request }: LoaderFunctionArgs) {
-  const userId = await requireAuth(request);
-
-  const formData = await request.formData();
-
-  const characterId = String(formData.get("characterId"));
-  const name = String(formData.get("name"));
-  const greeting = String(formData.get("greeting"));
-
-  const chatId = crypto.randomUUID();
-  const messageId = crypto.randomUUID();
-
-  await Promise.all([
-    createChat({
-      id: chatId,
-      title: name,
-      user: userId,
-      character: characterId,
-      created: new Date().toISOString(),
-    }),
-    createMessage({
-      id: messageId,
-      author: "ai",
-      content: greeting,
-      chat: chatId,
-      created: new Date().toISOString(),
-    }),
-  ]);
-
-  return redirect(`/app/character/${characterId}`);
 }

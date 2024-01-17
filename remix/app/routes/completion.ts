@@ -22,6 +22,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       body: JSON.stringify({
         model: "gryphe/mythomist-7b",
         prompt: prompt,
+        max_tokens: 1000,
         stream: true,
       }),
     })

@@ -1,11 +1,9 @@
 import { Character } from "drizzle/model";
-import { useSubmit } from "@remix-run/react";
+import { useNavigate } from "@remix-run/react";
 import { formatS3ImageUrl } from "@/utils/s3";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/card";
@@ -14,26 +12,15 @@ export function CharacterCard({
   id,
   name,
   title,
-  greeting,
   image,
   bucket,
 }: Character & { bucket: string }) {
-  const submit = useSubmit();
-
-  function handleClick() {
-    const formData = new FormData();
-
-    formData.append("characterId", id);
-    formData.append("name", name);
-    formData.append("greeting", greeting);
-
-    submit(formData, { method: "post" });
-  }
+  const navigate = useNavigate();
 
   return (
     <div
       className=" flex w-full flex-col items-center justify-center"
-      onClick={handleClick}
+      onClick={() => navigate("/app/character/" + id)}
     >
       <div className="aspect-w-1 aspect-h-1 w-full">
         <Card

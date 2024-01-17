@@ -1,5 +1,5 @@
 import { requireAuth } from "@/sessions.server";
-import { LoaderFunctionArgs, redirect } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { createChat, createMessage } from "drizzle/model";
 import type { ActionFunctionArgs } from "@remix-run/node"; // or cloudflare/deno
 

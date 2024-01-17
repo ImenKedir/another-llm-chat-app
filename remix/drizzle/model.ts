@@ -57,7 +57,6 @@ export async function createCharacter(character: Character) {
   return character;
 }
 
-
 export async function getCharacter(characterId: string | undefined) {
   if (!characterId) {
     return null;

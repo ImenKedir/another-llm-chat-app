@@ -55,34 +55,26 @@ export default function Login() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className={styles.container}>
-      <div className={styles.main}>
-        <div className={styles.left_content}>
-          <div className={styles.nav_container}>
-            <div className={styles.name}>
-              <h3>NaughtyML</h3>
-            </div>
-          </div>
-          <div className={styles.left_text}>
-            <h2>Hello, John!</h2>
-            <h3>Log in to start creating magic.</h3>
-            <div className={styles.center_button}>
-              <button className={styles.login_button}>
-                <Link
-                  to={data.authAPI + "/google/authorize"}
-                  className={styles.link}
-                >
-                  <p>Sign in with Google</p>
-                </Link>
-              </button>
-            </div>
-          </div>
+    <div className="flex h-full w-full items-start justify-center overflow-hidden bg-[var(--background-color)] px-10 pt-[150px] text-white">
+      <div className="flex w-full max-w-[500px] flex-col items-center justify-center gap-12 rounded-md border border-[var(--primary-light)] bg-[var(--tertiary-dark)] px-6 py-12 text-center">
+        <div className="flex flex-col gap-4">
+          <h1 className="font-[Geist-Bold] text-4xl">Welcome Back </h1>
+          <p className="text-md">Sign in to continue with NaughtyML</p>
         </div>
-        <div className={styles.right_content}>
-          <div className={styles.right_text}>
-            {/* <img src="/woman.png" className={styles.responsive_image} /> */}
-          </div>
-        </div>
+
+        <button className=" rounded-lg bg-white px-[12px] py-[2px] text-black no-underline">
+          <Link
+            to={data.authAPI + "/google/authorize"}
+            className="flex flex-row items-center gap-2 p-2 no-underline"
+          >
+            <img
+              src="/logos/google.png"
+              alt="Google Logo"
+              className="h-[15px] w-[15px]"
+            />
+            <p>Continue with Google</p>
+          </Link>
+        </button>
       </div>
     </div>
   );

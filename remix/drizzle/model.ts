@@ -1,5 +1,5 @@
 import { db } from "drizzle/db";
-import { asc, desc, eq } from "drizzle-orm";
+import { asc, desc, eq, sql, like } from "drizzle-orm";
 import { users, characters, chats, messages } from "drizzle/schema";
 
 export type User = typeof users.$inferInsert;
@@ -72,6 +72,13 @@ export async function getCharacter(characterId: string | undefined) {
   }
 
   return results[0];
+}
+
+export async function searchCharacters(query: string) {
+  return await db
+    .select()
+    .from(characters)
+    .where(like(characters.name, `%${query}%`));
 }
 
 export async function getCharacters(offset: number = 0, limit: number = 10) {

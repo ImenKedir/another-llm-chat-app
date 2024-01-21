@@ -1,5 +1,5 @@
 import type { SSTConfig } from "sst";
-import { Api, Auth, RemixSite, Bucket, Config } from "sst/constructs";
+import { Api, Function, Auth, RemixSite, Bucket, Config } from "sst/constructs";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 
 export default {
@@ -11,23 +11,45 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
-      const GOOGLE_AUTH_CLIENT_ID = 
-        new Config.Secret(stack, "GOOGLE_AUTH_CLIENT_ID");
+      const GOOGLE_AUTH_CLIENT_ID = new Config.Secret(
+        stack,
+        "GOOGLE_AUTH_CLIENT_ID",
+      );
 
-      const PLANETSCALE_DATABASE_URI = 
-        new Config.Secret(stack, "PLANETSCALE_DATABASE_URI");
+      const PLANETSCALE_DATABASE_URI = new Config.Secret(
+        stack,
+        "PLANETSCALE_DATABASE_URI",
+      );
 
-      const OPENROUTER_API_KEY = 
-        new Config.Secret(stack, "OPENROUTER_API_KEY")
+      const OPENROUTER_API_URL = new Config.Parameter(
+        stack,
+        "OPENROUTER_API_URL",
+        {
+          value: "https://openrouter.ai/api/v1/chat/completions",
+        },
+      );
 
-      const OPENROUTER_API_URL = new Config.Parameter(stack, "OPENROUTER_API_URL", {
-        value: "https://openrouter.ai/api/v1/chat/completions",
+      const OPENROUTER_API_KEY = new Config.Secret(stack, "OPENROUTER_API_KEY");
+
+      const api = new Api(stack, "API", {
+        defaults: {
+          function: {
+            bind: [PLANETSCALE_DATABASE_URI],
+            copyFiles: [
+              {
+                from: "data",
+                to: "data",
+              },
+            ],
+          },
+        },
+        routes: {
+          "GET /seed": "functions/seed.handler",
+        },
       });
 
-      const authApi = new Api(stack, "authApi");
-
-      const AUTH_API_URL = new Config.Parameter(stack, "AUTH_API_URL", {
-        value: authApi.url + "/auth",
+      const API_URL = new Config.Parameter(stack, "API_URL", {
+        value: api.url,
       });
 
       const bucket = new Bucket(stack, "content", {
@@ -50,40 +72,35 @@ export default {
           },
         },
       });
-
       bucket.attachPermissions([bucket]);
 
       const site = new RemixSite(stack, "site", {
         bind: [
           bucket,
-          AUTH_API_URL,
+          API_URL,
           OPENROUTER_API_KEY,
           OPENROUTER_API_URL,
           PLANETSCALE_DATABASE_URI,
-        ]
+        ],
       });
 
       const authFunction = new Auth(stack, "auth", {
         authenticator: {
           handler: "functions/auth.handler",
-          bind: [
-            site, 
-            GOOGLE_AUTH_CLIENT_ID,
-            PLANETSCALE_DATABASE_URI,
-          ],
+          bind: [site, GOOGLE_AUTH_CLIENT_ID],
         },
       });
 
       authFunction.attach(stack, {
-        api: authApi,
+        api: api,
         prefix: "/auth",
       });
 
       stack.addOutputs({
         SiteURL: site.url || "Site URL not available until after deployment",
         ImageBucket: bucket.bucketName,
-        GoogleAuth: authApi.url + "/auth/google/authorize",
-        GoogleAuthCallback: authApi.url + "/auth/google/callback",
+        GoogleAuth: api.url + "/auth/google/authorize",
+        GoogleAuthCallback: api.url + "/auth/google/callback",
       });
     });
   },

@@ -10,19 +10,17 @@ import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
 import { CharacterCard } from "./character-card";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  let q = new URL(request.url).searchParams.get("q");
+  let query = new URL(request.url).searchParams.get("q");
 
-  if (!q) {
-    const characters = await getCharacters();
+  if (query) {
     return json({
-      characters: characters,
+      characters: await searchCharacters(query),
       bucket: Bucket.content.bucketName,
     });
   }
 
-  const characters = await searchCharacters(q);
   return json({
-    characters: characters,
+    characters: await getCharacters(),
     bucket: Bucket.content.bucketName,
   });
 }

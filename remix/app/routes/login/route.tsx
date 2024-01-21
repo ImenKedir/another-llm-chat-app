@@ -21,7 +21,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   if (!token) {
     return json({
       error: session.get("error"),
-      authAPI: Config.AUTH_API_URL,
+      API: Config.API_URL,
     });
   }
 
@@ -64,7 +64,7 @@ export default function Login() {
 
         <button className=" rounded-lg bg-white px-[12px] py-[2px] text-black no-underline">
           <Link
-            to={data.authAPI + "/google/authorize"}
+            to={data.API + "auth/google/authorize"}
             className="flex flex-row items-center gap-2 p-2 no-underline"
           >
             <img

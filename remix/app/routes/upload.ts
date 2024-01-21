@@ -2,7 +2,7 @@ import { ActionFunctionArgs, json } from "@remix-run/node";
 import { requireAuth } from "@/sessions.server";
 
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "s3/client";
+import { s3 } from "@/s3.server";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { Bucket } from "sst/node/bucket";
 
@@ -17,7 +17,7 @@ export async function action({ request }: ActionFunctionArgs) {
     Bucket: Bucket.content.bucketName,
   });
 
-  const url = await getSignedUrl(s3Client, command);
+  const url = await getSignedUrl(s3, command);
 
   return json({ fileUploadUrl: url, imageId: key });
 }

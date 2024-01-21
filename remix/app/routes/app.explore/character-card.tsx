@@ -19,7 +19,7 @@ export function CharacterCard({
 
   return (
     <div
-      className=" flex w-full flex-col items-center justify-center"
+      className="flex w-full transform cursor-pointer flex-col items-center justify-center transition duration-300 sm:hover:scale-105"
       onClick={() => navigate("/app/character/" + id)}
     >
       <div className="aspect-w-1 aspect-h-1 w-full">

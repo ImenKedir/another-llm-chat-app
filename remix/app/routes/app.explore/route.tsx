@@ -1,28 +1,35 @@
-import { json } from "@remix-run/node";
-import { getCharacters } from "drizzle/model";
+import { LoaderFunctionArgs, json } from "@remix-run/node";
+import { getCharacters, searchCharacters } from "drizzle/model";
 import { Bucket } from "sst/node/bucket";
 
-import { useLoaderData } from "@remix-run/react";
-import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
-import { CharacterCard } from "@/routes/app.explore/character-card";
-import { Input } from "@/components/shadcn/input";
-import { FilterBox } from "@/components/shadcn/combobox";
-import { FilterGrid } from "./filter-grid";
-import { ToggleBlock } from "./toggleBlock";
-import { useFilterStore } from "@/hooks/useFilterStore";
+import { useLoaderData, useFetcher } from "@remix-run/react";
 
-export async function loader() {
-  const characters = await getCharacters();
-  return json({ characters: characters, bucket: Bucket.content.bucketName });
+import { Input } from "@/components/shadcn/input";
+import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
+
+import { CharacterCard } from "./character-card";
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  let q = new URL(request.url).searchParams.get("q");
+
+  if (!q) {
+    const characters = await getCharacters();
+    return json({
+      characters: characters,
+      bucket: Bucket.content.bucketName,
+    });
+  }
+
+  const characters = await searchCharacters(q);
+  return json({
+    characters: characters,
+    bucket: Bucket.content.bucketName,
+  });
 }
 
 export default function Explore() {
   const data = useLoaderData<typeof loader>();
-  const { selectedFilters } = useFilterStore();
-
-  const filteredCharacters = data.characters.filter((character) =>
-    selectedFilters.every((filter) => character.tags?.includes(filter)),
-  );
+  const search = useFetcher<typeof loader>();
 
   return (
     <div className="h-full w-full items-center overflow-y-scroll bg-[#0d0d0f] ">
@@ -31,34 +38,37 @@ export default function Explore() {
         <h1 className="font-[Geist] text-2xl text-white">Explore</h1>
       </header>
       <div className="flex flex-col gap-6 px-4 pt-6 lg:px-10">
-        <div className="flex w-full flex-row justify-between">
-          <h1 className=" m-0 p-0 font-[Geist] text-xl text-white">
-            Search Characters
-          </h1>
-        </div>
-        <Input
-          type="email"
-          id="email"
-          placeholder="Type here to search for character"
-          className="border border-[var(--quadrary-dark)] bg-[var(--tertiary-dark)] text-white"
-        />
-        <div className="flex w-full flex-row justify-between pt-2">
-          <ToggleBlock />
-          <FilterBox />
-        </div>
-
-        <div className="flex flex-row justify-between pb-4 pt-2">
-          <FilterGrid />
-        </div>
+        <search.Form method="get" className="flex gap-4">
+          <Input
+            className="border border-[var(--quadrary-dark)] bg-[var(--primary-dark)] text-white placeholder-[var(--secondary-light)]"
+            name="q"
+            placeholder="Search for characters by name"
+            onSubmit={() => console.log("submit")}
+            onChange={(event) => {
+              search.submit(event.currentTarget.form);
+            }}
+          />
+          {/* <Button className="bg-[var(--primary-light)] hover:opacity-[70%]">
+            <MagnifyingGlassIcon width={20} height={20} />
+          </Button> */}
+        </search.Form>
         <div className="grid w-full grid-cols-2 items-center justify-center gap-4 text-white md:grid-cols-3 md:gap-8 xl:grid-cols-4">
-          {filteredCharacters.map((character) => (
-            <div
-              key={character.id}
-              className="transform cursor-pointer transition duration-300 sm:hover:scale-105"
-            >
-              <CharacterCard {...character} bucket={data.bucket} />
-            </div>
-          ))}
+          {search.data
+            ?
+              search.data.characters.map((character) => (
+                <CharacterCard
+                  key={character.id}
+                  bucket={data.bucket}
+                  {...character}
+                />
+              ))
+            : data.characters.map((character) => (
+                <CharacterCard
+                  key={character.id}
+                  bucket={data.bucket}
+                  {...character}
+                />
+              ))}
         </div>
       </div>
     </div>

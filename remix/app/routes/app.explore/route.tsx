@@ -32,30 +32,26 @@ export default function Explore() {
   const search = useFetcher<typeof loader>();
 
   return (
-    <div className="h-full w-full items-center overflow-y-scroll bg-[#0d0d0f] ">
+    <div className="h-full w-full overflow-y-scroll bg-[#0d0d0f]">
       <header className="sticky top-0 z-10 flex h-[50px] items-center justify-center border-b-2 border-[var(--secondary-dark)] bg-[var(--primary-dark)]">
         <ToggleLeftSidebar />
         <h1 className="font-[Geist] text-2xl text-white">Explore</h1>
       </header>
-      <div className="flex flex-col gap-6 px-4 pt-6 lg:px-10">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-6 px-4 pt-6 lg:px-10">
         <search.Form method="get" className="flex gap-4">
           <Input
             className="border border-[var(--quadrary-dark)] bg-[var(--primary-dark)] text-white placeholder-[var(--secondary-light)]"
             name="q"
-            placeholder="Search for characters by name"
+            placeholder="Search for characters by name..."
             onSubmit={() => console.log("submit")}
             onChange={(event) => {
               search.submit(event.currentTarget.form);
             }}
           />
-          {/* <Button className="bg-[var(--primary-light)] hover:opacity-[70%]">
-            <MagnifyingGlassIcon width={20} height={20} />
-          </Button> */}
         </search.Form>
         <div className="grid w-full grid-cols-2 items-center justify-center gap-4 text-white md:grid-cols-3 md:gap-8 xl:grid-cols-4">
           {search.data
-            ?
-              search.data.characters.map((character) => (
+            ? search.data.characters.map((character) => (
                 <CharacterCard
                   key={character.id}
                   bucket={data.bucket}

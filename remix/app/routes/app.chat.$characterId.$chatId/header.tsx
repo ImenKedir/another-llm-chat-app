@@ -6,7 +6,9 @@ export function Header() {
 
   return (
     <div className="relative top-0 flex h-[50px] w-full items-center justify-center bg-black">
-      <ToggleLeftSidebar />
+      <div className="hidden sm:flex">
+        <ToggleLeftSidebar />
+      </div>
       <h1 className="font-[Geist] text-2xl text-white">{chat && chat.title}</h1>
     </div>
   );

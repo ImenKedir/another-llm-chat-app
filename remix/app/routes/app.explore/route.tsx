@@ -8,6 +8,7 @@ import { Input } from "@/components/shadcn/input";
 import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
 
 import { CharacterCard } from "./character-card";
+import { Header } from "@/routes/app.explore/header";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   let query = new URL(request.url).searchParams.get("q");
@@ -31,10 +32,8 @@ export default function Explore() {
 
   return (
     <div className="h-full w-full overflow-y-scroll bg-[#0d0d0f]">
-      <header className="sticky top-0 z-10 flex h-[50px] items-center justify-center border-b-2 border-[var(--secondary-dark)] bg-[var(--primary-dark)]">
-        <ToggleLeftSidebar />
-        <h1 className="font-[Geist] text-2xl text-white">Explore</h1>
-      </header>
+      <Header />
+       
       <div className="mx-auto flex max-w-[1200px] flex-col gap-6 px-4 pt-6 lg:px-10">
         <search.Form method="get" className="flex gap-4">
           <Input

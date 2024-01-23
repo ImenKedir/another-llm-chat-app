@@ -5,6 +5,7 @@ import { getRecentChats } from "drizzle/model";
 import { useEffect } from "react";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { LeftSidebar } from "@/routes/app/left-sidebar";
+import { BottomBar } from "@/routes/app/bottom-bar";
 import { useNavStore } from "@/hooks/useNavStore";
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -29,8 +30,20 @@ export default function App() {
 
   return (
     <div className="flex h-full w-full">
-      {isLeftSidebarOpen && <LeftSidebar />}
-      <Outlet />
+      <div className="hidden sm:flex sm:w-full">
+        {isLeftSidebarOpen && <LeftSidebar />}
+        <Outlet />
+
+      </div>
+      <div className="flex flex-col w-full sm:hidden ">
+        <Outlet />
+        <BottomBar />
+      </div>
+      
+      
     </div>
   );
 }
+
+
+

@@ -12,6 +12,7 @@ import { useSubmit } from "@remix-run/react";
 import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
 import { Textarea } from "@/components/shadcn/textarea";
 import { Form } from "@remix-run/react";
+import { Header } from "@/routes/app.create/header";
 
 // validation
 import { z } from "zod";
@@ -156,10 +157,7 @@ export default function Create() {
 
   return (
     <div className="h-full w-full overflow-y-scroll">
-      <header className="sticky top-0 flex h-[50px] items-center justify-center border-b-2 border-[var(--secondary-dark)] bg-[var(--primary-dark)]">
-        <ToggleLeftSidebar />
-        <h1 className="font-[Geist] text-2xl text-white">Create</h1>
-      </header>
+      <Header />
       <Form
         className="mx-auto flex h-full w-full max-w-[1440px] flex-col gap-4 px-4 pt-4 font-[Geist] text-white md:px-8"
         method="post"

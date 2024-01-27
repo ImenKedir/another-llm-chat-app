@@ -1,3 +1,11 @@
+import { Link, NavLink, useLoaderData } from "@remix-run/react";
+import { useNavStore } from "@/hooks/useNavStore";
+import { formatISOToDayAndHour } from "@/utils/date";
+import { formatS3ImageUrl } from "@/utils/s3";
+import { cn } from "@/utils/cn";
+
+import type { LoaderData } from "./route";
+
 import {
   PlusIcon,
   GearIcon,
@@ -5,10 +13,11 @@ import {
   ChatBubbleIcon,
   DoubleArrowLeftIcon,
 } from "@radix-ui/react-icons";
-import { Link, NavLink } from "@remix-run/react";
-import { useNavStore } from "@/hooks/useNavStore";
-import { formatISOToDayAndHour } from "@/utils/date";
-import { cn } from "@/utils/cn";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/shadcn/avatar";
 
 function IconWrapper(Icon: typeof GearIcon) {
   return function (active: boolean) {
@@ -32,13 +41,13 @@ const NavItems = [
 ];
 
 export function LeftSidebar() {
-  const recentChats = useNavStore((state) => state.recentChats);
+  const data = useLoaderData<LoaderData>();
   const toggleLeftSidebar = useNavStore((state) => state.toggleLeftSidebar);
 
   return (
-    <div className="fixed z-[1] flex h-full w-full flex-col bg-[var(--primary-dark)] md:relative md:w-[320px]">
-      <header className="flex h-[50px] w-full items-center border-b-2 border-[var(--secondary-dark)] bg-[var(--primary-dark)] pl-4 ">
-        <Link className="font-[Geist] text-2xl text-white" to="/">
+    <div className="relative z-[1] flex h-full min-w-[250px] flex-col bg-[var(--primary-dark)]">
+      <header className="flex h-[60px] w-full items-center bg-[var(--primary-dark)] pl-4 ">
+        <Link className="font-[Geist] text-xl text-white" to="/">
           NaughtyML
         </Link>
         <DoubleArrowLeftIcon
@@ -66,23 +75,39 @@ export function LeftSidebar() {
             </NavLink>
           ))}
         </div>
-        <div className="flex h-full w-full flex-col overflow-y-scroll text-white">
-          {recentChats.map((chat) => {
+        <div className="flex h-full w-full flex-col gap-2 overflow-y-hidden text-white">
+          {data.recentChats.map((chat) => {
             return (
-              <div key={chat.id} className="w-full px-4 py-2">
+              <div key={chat.id} className="w-full px-2 pb-2">
                 <NavLink
                   className={({ isActive }) =>
                     cn(
-                      "flex w-full cursor-pointer flex-col items-start rounded p-2 font-[Geist]",
+                      "flex w-full cursor-pointer flex-col items-start gap-2 rounded px-2 pb-2 font-[Geist]",
                       isActive && "bg-white text-black",
                     )
                   }
                   to={`/app/chat/${chat.character}/${chat.id}`}
                 >
-                  <h1 className="text-lg">{chat.title}</h1>
-                  <p className="text-sm text-[var(--quadrary-dark)]">
-                    {formatISOToDayAndHour(chat.created)}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <Avatar>
+                      <AvatarImage
+                        src={formatS3ImageUrl(
+                          chat.characterImage || "",
+                          data.bucket,
+                          "sm",
+                        )}
+                      />
+                      <AvatarFallback>
+                        {chat.characterName || ""}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h1>{chat.title}</h1>
+                      <p className="text-sm text-[var(--quadrary-dark)]">
+                        {formatISOToDayAndHour(chat.created)}
+                      </p>
+                    </div>
+                  </div>
                 </NavLink>
               </div>
             );

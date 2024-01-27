@@ -1,7 +1,4 @@
-import {
-  DoubleArrowLeftIcon,
-  DoubleArrowRightIcon,
-} from "@radix-ui/react-icons";
+import { ChevronRightIcon, ChevronLeftIcon } from "@radix-ui/react-icons";
 import { useNavStore } from "@/hooks/useNavStore";
 
 export function ToggleLeftSidebar() {
@@ -10,13 +7,15 @@ export function ToggleLeftSidebar() {
 
   return (
     <div
-      className="absolute left-0 flex h-10 w-10 cursor-pointer items-center justify-center"
+      className={`${
+        isLeftSidebarOpen ? "left-[250px]" : "left-[10px]"
+      } fixed top-1/2 z-40 flex h-20 w-8 cursor-pointer items-center justify-center rounded-lg hover:bg-[var(--primary-dark)]`}
       onClick={() => toggleLeftSidebar()}
     >
       {isLeftSidebarOpen ? (
-        <DoubleArrowLeftIcon color="white" width={20} height={20} />
+        <ChevronLeftIcon color="white" width={20} height={20} />
       ) : (
-        <DoubleArrowRightIcon color="white" width={20} height={20} />
+        <ChevronRightIcon color="white" width={20} height={20} />
       )}
     </div>
   );

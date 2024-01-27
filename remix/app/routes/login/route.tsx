@@ -64,7 +64,7 @@ export default function Login() {
 
         <button className=" rounded-lg bg-white px-[12px] py-[2px] text-black no-underline">
           <Link
-            to={data.API + "auth/google/authorize"}
+            to={data.API + "/auth/google/authorize"}
             className="flex flex-row items-center gap-2 p-2 no-underline"
           >
             <img

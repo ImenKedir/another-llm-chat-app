@@ -115,8 +115,16 @@ export async function getChat(chatId?: string) {
 
 export async function getRecentChats(userId: string, limit: number = 10) {
   return await db
-    .select()
+    .select({
+      id: chats.id,
+      title: chats.title,
+      created: chats.created,
+      character: chats.character,
+      characterName: characters.name,
+      characterImage: characters.image,
+    })
     .from(chats)
+    .leftJoin(characters, eq(chats.character, characters.id))
     .orderBy(desc(chats.created))
     .where(eq(chats.user, userId))
     .limit(limit);

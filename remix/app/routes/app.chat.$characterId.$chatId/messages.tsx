@@ -22,7 +22,7 @@ function Message({ user, message, bucket }: MessageProps) {
   const character = useChatStore((state) => state.character);
 
   return (
-    <div className="flex w-full gap-2 rounded-lg border border-[var(--tertiary-dark)] bg-[var(--secondary-dark)] p-2 font-[Geist] text-[var(--secondary-light)]">
+    <div className="flex w-full gap-2 rounded-lg p-2 font-[Geist] text-[var(--secondary-light)]">
       <div>
         {message.author === "user" ? (
           <Avatar>
@@ -38,7 +38,8 @@ function Message({ user, message, bucket }: MessageProps) {
           </Avatar>
         )}
       </div>
-      <div className="px-2">
+      <div className="px-2 flex flex-col gap-2">
+        <h1 className="text-lg text-white">{character?.name}</h1>
         {message.content.length > 0 ? message.content : <Spinner />}
       </div>
     </div>

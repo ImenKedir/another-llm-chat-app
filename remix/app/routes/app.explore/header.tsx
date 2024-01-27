@@ -1,19 +1,18 @@
-import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
-import { useChatStore } from "@/hooks/useChatStore";
+import { Link } from "@remix-run/react";
+
+import { PlusIcon } from "@radix-ui/react-icons";
+import { Button } from "@/components/shadcn/button";
+import { SearchBar } from "./searchbar";
 
 export function Header() {
-  const chat = useChatStore((state) => state.chat);
-
   return (
-    <div>
-        <header className="sm:hidden sticky top-0 z-10 flex h-[50px] items-center justify-center border-b-2 border-[var(--secondary-dark)] bg-[var(--primary-dark)]">
-        <h1 className="font-[Geist] text-2xl text-white">Explore</h1>
-      </header>
-      <header className="hidden sticky top-0 z-10 sm:flex h-[50px] items-center justify-center border-b-2 border-[var(--secondary-dark)] bg-[var(--primary-dark)]">
-        <ToggleLeftSidebar />
-        <h1 className="font-[Geist] text-2xl text-white">Explore</h1>
-      </header>
-     
-    </div>
+    <header className="sticky top-0 z-10 mx-auto flex h-[50px] max-w-[1200px] items-center gap-6 bg-[#0d0d0f] px-4 lg:px-10">
+      <SearchBar />
+      <Link className="hidden md:flex" to="/app/create">
+        <Button className="flex gap-1 bg-black px-8 text-white">
+          <PlusIcon color="white" width={20} height={20} />
+        </Button>
+      </Link>
+    </header>
   );
 }

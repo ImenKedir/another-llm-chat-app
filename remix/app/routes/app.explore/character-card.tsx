@@ -24,7 +24,7 @@ export function CharacterCard({
     >
       <div className="aspect-w-1 aspect-h-1 w-full">
         <Card
-          className="px-auto flex h-auto w-full flex-col justify-center border border-[var(--quadrary-dark)] bg-[var(--primary-dark)]  pb-0 text-white "
+          className="px-auto flex h-auto w-full max-w-[250px] flex-col justify-center border border-[var(--quadrary-dark)] bg-[var(--primary-dark)]  pb-0 text-white "
           key={id}
         >
           <CardHeader className="px-0 py-0">

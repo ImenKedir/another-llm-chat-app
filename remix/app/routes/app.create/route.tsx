@@ -9,10 +9,8 @@ import { useForm } from "react-hook-form";
 import { useSubmit } from "@remix-run/react";
 
 // components
-import { ToggleLeftSidebar } from "@/components/toggle-sidebar";
 import { Textarea } from "@/components/shadcn/textarea";
 import { Form } from "@remix-run/react";
-import { Header } from "@/routes/app.create/header";
 
 // validation
 import { z } from "zod";
@@ -157,7 +155,6 @@ export default function Create() {
 
   return (
     <div className="h-full w-full overflow-y-scroll">
-      <Header />
       <Form
         className="mx-auto flex h-full w-full max-w-[1440px] flex-col gap-4 px-4 pt-4 font-[Geist] text-white md:px-8"
         method="post"

@@ -16,7 +16,6 @@ import { useLoaderData, useSubmit } from "@remix-run/react";
 import { useChatStore } from "@/hooks/useChatStore";
 
 // components
-import { Header } from "@/routes/app.chat.$characterId.$chatId/header";
 import { Messages } from "@/routes/app.chat.$characterId.$chatId/messages";
 import { Input } from "@/routes/app.chat.$characterId.$chatId/input";
 
@@ -161,7 +160,6 @@ export default function Chat() {
 
   return (
     <div className={styles.chat_container}>
-      <Header />
       <Messages user={data.user} bucket={data.bucket} />
       <Input sendMessage={sendMessage} />
     </div>

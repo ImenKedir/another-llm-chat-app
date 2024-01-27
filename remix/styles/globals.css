@@ -62,7 +62,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--primary-dark);
+  background: #0D0D0F;
   border-radius: 5px;
 }
 

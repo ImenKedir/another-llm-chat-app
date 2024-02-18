@@ -135,6 +135,13 @@ export default function Chat() {
         } else {
           // close the event stream
           sse.close();
+
+          // if the user's name is found at the end of the response, we need to remove it
+          const userIndex = ai.lastIndexOf(`${data.user.name}`);
+          if (userIndex !== -1) {
+            ai = ai.slice(0, userIndex);
+          }
+
           // make a post request to save tokens to db
           const formData = new FormData();
           formData.append("chatId", chat!.id);

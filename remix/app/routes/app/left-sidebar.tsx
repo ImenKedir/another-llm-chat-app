@@ -48,7 +48,7 @@ export function LeftSidebar() {
     <div className="relative z-[1] flex h-full min-w-[250px] flex-col bg-[var(--primary-dark)]">
       <header className="flex h-[60px] w-full items-center bg-[var(--primary-dark)] pl-4 ">
         <Link className="font-[Geist] text-xl text-white" to="/">
-          NaughtyML
+          NaughtyML <span className="text-sm font-[Geist-Light] text-violet-500	">{"[Beta]"}</span>
         </Link>
         <DoubleArrowLeftIcon
           className="absolute right-0 mr-4 cursor-pointer md:hidden"

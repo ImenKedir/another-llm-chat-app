@@ -89,7 +89,7 @@ export default function Index() {
         </div>
         <Scroller />
       </div>
-      <div className={styles.feature_container}>
+      {/* <div className={styles.feature_container}>
         <h1 className="font-[Geist-Bold] text-3xl text-white">FEATURES</h1>
         <FeatureGrid />
       </div>
@@ -98,7 +98,7 @@ export default function Index() {
         <h1>Frequently Asked Questions</h1>
         <FAQ />
       </div>
-      <div className={styles.footer_container}>Footer</div>
+      <div className={styles.footer_container}>Footer</div> */}
     </div>
   );
 }
